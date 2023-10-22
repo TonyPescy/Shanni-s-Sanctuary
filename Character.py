@@ -35,6 +35,8 @@ class Character:
     self.inventory = []
 
 # Defines pickup weapon action and it's effect on damage
+# Parameters:   weapon_name = 
+# Return:       N/A
 def pickupWeapon(weapon_name):
   self.weapon = weapon_name
   # Switch statement to equip weapon and update damage amount

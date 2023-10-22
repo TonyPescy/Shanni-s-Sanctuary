@@ -11,17 +11,23 @@
 # Imports
 import Encounter
 import Rooms
-import Character
+# import Character
 import random
-random.seed(69)
+random.seed(69)     # Hahahaha funni number
 #######################################################################################################################################
 
 #######################################################################################################################################
-#Code  
-def userName(): #Gets players name
+#Code
+
+# Username Starts
+# Gets the users name
+# Parameters:   None
+# Return:       Users name with first letter uppercase and all others lowercase
+def userName(): # Gets players name
     name = str(input("The voice within asks:  'What is your name?' "))
-    name = name[0].upper() + name[1:]
+    name = name[0].upper() + name[1:].lower()       # Makes name look nice
     return name
+# Username Ends
 #userName() TEST
 
 ############################################################################################################
@@ -32,7 +38,7 @@ def main():
     #Encounter.entrance(userName())
 
     # Randomize rooms in layout
-    roomList = list(random.sample(range(50), 30))
+    roomList = list(random.sample(range(50), 31))
     print(roomList)
 
 main()
