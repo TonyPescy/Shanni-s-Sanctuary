@@ -36,9 +36,9 @@ class Room():
         r7 = Room(7, eList[7], False, True, False, True, True, False, False, True)          # Room 7, can go east to Room 8, west to Room 3, north east to Room 13, or north west to Room 12
         r8 = Room(8, eList[8], False, False, True, True, False, False, False, True)         # Room 8, can go south to Room 31, west to Room 7, or north west to Room 13
         r9 = Room(9, eList[9], False, True, False, False, True, False, False, False)        # Room 9, can go east to Room 6 or north east to Room 10
-        r10 = Room(10, eList[10], False, True, False, False, False, True, True, False)      # Room 10, can go to Room 14, south east to Room 6, or south west to Room 9
-        r11 = Room(11, eList[11], True, False, False, False, False, False, False, False)
-        r12 = Room(12, eList[12], True, False, False, False, False, False, False, False)
+        r10 = Room(10, eList[10], False, True, False, False, False, True, True, False)      # Room 10, can go east to Room 14, south east to Room 6, or south west to Room 9
+        r11 = Room(11, eList[11], True, True, False, True, False, True, True, False)        # Room 11, can go north to Room 16, east to Room 12, wouth east to Room 3, or south west to Room 6
+        r12 = Room(12, eList[12], True, False, False, True, False, True, True, False)       # Room 12, can go west to Room 11, south east to Room 7, or south west to Room 3
         r13 = Room(13, eList[13], True, False, False, False, False, False, False, False)
         r14 = Room(14, eList[14], True, False, False, False, False, False, False, False)
         r15 = Room(15, eList[15], True, False, False, False, False, False, False, False)
