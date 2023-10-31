@@ -10,11 +10,11 @@ class Room():
 
     # Initializes parts of rooms
     def __init__(self, num, e_num, pathing, desc_num re_entry):
-        self.num = num          # Room number - Integer
-        self.e_num = e_num      # List of numbers used for encounter assignment - Integer
-        self.pathing = pathing  # Pathing that will be displayed when asked for direction to go after room is completed - String
+        self.num = num              # Room number - Integer
+        self.e_num = e_num          # List of numbers used for encounter assignment - Integer
+        self.pathing = pathing      # Pathing that will be displayed when asked for direction to go after room is completed - String
         self.desc_num = desc_num    # Number that determines what the room will be described as - Integer
-        self.re_entry = False   # Determines if room has been entered or not - False means first entry and True means second or more entries - Boolean
+        self.re_entry = False       # Determines if room has been entered or not - False means first entry and True means second or more entries - Boolean
 
     # Room Creation Starts
     # Creates all rooms with their unique randomized encounter number and all the possible directions as strings
