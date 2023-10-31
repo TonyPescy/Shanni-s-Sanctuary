@@ -23,7 +23,7 @@ random.seed(69)     # Hahahaha funni number
 # Gets the users name
 # Parameters:   None
 # Return:       Users name with first letter uppercase and all others lowercase
-def userName(): # Gets players name
+def user_name(): # Gets players name
     name = str(input("The voice within asks:  'What is your name?' "))
     name = name[0].upper() + name[1:].lower()       # Makes name look nice
     return name
@@ -35,11 +35,11 @@ def userName(): # Gets players name
 
 def main():
     #Encounter.intro()
-    #Encounter.entrance(userName())
+    #Encounter.entrance(user_name())
 
     # Randomize rooms in layout
-    roomList = list(random.sample(range(50), 31))
-    print(roomList)
+    room_list = list(random.sample(range(50), 31))
+    print(room_list)
 
 main()
 #######################################################################################################################################

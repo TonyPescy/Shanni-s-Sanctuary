@@ -9,21 +9,11 @@
 class Encounter():
 
     # Initializes basic parts of an encounter
-    def __init__(self, eNum, eDesc, rNum, comp):
-        self.eNum = eNum                    # Encounter number
-        self.eDesc = eDesc                  # Encounter descrpition
-        self.rNum = rNum                    # Number that encounter will be assigned to
-        self.comp = comp                    # Boolean that will determine if encounter has been beaten before or not
-
-# Encounter creation
-# Encounters 1 - 50
-# e1 = Encounter("Item", 1)
-
-# e11 = Encounter("Trap", )
-
-# e21 = Encounter("Enemies", )
-
-# e41 = Encounter("Empty", )
+    def __init__(self, e_num, e_desc, r_num, comp):
+        self.e_num = e_num                      # Encounter number - Integer
+        self.e_desc = e_desc                    # Encounter descrpition - String
+        self.r_num = r_num                      # Number that encounter will be assigned to - Integer
+        self.comp = False                       # Will determine if encounter has been beaten before or not - Boolean
 
 # Special Encounters
 # finEn
@@ -31,7 +21,7 @@ class Encounter():
 
 # Entrance Starts
 # Entrance encounter - For going into the sanctuary
-# Parameters:   name = users name
+# Parameters:   name = players name
 # Return:       N/A
 def entrance(name):         # Entrance to the sanctuary, this decides if user wishes to play the game or not
     answer = str(input(name + ", do you wish to enter Shanni's Sanctuary?  Yes or no? "))
