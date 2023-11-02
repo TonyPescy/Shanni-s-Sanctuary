@@ -9,11 +9,10 @@
 class Encounter():
 
     # Initializes basic parts of an encounter
-    def __init__(self, e_num, e_desc, r_num, comp):
+    def __init__(self, e_num, e_desc, r_num):
         self.e_num = e_num                      # Encounter number - Integer
         self.e_desc = e_desc                    # Encounter descrpition - String
         self.r_num = r_num                      # Number that encounter will be assigned to - Integer
-        self.comp = False                       # Will determine if encounter has been beaten before or not - Boolean
 
 # Special Encounters
 # finEn

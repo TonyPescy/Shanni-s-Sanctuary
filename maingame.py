@@ -9,10 +9,11 @@
 
 #######################################################################################################################################
 # Imports
-import Encounter
+# import Encounter
 import Rooms
 # import Character
 import random
+
 random.seed(69)     # Hahahaha funni number
 #######################################################################################################################################
 
@@ -38,8 +39,14 @@ def main():
     #Encounter.entrance(user_name())
 
     # Randomize rooms in layout
-    room_list = list(random.sample(range(50), 31))
-    print(room_list)
+    rm_lst = list(random.sample(range(50), 31))
+    print(rm_lst)
+
+    print ("\n")
+
+    # Read room descriptions from text file and puts it into list.  This list is used in room_creation function
+    rm_dsc_lst = Rooms.Room.room_desc_read()
+    print(rm_dsc_lst)
 
 main()
 #######################################################################################################################################

@@ -6,22 +6,33 @@
 # Description: Pyramid layout
 #######################################################################################################################################
 
+# Imports
+# import random
+
+# Constants
+ENTRANCE_D_NUM = 0
+
+
 class Room():
 
     # Initializes parts of rooms
-    def __init__(self, num, e_num, pathing, desc_num re_entry):
+    def __init__(self, num, e_num, pathing, desc_num, re_entry):
         self.num = num              # Room number - Integer
         self.e_num = e_num          # List of numbers used for encounter assignment - Integer
         self.pathing = pathing      # Pathing that will be displayed when asked for direction to go after room is completed - String
         self.desc_num = desc_num    # Number that determines what the room will be described as - Integer
         self.re_entry = False       # Determines if room has been entered or not - False means first entry and True means second or more entries - Boolean
 
-    # Room Creation Starts
+    # room_creation Starts
     # Creates all rooms with their unique randomized encounter number and all the possible directions as strings
-    # Parameters:   e_list = list of unique random numbers for encounter number
+    # Parameters:   e_list = List of unique random numbers for encounter number
+    #               d_list = List of all room descriptions
     # Returns:      N/A
-    def room_creation(e_list):
-        rE = Room(0, -1, "North")                                                    # Entrance room, can only go north from here into room 1
+    def room_creation(e_list, d_list):
+        # random.seed(420)        # Hahaha funni number, for testing
+        # rm_desc_lst_nums = list(random.sample(range(50), 31))                             # Generates random room descriptions for all rooms, excludes special rooms with constant room descriptions
+
+        rE = Room(0, -1, "North", )                                                 # Entrance room, can only go north from here into room 1
         r1 = Room(1, e_list[1], "North, East, or West")                              # Room 1, can go north to Room 3, east to Room 4, or west to Room 2 - Cannot go south as entrance will close
         r2 = Room(2, e_list[2], "North, East, or West")                              # Room 2, can go north to Room 6, east to Room 1, or west to Room 5
         r3 = Room(3, e_list[3], "East, West, Northeast, or Northwest")               # Room 3, can go east to Room 7, west to Room 6, north east to Room 12, or north west to Room 11
@@ -53,5 +64,18 @@ class Room():
         r29 = Room(29, e_list[29], "East, South, or West")                           # Room 29, can go east to Room 27, south to room 22, or west to Room 30
         r30 = Room(30, e_list[30], "North, East, or South")                          # Room 30, can go north to Room win, east to Room 29, or south to Room 26 - Boss battle room with fixed encounter and leads to the exit room
         r31 = Room(31, e_list[31], "North or West")                                  # Room 31, can go north to Room 8 or west to Room 4
-        rW = Room(-1, -2, "North")                                                   # Room win, can go north to exit
-        # Room Creation Ends
+        rW = Room(-1, -2, "North")                                                   # Room win, can go north to exit (Exit room will be handled as more of an encounter thing as of right now)
+    # room_creation Ends
+
+    # room_desc_read Starts
+    # Reads all room descriptions from file and adds it to a list
+    # Parameters:   None
+    # Returns:      rm_desc_lst - List - Has all room descriptions
+    def room_desc_read():
+        rm_desc_f = open("Room Descriptions.txt", "r")  # Opens file with room descriptions
+        rm_desc_lst = []                                # Creates empty list
+        for line in rm_desc_f:
+            line = line.replace("\n", "")               # Removes \n from every description
+            rm_desc_lst.append(line)
+        return rm_desc_lst
+    # room_desc_read Ends
