@@ -18,6 +18,16 @@ class Encounter():
 # finEn
 # bossEn
 
+# Username Starts
+# Gets the users name
+# Parameters:   None
+# Return:       Users name with first letter uppercase and all others lowercase
+def user_name(): # Gets players name
+    name = str(input("The voice within asks:  'What is your name?' "))
+    name = name[0].upper() + name[1:].lower()       # Makes name look nice
+    return name
+# Username Ends
+
 # Entrance Starts
 # Entrance encounter - For going into the sanctuary
 # Parameters:   name = players name

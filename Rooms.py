@@ -25,8 +25,8 @@ class Room():
 
     # room_creation Starts
     # Creates all rooms with their unique randomized encounter number and all the possible directions as strings
-    # Parameters:   e_list = List of unique random numbers for encounter number
-    #               d_list = List of all room descriptions
+    # Parameters:   e_list - List - Unique random numbers for encounter number
+    #               d_list = List - All room descriptions
     # Returns:      N/A
     def room_creation(e_list, d_list):
         # random.seed(420)        # Hahaha funni number, for testing
@@ -72,7 +72,7 @@ class Room():
     # Parameters:   None
     # Returns:      rm_desc_lst - List - Has all room descriptions
     def room_desc_read():
-        rm_desc_f = open("Room Descriptions.txt", "r")  # Opens file with room descriptions
+        rm_desc_f = open('Room Descriptions.txt', "r")  # Opens file with room descriptions
         rm_desc_lst = []                                # Creates empty list
         for line in rm_desc_f:
             line = line.replace("\n", "")               # Removes \n from every description

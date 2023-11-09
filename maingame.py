@@ -9,7 +9,7 @@
 
 #######################################################################################################################################
 # Imports
-# import Encounter
+import Encounter
 import Rooms
 # import Character
 import random
@@ -20,23 +20,13 @@ random.seed(69)     # Hahahaha funni number
 #######################################################################################################################################
 #Code
 
-# Username Starts
-# Gets the users name
-# Parameters:   None
-# Return:       Users name with first letter uppercase and all others lowercase
-def user_name(): # Gets players name
-    name = str(input("The voice within asks:  'What is your name?' "))
-    name = name[0].upper() + name[1:].lower()       # Makes name look nice
-    return name
-# Username Ends
-#userName() TEST
-
 ############################################################################################################
 #FINAL
 
 def main():
     #Encounter.intro()
-    #Encounter.entrance(user_name())
+    player_name = Encounter.user_name()
+    #Encounter.entrance(player_name)
 
     # Randomize rooms in layout
     rm_lst = list(random.sample(range(50), 31))
@@ -45,8 +35,8 @@ def main():
     print ("\n")
 
     # Read room descriptions from text file and puts it into list.  This list is used in room_creation function
-    rm_dsc_lst = Rooms.Room.room_desc_read()
-    print(rm_dsc_lst)
+    # erm_dsc_lst = Rooms.Room.room_desc_read()
+    # print(rm_dsc_lst)
 
 main()
 #######################################################################################################################################
