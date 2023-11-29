@@ -32,7 +32,6 @@ def main():
     # Randomize rooms in layout
     rm_lst = list(random.sample(range(50), 31))
     print(rm_lst)
-
     print ("\n")
 
     rm_lst2 = list(random.sample(range(50), 31))
