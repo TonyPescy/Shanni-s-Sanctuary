@@ -74,15 +74,11 @@ class Room():
     # Parameters:   None
     # Returns:      rm_desc_lst - List - Has all room descriptions
     def room_desc_read():
-        curr_loc = pathlib.Path().absolute()                        # Gets current file location so that we can find Room Descriptions.txt file
-        located_file = str(curr_loc) + "\Room Description.txt"      # Adds Room Descriptions.txt file to current location
 
-        # FOR WHAT EVER REASON located_file DOUBLES ALL "\" SO WE MUST GO THROUGH THE STRING AND REPLACE EVERY "\\" WITH "\"
-
-        rm_desc_f = open(located_file, "r")                         # Opens file with room descriptions
+        rm_desc_f = open("Room Descriptions.txt", "r")              # Opens file with room descriptions
         rm_desc_lst = []                                            # Creates empty list
         for line in rm_desc_f:
             line = line.replace("\n", "")                           # Removes \n from every description
-            rm_desc_lst.append(line)
+            rm_desc_lst.append(line)                                # Adds room description to the list
         return rm_desc_lst
     # room_desc_read Ends
