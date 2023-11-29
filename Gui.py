@@ -31,20 +31,18 @@ def confirm_exit():
 
     # User input
     while True:
-        eventCon = con_wind.read()
+        eventCon, valuesU = con_wind.read()
         if eventCon == sg.WIN_CLOSED:       # User did not confirm closure of program
             ex = False
-            con_wind.close()
             break
         if eventCon == "Yes":               # User selecter yes
-            sys.exit("Exited using the X button")
-            #ex = True
-            #con_wind.close()
-            #break
-        else:                               # User selected no
-            ex = False
-            con_wind.close()      
+            ex = True
             break
+        else:                               # User selected no
+            ex = False      
+            break
+
+    con_wind.close()
     return ex 
 # confirm_exit Ends
 
@@ -68,7 +66,9 @@ def username_gui():
         if eventU == sg.WIN_CLOSED:                             # If user closes window
             if confirm_exit() == True:                          # User means to exit program if true
                 sys.exit("Exited using the X button")
-
+            else:                                               # User did not mean to exit program
+                username_gui()                                  # Restarts the original function
+                break
         if eventU == "Enter":                                   # User inputs name
             name = str(valuesU[0])
             name = name[0].upper() + name[1:].lower()     # Gets name and makes it look nice
