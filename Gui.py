@@ -31,11 +31,11 @@ def confirm_exit():
 
     # User input
     while True:
-        eventCon, valuesU = con_wind.read()
-        if eventCon == sg.WIN_CLOSED:       # User did not confirm closure of program
+        event_Con = con_wind.read()
+        if event_Con == sg.WIN_CLOSED:       # User did not confirm closure of program
             ex = False
             break
-        if eventCon == "Yes":               # User selecter yes
+        if event_Con == "Yes":               # User selecter yes
             ex = True
             break
         else:                               # User selected no
@@ -62,15 +62,15 @@ def username_gui():
 
     # Get user input
     while True:
-        eventU, valuesU = username_wind.read()
-        if eventU == sg.WIN_CLOSED:                             # If user closes window
+        event_U, values_U = username_wind.read()
+        if event_U == sg.WIN_CLOSED:                             # If user closes window
             if confirm_exit() == True:                          # User means to exit program if true
                 sys.exit("Exited using the X button")
             else:                                               # User did not mean to exit program
                 username_gui()                                  # Restarts the original function
                 break
-        if eventU == "Enter":                                   # User inputs name
-            name = str(valuesU[0])
+        if event_U == "Enter":                                   # User inputs name
+            name = str(values_U[0])
             name = name[0].upper() + name[1:].lower()     # Gets name and makes it look nice
             break
 
@@ -79,6 +79,47 @@ def username_gui():
 # intro_gui Ends
 
 # intro_gui Starts
-# Creates layouts + gui for intro
-# Parameters:   N/A
-# Returns:      
+# Creates introduction encounters
+# Parameters:   name - String - Users name
+# Returns:      N/A 
+def intro_gui(name):
+    # intro gui layouts
+    intro_lay_i = [     [sg.Text(name +", do you wish to enter Shanni's Sanctuary?")],
+                        [sg.Button("Yes", bind_return_key = True), sg.Button("No")]
+    ]
+    intro_lay_no = [    [sg.Text("No?  Shanni is disappointed with your cowardice, but acknoledges your intellect.  She shall let you live and return to your life, as that is more hellish than what lies within.")],
+                        [sg.Text("You turn away slowly as the invisble weight appears to be lifted from your shoulders.  As you begin away from the sanctuary you take one last look at its devilish stone before it is blown into dust by the wind.")]
+    ]
+    intro_lay_yes = [   [sg.Text("Yes?  Shanni is delighted with your stupidity, it's not everyday she gets a sacrifice so eager.  Please enter.")],
+                        [sg.Text("The weight one your shoulders grows heavier as you walk into the black abyss beyond the door.")],
+                        [sg.Text("Welcome to Shanni's Sanctuary " + name + ", good luck in there, you'll need it.")],
+                        [sg.Button("Enter", bind_return_key = True)]
+    ]
+    
+    # intro_gui_i Starts
+    # Creates introduction encounters
+    # Parameters:   N/A
+    # Returns:      dec - Boolean - True means yes and False means no 
+    def intro_gui_i():
+        # intro start
+        wind = sg.Window("Shanni's Sanctuary", intro_lay_i, use_custom_titlebar = True)   # Uses layout for the very start of the intro
+
+        # User inputs
+        while True:
+            event_li = wind.read()
+        
+            if event_li == sg.WIN_CLOSED:                               # If user closes window
+                if confirm_exit() == True:                              # User means to exit program if true
+                    sys.exit("Exited using the X button")
+                else:                                                   # User did not mean to exit program
+                    intro_gui_i()                                       # Restarts the nested function from beginning
+                    break
+            if event_li == "Yes":                                       # User wishes to enter 
+                    dec = True
+                    break
+            else:                                                       # User does not wish to enter 
+                dec = False
+                break
+        wind.close()
+        return dec
+    # intro_gui_i Ends
