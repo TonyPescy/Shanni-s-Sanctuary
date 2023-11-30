@@ -6,8 +6,12 @@
 # Description: Simple Gui for the game
 #######################################################################################################################################
 
-# MAYBE ADD CONFIRMATION FUNCTION WINDOW WHEN X IS CLICKED
-# 
+# MAYBE ADD CONFIRMATION FUNCTION WINDOW WHEN X IS CLICKED | X |
+# Gui layout needed for all room types with 1-8 choices    | o |
+#       > Get info from Rooms.py
+#           - List for all button names (North, East, West, etc)    List format
+#           - Room Description and Encounter Description too
+#           - Encounters should use same gui for every type (Combat, Riddle?, Status floor, Trap, Empty)
 
 # Imports
 import PySimpleGUI as sg
@@ -120,6 +124,7 @@ def intro_gui(name):
             else:                                                       # User does not wish to enter 
                 dec = False
                 break
+
         wind.close()
         return dec
     # intro_gui_i Ends
