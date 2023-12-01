@@ -92,7 +92,8 @@ def intro_gui(name):
                         [sg.Button("Yes", bind_return_key = True), sg.Button("No")]
     ]
     intro_lay_no = [    [sg.Text("No?  Shanni is disappointed with your cowardice, but acknoledges your intellect.  She shall let you live and return to your life, as that is more hellish than what lies within.")],
-                        [sg.Text("You turn away slowly as the invisble weight appears to be lifted from your shoulders.  As you begin away from the sanctuary you take one last look at its devilish stone before it is blown into dust by the wind.")]
+                        [sg.Text("You turn away slowly as the invisble weight appears to be lifted from your shoulders.  As you begin away from the sanctuary you take one last look at its devilish stone before it is blown into dust by the wind.")],
+                        [sg.Button("Exit", bind_return_key = True)]
     ]
     intro_lay_yes = [   [sg.Text("Yes?  Shanni is delighted with your stupidity, it's not everyday she gets a sacrifice so eager.  Please enter.")],
                         [sg.Text("The weight one your shoulders grows heavier as you walk into the black abyss beyond the door.")],
@@ -124,7 +125,53 @@ def intro_gui(name):
             else:                                                       # User does not wish to enter 
                 dec = False
                 break
-
         wind.close()
         return dec
     # intro_gui_i Ends
+
+    # intro_gui_dec Starts
+    # Continues intro if user says yes
+    # Parameters:   dec - Boolean - True means yes and False means no
+    # Returns:      N/A
+    def intro_gui_dec(dec):
+        # Part 2 of intro
+
+        # If user says yes to entering
+        if dec == True:
+            wind_t = sg.Window("Shanni's Sanctuary", intro_lay_yes, use_custom_titlebar = True)   # Uses layout for if the user said yes
+
+            while True:
+                event_t = wind_t.read()
+
+                if event_t == sg.WIN_CLOSED:                                # If user closes window
+                    if confirm_exit() == True:                              # User means to exit program if true
+                        sys.exit("Exited using the X button")
+                    else:                                                   # User did not mean to exit program
+                        intro_gui_dec(dec)                                     # Restarts the nested function from beginning
+                        break
+                if event_t == "Enter":
+                    print("YOU ENTERED THE SANCTUARY, GAME WILL START NOW")
+                    wind_t.close()
+
+        # If user said they wanted to leave and not enter
+        if dec == False:
+            wind_f = sg.Window("Shanni's Sanctuary", intro_lay_no, use_custom_titlebar = True)   # Uses layout for if the user said yes
+
+            while True:
+                event_f = wind_f.read()
+
+                if event_f == sg.WIN_CLOSED:                                # If user closes window
+                    if confirm_exit() == True:                              # User means to exit program if true
+                        sys.exit("Exited using the X button")
+                    else:                                                   # User did not mean to exit program
+                        intro_gui_dec(dec)                                     # Restarts the nested function from beginning
+                        break
+                if event_f == "Exit":
+                    sys.exit("Exited using the X button")
+    # intro_gui_dec Ends
+
+    # continue intro_gui function using local ones above
+    dec = intro_gui_i()
+
+    intro_gui_dec(dec)
+# intro_gui Ends
