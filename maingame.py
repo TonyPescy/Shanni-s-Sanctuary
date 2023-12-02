@@ -29,7 +29,9 @@ def main():
 
     # Builds and displays gui for intro
     name = Gui.username_gui()
-    print(name)
+    print(name)                 # Test 1
+    
+    Gui.intro_gui(name)
 
     #Encounter.intro()
     #player_name = Encounter.user_name()
