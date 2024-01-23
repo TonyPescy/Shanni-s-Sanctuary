@@ -15,6 +15,7 @@ Nick Pescatore (NAP1313)
 table of contents with links
 
 ## Rooms
+[Table of Contents](#table-of-contents)
 ### Enemy Rooms
 All enemy types and abilities
 ### Item Rooms
@@ -24,4 +25,8 @@ All trap types and abilities
 ### Other Rooms
 All other types and abilities
 
-## 
+## Known Issues
+[Table of Contents](#table-of-contents)
+1. The biggest issue with this is that the room layout is not randomized at all which lowers the replay value drastically.
+    - The fix for this would result in a complete overhaul of pathing system for the labryinth, which would cause issues over the whole project.
+1. ISSUE
