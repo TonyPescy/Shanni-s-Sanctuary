@@ -31,7 +31,11 @@ def main():
     name = Gui.username_gui()
     print(name)                 # Test 1
     
-    Gui.intro_gui(name)
+    intro_repeat = Gui.intro_gui(name)
+
+    if intro_repeat == True:            # repeats intro if needed
+        Gui.intro_gui(name)
+
 
     #Encounter.intro()
     #player_name = Encounter.user_name()

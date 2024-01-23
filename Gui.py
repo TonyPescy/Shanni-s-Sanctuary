@@ -35,7 +35,7 @@ def confirm_exit():
 
     # User input
     while True:
-        event_Con = con_wind.read()
+        event_Con, values_con = con_wind.read()
         if event_Con == sg.WIN_CLOSED:       # User did not confirm closure of program
             ex = False
             break
@@ -140,7 +140,7 @@ def intro_gui(name):
     # intro_gui_dec Starts
     # Continues intro if user says yes
     # Parameters:   dec - Boolean - True means yes and False means no
-    # Returns:      N/A
+    # Returns:      repeat - bool - Whether to repeat it or not
     def intro_gui_dec(dec):
         # Part 2 of intro
 
@@ -154,11 +154,14 @@ def intro_gui(name):
                 if event_t == sg.WIN_CLOSED:                                # If user closes window
                     wind_t.close()
                     if confirm_exit() == True:                              # User means to exit program if true
-                        sys.exit("Exited using the X button")
+                        repeat = False
+                        return repeat
                     else:                                                   # User did not mean to exit program
+                        # Will end current window and session and return a key word that will be checked to see if intro needs to be redone
                         print("RETRY TRUE FUNCTION")
-                        intro_gui_dec(dec)                                     # Restarts the nested function from beginning
-                        break
+                        wind_t.close()                                  # closes current window
+                        repeat = True                                   # will be used to check if intro needs to be restarted
+                        return repeat
                 if event_t == "Enter":
                     print("YOU ENTERED THE SANCTUARY, GAME WILL START NOW")
                     wind_t.close()
@@ -172,11 +175,13 @@ def intro_gui(name):
 
                 if event_f == sg.WIN_CLOSED:                                # If user closes window
                     if confirm_exit() == True:                              # User means to exit program if true
-                        sys.exit("Exited using the X button")
+                        sys.exit("Exited using the X button")               # exits current window
+                        
                     else:                                                   # User did not mean to exit program
                         print("RETRY FALSE FUNCTION")
-                        intro_gui_dec(dec)                                     # Restarts the nested function from beginning
-                        break
+                        repeat = True                                     # will be used to check if intro needs to be restarted
+                        wind_f.close()                                      # closes current window
+                        return repeat
                 if event_f == "Exit":
                     sys.exit("Exited using the 'Exit' button")
     # intro_gui_dec Ends
