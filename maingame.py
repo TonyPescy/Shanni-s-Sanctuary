@@ -37,9 +37,14 @@ def main():
     #    Gui.intro_gui(name)
 
     # room creation testing
-    all_room_descs = Rooms.room_desc_read()
-    print(all_room_descs)
-    Rooms.room_creation()
+
+    random.seed(420)        # Hahaha funni number, for testing
+    rm_desc_lst_nums = list(random.sample(range(50), 31))                             # Generates random room descriptions for all rooms, excludes special rooms with constant room descriptions
+
+    room_array = Rooms.Room.room_creation(rm_desc_lst_nums)          # gives the random numbers that will be used to access the descriptions of the rooms
+
+    print(room_array[0].e_num)                          # prints out encounter number of first room
+    Encounter.room_encounters(room_array[0].e_num)      # prints out room description
 
     #Encounter.intro()
     #player_name = Encounter.user_name()

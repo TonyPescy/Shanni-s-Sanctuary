@@ -6,6 +6,9 @@
 # Description: All encounter descriptions and encounter interactions
 #######################################################################################################################################
 
+# imports
+import Rooms
+
 class Encounter():
 
     # Initializes basic parts of an encounter
@@ -62,3 +65,18 @@ def intro():            # Intro to the game
         print("Enter yes or no")
         intro()
 # Introduction Ends
+        
+# Numbered Encounters Start
+# Numbered Encounters - Encounters that happen in the rooms
+# Parameters: en_num - integer - e_list from room that determines what encounter is happening
+# Return: encounter - IDK - RETURNS THE ENCOUNTER TO THE USER SO THEY CAN INTERACT WITH IT
+def room_encounters(en_num):
+    # ALL ROOMS WILL HAVE A RANDOM NUMBER (1-50) THAT WILL BE USED HERE TO DETERMINE THE WHAT HAPPENS IN THE ROOM.  THIS IS THE e_list VALUE IN ROOMS.py
+    all_room_descs = Rooms.Room.room_desc_read()
+    # print(all_room_descs)
+
+
+    # USE BINARY SEARCH TO FIND ROOM DESCRIPTION WITH BETTER EFFICIENTLY
+    if en_num == 43:    # our seed ensures this is the first one to appear in room 1
+        print(all_room_descs[en_num])
+# Numbered Encounteres End
