@@ -28,14 +28,18 @@ import Gui
 def main():
 
     # Builds and displays gui for intro
-    name = Gui.username_gui()
-    print(name)                 # Test 1
+    # name = Gui.username_gui()
+    # print(name)                 # Test 1
     
-    intro_repeat = Gui.intro_gui(name)
+    # intro_repeat = Gui.intro_gui(name)
 
-    if intro_repeat == True:            # repeats intro if needed
-        Gui.intro_gui(name)
+    # if intro_repeat == True:            # repeats intro if needed
+    #    Gui.intro_gui(name)
 
+    # room creation testing
+    all_room_descs = Rooms.room_desc_read()
+    print(all_room_descs)
+    Rooms.room_creation()
 
     #Encounter.intro()
     #player_name = Encounter.user_name()

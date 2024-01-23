@@ -8,7 +8,7 @@
 
 # Imports
 # import os
-import pathlib
+# import pathlib
 import random
 
 # Constants
@@ -23,7 +23,7 @@ class Room():
         self.e_num = e_num          # List of numbers used for encounter assignment - Integer List
         self.pathing = pathing      # Pathing that will be displayed when asked for direction to go after room is completed - String List
         self.desc = desc            # Number that determines what the room will be described as - Integer
-        self.re_entry = False       # Determines if room has been entered or not - False means first entry and True means second or more entries - Boolean
+        self.re_entry = False       # Determines if room has been entered or not - False means first entry and True means second or more entries - Boolean.  Default is false as it is the first entry
 
     # room_creation Starts
     # Creates all rooms with their unique randomized encounter number and all the possible directions as strings
@@ -34,7 +34,7 @@ class Room():
         random.seed(420)        # Hahaha funni number, for testing
         rm_desc_lst_nums = list(random.sample(range(50), 30))                             # Generates random room descriptions for all rooms, excludes special rooms with constant room descriptions
 
-        rE = Room(0, -1, ["North"], 0)                                                                       # Entrance room, can only go north from here into room 1
+        rE = Room(0, -1, ["North"], 51)                                                                       # Entrance room, can only go north from here into room 1
         r1 = Room(1, e_list[1], ["North", "East", "West"], rm_desc_lst_nums[0])                               # Room 1, can go north to Room 3, east to Room 4, or west to Room 2 - Cannot go south as entrance will close
         r2 = Room(2, e_list[2], ["North", "East", "West"], rm_desc_lst_nums[1])                               # Room 2, can go north to Room 6, east to Room 1, or west to Room 5
         r3 = Room(3, e_list[3], ["East", "West", "Northeast", "Northwest"], rm_desc_lst_nums[2])                # Room 3, can go east to Room 7, west to Room 6, north east to Room 12, or north west to Room 11
@@ -65,8 +65,8 @@ class Room():
         r28 = Room(28, e_list[28], ["East", "South", "West"], rm_desc_lst_nums[27])                           # Room 28, can go east to Room 24, south to Room 23, or west to Room 27
         r29 = Room(29, e_list[29], ["East", "South", "West"], rm_desc_lst_nums[28])                           # Room 29, can go east to Room 27, south to room 22, or west to Room 30
         r30 = Room(30, e_list[30], ["North", "East", "South"], rm_desc_lst_nums[29])                          # Room 30, can go north to Room win, east to Room 29, or south to Room 26 - Boss battle room with fixed encounter and leads to the exit room
-        r31 = Room(31, e_list[31], ["North", "West"])                                                        # Room 31, can go north to Room 8 or west to Room 4
-        rW = Room(-1, -2, ["North"])                                                                         # Room win, can go north to exit (Exit room will be handled as more of an encounter thing as of right now)
+        r31 = Room(31, e_list[31], ["North", "West"], 53)                                                        # Room 31, can go north to Room 8 or west to Room 4
+        rW = Room(-1, -2, ["North"], 52)                                                                         # Room win, can go north to exit (Exit room will be handled as more of an encounter thing as of right now)
     # room_creation Ends
 
     # room_desc_read Starts
