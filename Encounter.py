@@ -25,9 +25,11 @@ class Encounter():
 # Gets the users name
 # Parameters:   None
 # Return:       Users name with first letter uppercase and all others lowercase
-def user_name(): # Gets players name
+def user_name_and_ans(): # Gets players name
     name = str(input("The voice within asks:  'What is your name?' "))
     name = name[0].upper() + name[1:].lower()       # Makes name look nice
+    answer = str(input(name + ", do you wish to enter Shanni's Sanctuary?  Yes or no? "))
+    answer = answer.lower()
     return name
 # Username Ends
 
@@ -35,9 +37,7 @@ def user_name(): # Gets players name
 # Entrance encounter - For going into the sanctuary
 # Parameters:   name = players name
 # Return:       N/A
-def entrance(name):         # Entrance to the sanctuary, this decides if user wishes to play the game or not
-    answer = str(input(name + ", do you wish to enter Shanni's Sanctuary?  Yes or no? "))
-    answer = answer.lower()
+def entrance(name, answer):         # Entrance to the sanctuary, this decides if user wishes to play the game or not
     if answer == "no":      # If user says no
         print("No?  Shanni is disappointed with your cowardice, but acknoledges your intellect.  She shall let you live and return to your life, as that is more hellish than what lies within.")
         print("You turn away slowly as the invisble weight appears to be lifted from your shoulders.  As you begin away from the sanctuary you take one last look at its devilish stone before it is blown into dust by the wind.")
