@@ -43,12 +43,12 @@ def main():
 
     room_array = Rooms.Room.room_creation(rm_desc_lst_nums)          # gives the random numbers that will be used to access the descriptions of the rooms
 
-    print(room_array[0].e_num)                          # prints out encounter number of first room
-    Encounter.room_encounters(room_array[0].e_num)      # prints out room description
+    # print(room_array[0].e_num)                          # prints out encounter number of first room
+    # Encounter.room_encounters(room_array[0].e_num)      # prints out room description
 
     #Encounter.intro()
-    #player_name = Encounter.user_name()
-    #Encounter.entrance(player_name)
+    #player_name, player_answer = Encounter.user_name_and_ans()
+    #Encounter.entrance(player_name, player_answer)
 
     # Randomize rooms in layout
     #rm_lst = list(random.sample(range(50), 31))
