@@ -46,8 +46,8 @@ def entrance(name, answer):         # Entrance to the sanctuary, this decides if
         print("The weight one your shoulders grows heavier as you walk into the black abyss beyond the door.")
         print("Welcome to Shanni's Sanctuary " + name + ", good luck in there, you'll need it.")
     else:                   # If no proper answer is given, program tries again
-        print("Enter yes or no")
-        entrance()
+        answer = input("Enter yes or no")
+        entrance(name, answer)
 # Entrance Ends
 
 # Introduction Starts
