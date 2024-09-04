@@ -1,7 +1,5 @@
 #######################################################################################################################################
 # Title: Character
-# Date Started: 2/22/2022 dropped after 2/25/2022, picked again on 10/21/23
-# Date Completed: TBD
 # Author: Tony Pescatore and Nick Pescatore
 # Description: Character Class to define the player character.
 #######################################################################################################################################
@@ -21,12 +19,13 @@
 
 class Character:
   # Initialize basic stats of the character
-  def _init_(self, hp, weapon, damage. armor_type, armor, shield_type, shield, buff_type, buff, debuff_type, debuff, inventory):
+  def _init_(self, name, hp, weapon, damage, armor_type, armor, shield_type, shield, buff_type, buff, debuff_type, debuff, inventory):
+    self.name = name
     self.hp = 100
     self.weapon = 'UNARMED'
     self.damage = 5
-    self.armor_type = 'NONE'
-    self.armor = 0
+    self.armor_type = 'WORK CLOTHES'
+    self.armor = 5
     self.shield_type = 'NONE'
     self.buff_type = 'NONE'
     self.buff = 0
@@ -55,7 +54,7 @@ def pickupArmor(armor_name):
   self.armor_type = armor_name
   # Switch statement to equip armor and update armor amount
   match self.armor_type:
-    case 'NONE'
+    case 'NONE':
       self.armor = 0
 
 # Defines pickup shield action and it's effect on shield

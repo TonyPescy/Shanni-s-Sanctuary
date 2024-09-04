@@ -9,7 +9,7 @@
 # Imports
 import Encounter as en
 import Rooms as rm
-# import Character as char
+import Character as char
 import random as rand
 # import Gui
 
@@ -44,6 +44,10 @@ def main():
     en.intro()
     player_name, player_answer = en.user_name_and_ans()
     en.entrance(player_name, player_answer)
+
+    # creates character object for player
+    player = char.Character(player_name)
+    print(player)
 
     # First Encounter
 

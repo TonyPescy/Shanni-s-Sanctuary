@@ -5,6 +5,7 @@
 #######################################################################################################################################
 
 # imports
+import sys
 
 class Encounter():
 
@@ -40,6 +41,7 @@ def entrance(name, answer):         # Entrance to the sanctuary, this decides if
     if answer == "no":      # If user says no
         print("No?  Shanni is disappointed with your cowardice, but acknoledges your intellect.  She shall let you live and return to your life, as that is more hellish than what lies within.")
         print("You turn away slowly as the invisble weight appears to be lifted from your shoulders.  As you begin away from the sanctuary you take one last look at its devilish stone before it is blown into dust by the wind.")
+        sys.exit(1)
     elif answer == "yes":   # If user says yes
         print("Yes?  Shanni is delighted with your stupidity, it's not everyday she gets a sacrifice so eager.  Please enter.")
         print("The weight one your shoulders grows heavier as you walk into the black abyss beyond the door.")
@@ -90,3 +92,4 @@ def player_move(options):
         # the only rooms that have this many are room numbers x, x, x, x... This means it will prompt player for their movement choice then it will binary search where that would take them
         # for example if they said east and their room is room number 6, it will take them to room 3
         # this will need to be hard coded but we can save on time with binary search and by splitting rooms up by how many options they have
+        print('temp')
