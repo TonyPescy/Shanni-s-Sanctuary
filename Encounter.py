@@ -1,13 +1,10 @@
 #######################################################################################################################################
 # Title: Encounter
-# Date Started: 2/22/2022 dropped after 2/25/2022, picked again on 10/21/23
-# Date Completed: TBD
 # Author: Tony Pescatore and Nick Pescatore
 # Description: All encounter descriptions and encounter interactions
 #######################################################################################################################################
 
 # imports
-import Rooms
 
 class Encounter():
 
@@ -25,19 +22,21 @@ class Encounter():
 # Gets the users name
 # Parameters:   None
 # Return:       Users name with first letter uppercase and all others lowercase
-def user_name(): # Gets players name
+def user_name_and_ans(): # Gets players name
     name = str(input("The voice within asks:  'What is your name?' "))
     name = name[0].upper() + name[1:].lower()       # Makes name look nice
-    return name
+    answer = str(input(name + ", do you wish to enter Shanni's Sanctuary?  Yes or no? "))
+    answer = answer.lower()
+    if (answer != 'yes' or answer != 'no'):
+        input
+    return name, answer
 # Username Ends
 
 # Entrance Starts
 # Entrance encounter - For going into the sanctuary
 # Parameters:   name = players name
 # Return:       N/A
-def entrance(name):         # Entrance to the sanctuary, this decides if user wishes to play the game or not
-    answer = str(input(name + ", do you wish to enter Shanni's Sanctuary?  Yes or no? "))
-    answer = answer.lower()
+def entrance(name, answer):         # Entrance to the sanctuary, this decides if user wishes to play the game or not
     if answer == "no":      # If user says no
         print("No?  Shanni is disappointed with your cowardice, but acknoledges your intellect.  She shall let you live and return to your life, as that is more hellish than what lies within.")
         print("You turn away slowly as the invisble weight appears to be lifted from your shoulders.  As you begin away from the sanctuary you take one last look at its devilish stone before it is blown into dust by the wind.")
@@ -46,8 +45,8 @@ def entrance(name):         # Entrance to the sanctuary, this decides if user wi
         print("The weight one your shoulders grows heavier as you walk into the black abyss beyond the door.")
         print("Welcome to Shanni's Sanctuary " + name + ", good luck in there, you'll need it.")
     else:                   # If no proper answer is given, program tries again
-        print("Enter yes or no")
-        entrance()
+        answer = input("Enter yes or no ")
+        entrance(name, answer)
 # Entrance Ends
 
 # Introduction Starts
@@ -55,28 +54,39 @@ def entrance(name):         # Entrance to the sanctuary, this decides if user wi
 # Parameters:   None
 # Return:       N/A
 def intro():            # Intro to the game 
+    temp = 0        # temp for while loop to ensure yes or no is provided
     print("You are walking down the side walk of the city you've spent your entire life in, during that time nothing much has changed.  It was always a small city, but now that you've grown up it seems to have gotten smaller and much duller.  You know every inch of this city like the back of your hand, you could walk the streets blindfolded and make it to work on time.  However today was odd, a peculiar weight was on you shoulders, maybe work was getting to you?  But that can't be making you feel this way can it?.")
     answer = str(input("That's when something catches your eye, something you never saw before.  A large overgrown pyramid in the center of the street, how have you never noticed this before?  A voice speaks to you, it comes from within your own mind, it's beckoning you forth.  Come closer it says, egging you on and on.  Do you listen to what the voice says?  Yes or no? ").lower())
-    if answer == "no":
-        print("Your body does not listen to you, instead it does the opposite and begins towards the massive black pyramid.")
-    elif answer == "yes":
-        print("Your begin towards the massive black pyramid, unaware of the implications it will have for your future... or if there will be one to come back to. ")
-    else:               # If no proper answer is given, program tries again
-        print("Enter yes or no")
-        intro()
+    while temp == 0:
+        if answer.lower() == "no":
+            print("Your body does not listen to you, instead it does the opposite and begins towards the massive black pyramid.")
+            temp = 1
+        elif answer.lower() == "yes":
+            print("Your begin towards the massive black pyramid, unaware of the implications it will have for your future... or if there will be one to come back to. ")
+            temp = 1
+        else:               # If no proper answer is given, program tries again
+            answer = input("Enter yes or no ")
+            
 # Introduction Ends
         
 # Numbered Encounters Start
-# Numbered Encounters - Encounters that happen in the rooms
-# Parameters: en_num - integer - e_list from room that determines what encounter is happening
-# Return: encounter - IDK - RETURNS THE ENCOUNTER TO THE USER SO THEY CAN INTERACT WITH IT
-def room_encounters(en_num):
-    # ALL ROOMS WILL HAVE A RANDOM NUMBER (1-50) THAT WILL BE USED HERE TO DETERMINE THE WHAT HAPPENS IN THE ROOM.  THIS IS THE e_list VALUE IN ROOMS.py
-    all_room_descs = Rooms.Room.room_desc_read()
-    # print(all_room_descs)
-
-
-    # USE BINARY SEARCH TO FIND ROOM DESCRIPTION WITH BETTER EFFICIENTLY
-    if en_num == 43:    # our seed ensures this is the first one to appear in room 1
-        print(all_room_descs[en_num])
+# Numbered Encounters - Encounters that happen in the rooms. This occurs after the room desc has been read in main game, this will be the battle that takes place or event
+# Parameters:  
+# Return: 
+# def room_encounters(en_num):
+    
 # Numbered Encounteres End
+
+# Player Move Start
+# Player Move - Players decide which move they want to make
+# Parameters: options - list - Has all directions player can move in
+#       rm_num - Used to decide which room the players
+# Returns: 
+def player_move(options):
+    # max options is 5, minimum is 1
+    # could be binary searched for efficiency, most likely will be done later
+    # every room 
+    if (len(options) == 5):
+        # the only rooms that have this many are room numbers x, x, x, x... This means it will prompt player for their movement choice then it will binary search where that would take them
+        # for example if they said east and their room is room number 6, it will take them to room 3
+        # this will need to be hard coded but we can save on time with binary search and by splitting rooms up by how many options they have

@@ -29,4 +29,5 @@ All other types and abilities
 [Table of Contents](#table-of-contents)
 1. The biggest issue with this is that the room layout is not randomized at all which lowers the replay value drastically.
     - The fix for this would result in a complete overhaul of pathing system for the labryinth, which would cause issues over the whole project.
+    - Perhaps make several maps for the labryinth to take, as it will have more replayablility value with the random room generator
 1. ISSUE
