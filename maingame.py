@@ -47,7 +47,7 @@ def main():
 
     # creates character object for player
     player = char.Character(player_name)
-    print(player)
+    print(player.name)
 
     # First Encounter
 

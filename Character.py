@@ -19,19 +19,20 @@
 
 class Character:
   # Initialize basic stats of the character
-  def _init_(self, name, hp, weapon, damage, armor_type, armor, shield_type, shield, buff_type, buff, debuff_type, debuff, inventory):
+  def __init__(self, name, hp = 100, weapon = 'UNARMED', damage = 5, armor_type = 'WORK  CLOTHES', armor = 5, shield_type = 'NONE', shield_armor = 0, buff_type = 'NONE', buff = 0, debuff_type = 'NONE', debuff = 0, inventory = []):
     self.name = name
-    self.hp = 100
-    self.weapon = 'UNARMED'
-    self.damage = 5
-    self.armor_type = 'WORK CLOTHES'
-    self.armor = 5
-    self.shield_type = 'NONE'
-    self.buff_type = 'NONE'
-    self.buff = 0
-    self.debuff_type = 'NONE'
-    self.debuff = 0
-    self.inventory = []
+    self.hp = hp
+    self.weapon = weapon
+    self.damage = damage
+    self.armor_type =armor_type
+    self.armor = armor
+    self.shield_type = shield_type
+    self.shield_armor = shield_armor
+    self.buff_type = buff_type
+    self.buff = buff
+    self.debuff_type = debuff_type
+    self.debuff = debuff
+    self.inventory = inventory
 
 # Defines pickup weapon action and it's effect on damage
 # Parameters:   weapon_name = 
@@ -48,6 +49,9 @@ def pickupWeapon(weapon_name):
 
     case 'SPEAR':
       damage = 10
+
+'''
+COMMENTED TO ALLOW FOR CHARACTER CREATION TESTING
 
 # Defines pickup armor action and it's effect on armor
 def pickupArmor(armor_name):
@@ -77,3 +81,4 @@ def pickupItem(item):
   self.inventory.append(item)
 
 def dropItem(item):
+'''
