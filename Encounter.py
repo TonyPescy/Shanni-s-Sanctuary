@@ -77,19 +77,4 @@ def intro():            # Intro to the game
 # Return: 
 # def room_encounters(en_num):
     
-# Numbered Encounteres End
-
-# Player Move Start
-# Player Move - Players decide which move they want to make
-# Parameters: options - list - Has all directions player can move in
-#       rm_num - Used to decide which room the players
-# Returns: 
-def player_move(options):
-    # max options is 5, minimum is 1
-    # could be binary searched for efficiency, most likely will be done later
-    # every room 
-    if (len(options) == 5):
-        # the only rooms that have this many are room numbers x, x, x, x... This means it will prompt player for their movement choice then it will binary search where that would take them
-        # for example if they said east and their room is room number 6, it will take them to room 3
-        # this will need to be hard coded but we can save on time with binary search and by splitting rooms up by how many options they have
-        print('temp')
+# Numbered Encounters End
