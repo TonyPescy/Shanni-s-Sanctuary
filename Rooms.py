@@ -149,53 +149,84 @@ class Room():
     # Player Move End
 
 # Cases for each room in game and what to do with dictionary lookup
-    class Room_Tasks():
-        def rm_entrance(): 
-            print('ROMENTRNC')
-        def rm_1(): print('Temp!')
-        def rm_2(): print('Temp!')
-        def rm_3(): print('Temp!')
-        def rm_4(): print('Temp!')
-        def rm_5(): print('Temp!')
-        def rm_6(): print('Temp!')
-        def rm_7(): print('Temp!')
-        def rm_8(): print('Temp!')
-        def rm_9(): print('Temp!')
-        def rm_10(): print('Temp!')
-        def rm_11(): print('Temp!')
-        def rm_12(): print('Temp!')
-        def rm_13(): print('Temp!')
-        def rm_14(): print('Temp!')
-        def rm_15(): print('Temp!')
-        def rm_16(): print('Temp!')
-        def rm_17(): print('Temp!')
-        def rm_18(): print('Temp!')
-        def rm_19(): print('Temp!')
-        def rm_20(): print('Temp!')
-        def rm_21(): print('Temp!')
-        def rm_22(): print('Temp!')
-        def rm_23(): print('Temp!')
-        def rm_24(): print('Temp!')
-        def rm_25(): print('Temp!')
-        def rm_26(): print('Temp!')
-        def rm_27(): print('Temp!')
-        def rm_28(): print('Temp!')
-        def rm_29(): print('Temp!')
-        def rm_30(): print('Temp!')
-        def rm_boss(): print('TEMP!BOSS')
-        def rm_exit(): print('Temp!Ex')
+    def rm_entrance(): 
+        return 'ROMENTRNC'
+    def rm_1(): 
+        print('Temp!')
+    def rm_2(): 
+        print('Temp!')
+    def rm_3(): 
+        print('Temp!')
+    def rm_4(): 
+        print('Temp!')
+    def rm_5(): 
+        print('Temp!')
+    def rm_6(): 
+        print('Temp!')
+    def rm_7(): 
+        print('Temp!')
+    def rm_8(): 
+        print('Temp!')
+    def rm_9(): 
+        print('Temp!')
+    def rm_10(): 
+        print('Temp!')
+    def rm_11(): 
+        print('Temp!')
+    def rm_12(): 
+        print('Temp!')
+    def rm_13(): 
+        print('Temp!')
+    def rm_14(): 
+        print('Temp!')
+    def rm_15(): 
+        print('Temp!')
+    def rm_16(): 
+        print('Temp!')
+    def rm_17(): 
+        print('Temp!')
+    def rm_18(): 
+        print('Temp!')
+    def rm_19(): 
+        print('Temp!')
+    def rm_20(): 
+        print('Temp!')
+    def rm_21(): 
+        print('Temp!')
+    def rm_22(): 
+        print('Temp!')
+    def rm_23(): 
+        print('Temp!')
+    def rm_24(): 
+        print('Temp!')
+    def rm_25(): 
+        print('Temp!')
+    def rm_26(): 
+        print('Temp!')
+    def rm_27(): 
+        print('Temp!')
+    def rm_28(): 
+        print('Temp!')
+    def rm_29(): 
+        print('Temp!')
+    def rm_30(): 
+        print('Temp!')
+    def rm_boss(): 
+        print('TEMP!BOSS')
+    def rm_exit(): 
+        print('Temp!Ex')
 
-        # Dictionary to map rooms to proper room function
-        room_dict = {
-            0: rm_entrance(), 1: rm_1(), 2: rm_2(), 3: rm_3(), 4: rm_4(), 5: rm_5(), 6: rm_6(), 7: rm_7(), 8: rm_8(), 9: rm_9(), 10: rm_10(), 
-            11: rm_11(), 12: rm_12(), 13: rm_13(), 14: rm_14(), 15: rm_15(), 16: rm_16(), 17: rm_17(), 18: rm_18(), 19: rm_19(), 20: rm_20(), 
-            21: rm_21(), 22: rm_22(), 23: rm_23(), 24: rm_24(), 25: rm_25(), 26: rm_26(), 27: rm_27(), 28: rm_28(), 29: rm_29(), 30: rm_30(), 
-            31: rm_boss(), 32: rm_exit()
-        }
+    # Dictionary to map rooms to proper room function
+    room_dict = {
+        0: rm_entrance, 1: rm_1, 2: rm_2, 3: rm_3, 4: rm_4, 5: rm_5, 6: rm_6, 7: rm_7, 8: rm_8, 9: rm_9, 10: rm_10, 
+        11: rm_11, 12: rm_12, 13: rm_13, 14: rm_14, 15: rm_15, 16: rm_16, 17: rm_17, 18: rm_18, 19: rm_19, 20: rm_20, 
+        21: rm_21, 22: rm_22, 23: rm_23, 24: rm_24, 25: rm_25, 26: rm_26, 27: rm_27, 28: rm_28, 29: rm_29, 30: rm_30, 
+        31: rm_boss, 32: rm_exit
+    }
 
-        # Function to lookup and execute the function based on players new room
-        def room_move(dict, c_room):
-            dict[c_room]
+    # Function to lookup and execute the function based on players new room
+    def room_move(dict, c_room):
+        return dict[c_room]()
 
     # NEED A FUNCTION THAT WILL SEND PLAYER TO THEIR PROPER ROOM
     # Next Room Start
@@ -204,5 +235,4 @@ class Room():
     #               curr_room - int - Current room the player is in
     # Returns: N/A
     def next_room(direction, curr_room):
-        
-        return Room.Room_Tasks.room_move(Room.Room_Tasks.room_dict, curr_room)
+        return Room.room_move(Room.room_dict, curr_room)
