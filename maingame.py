@@ -36,21 +36,24 @@ def main():
     # Use as rooms_array[desried_room_num].desired_prop
     rooms_array = rm.Room.room_creation(rm_lst)
 
-    en.intro()
-    player_name, player_answer = en.user_name_and_ans()
-    en.entrance(player_name, player_answer)
+    #en.intro()
+    #player_name, player_answer = en.user_name_and_ans()
+    #en.entrance(player_name, player_answer)
 
     # creates character object for player
-    player = char.Character(player_name)
+    # used in combat and the sort
+    #player = char.Character(player_name)
     # print(player.name)
 
     # Entrance Encounter
     print(rm_dsc_lst[rooms_array[-3].e_num])
+    rm.Room.reentry_switch(rooms_array[-3])
     next_direction = rm.Room.get_player_move(rooms_array[-3].pathing)
-    temp = rm.Room.next_room(next_direction, rooms_array[-3].num)
-    print(temp)
-    # 'Random' Encounters
+    new_room = rm.Room.next_room(next_direction, rooms_array[-3].num)
+    print(new_room)
 
+    # 'Random' Encounters
+    
     # Boss Encounter
 
     # Exit Encounter

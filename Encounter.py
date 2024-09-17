@@ -75,6 +75,6 @@ def intro():            # Intro to the game
 # Numbered Encounters - Encounters that happen in the rooms. This occurs after the room desc has been read in main game, this will be the battle that takes place or event
 # Parameters:  
 # Return: 
-# def room_encounters(en_num):
+# def room_encounters(room_obj):
     
 # Numbered Encounters End

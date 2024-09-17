@@ -149,71 +149,72 @@ class Room():
     # Player Move End
 
 # Cases for each room in game and what to do with dictionary lookup
-    def rm_entrance(): 
-        return 'ROMENTRNC'
-    def rm_1(): 
+# each function will return the new room number based on direction inputted
+    def rm_entrance(dir):
+        return 1
+    def rm_1(dir): 
         print('Temp!')
-    def rm_2(): 
+    def rm_2(dir): 
         print('Temp!')
-    def rm_3(): 
+    def rm_3(dir): 
         print('Temp!')
-    def rm_4(): 
+    def rm_4(dir): 
         print('Temp!')
-    def rm_5(): 
+    def rm_5(dir): 
         print('Temp!')
-    def rm_6(): 
+    def rm_6(dir): 
         print('Temp!')
-    def rm_7(): 
+    def rm_7(dir): 
         print('Temp!')
-    def rm_8(): 
+    def rm_8(dir): 
         print('Temp!')
-    def rm_9(): 
+    def rm_9(dir): 
         print('Temp!')
-    def rm_10(): 
+    def rm_10(dir): 
         print('Temp!')
-    def rm_11(): 
+    def rm_11(dir): 
         print('Temp!')
-    def rm_12(): 
+    def rm_12(dir): 
         print('Temp!')
-    def rm_13(): 
+    def rm_13(dir): 
         print('Temp!')
-    def rm_14(): 
+    def rm_14(dir): 
         print('Temp!')
-    def rm_15(): 
+    def rm_15(dir): 
         print('Temp!')
-    def rm_16(): 
+    def rm_16(dir): 
         print('Temp!')
-    def rm_17(): 
+    def rm_17(dir): 
         print('Temp!')
-    def rm_18(): 
+    def rm_18(dir): 
         print('Temp!')
-    def rm_19(): 
+    def rm_19(dir): 
         print('Temp!')
-    def rm_20(): 
+    def rm_20(dir): 
         print('Temp!')
-    def rm_21(): 
+    def rm_21(dir): 
         print('Temp!')
-    def rm_22(): 
+    def rm_22(dir): 
         print('Temp!')
-    def rm_23(): 
+    def rm_23(dir): 
         print('Temp!')
-    def rm_24(): 
+    def rm_24(dir): 
         print('Temp!')
-    def rm_25(): 
+    def rm_25(dir): 
         print('Temp!')
-    def rm_26(): 
+    def rm_26(dir): 
         print('Temp!')
-    def rm_27(): 
+    def rm_27(dir): 
         print('Temp!')
-    def rm_28(): 
+    def rm_28(dir): 
         print('Temp!')
-    def rm_29(): 
+    def rm_29(dir): 
         print('Temp!')
-    def rm_30(): 
+    def rm_30(dir): 
         print('Temp!')
-    def rm_boss(): 
+    def rm_boss(dir): 
         print('TEMP!BOSS')
-    def rm_exit(): 
+    def rm_exit(dir): 
         print('Temp!Ex')
 
     # Dictionary to map rooms to proper room function
@@ -224,15 +225,24 @@ class Room():
         31: rm_boss, 32: rm_exit
     }
 
-    # Function to lookup and execute the function based on players new room
-    def room_move(dict, c_room):
-        return dict[c_room]()
+    # room_move to lookup and execute the function based on players new room
+    # room_move - Moves players into the next room
+    # Parameters:   dict - dictionary - Has dictionary of all functions used ot move to every room
+    #               c_room - int - Current room the player is in
+    #               dir - int - direction player is moving
+    # Returns: N/A
+    def room_move(dict, c_room, dir):
+        return dict[c_room](dir)
 
-    # NEED A FUNCTION THAT WILL SEND PLAYER TO THEIR PROPER ROOM
-    # Next Room Start
-    # Next Room - Moves players into the next room
+    # next_room - Moves players into the next room
     # Parameters:   direction - string - Has players chosen direction
     #               curr_room - int - Current room the player is in
     # Returns: N/A
     def next_room(direction, curr_room):
-        return Room.room_move(Room.room_dict, curr_room)
+        return Room.room_move(Room.room_dict, curr_room, direction)
+    
+    # reentry_switch - flips reentry bool on Room object to true once a room has been entered
+    # Parameters:   room_obj - obj - object of current room entered
+    # Returns: N/A
+    def reentry_switch(room_obj):
+        room_obj.re_entry = True
