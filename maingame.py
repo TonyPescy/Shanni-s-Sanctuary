@@ -25,10 +25,8 @@ import random as rand
 def main():
     rand.seed(420)        # Hahaha funni number, for testing
 
-    # Room Creation
-    # Randomize rooms in layout
+    # Room Creation and randomize rooms in layout
     rm_lst = list(rand.sample(range(50), 31))
-    # print(rm_lst)
     # Read room descriptions from text file and puts it into list
     rm_dsc_lst = rm.Room.room_desc_read()
 
