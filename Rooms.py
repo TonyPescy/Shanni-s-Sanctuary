@@ -227,10 +227,10 @@ class Room():
 
     # room_move to lookup and execute the function based on players new room
     # room_move - Moves players into the next room
-    # Parameters:   dict - dictionary - Has dictionary of all functions used ot move to every room
+    # Parameters:   dict - dictionary - Has dictionary of all functions used to move to every room
     #               c_room - int - Current room the player is in
     #               dir - int - direction player is moving
-    # Returns: N/A
+    # Returns: returns the output of the corresponding function in the dictionary
     def room_move(dict, c_room, dir):
         return dict[c_room](dir)
 

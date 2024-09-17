@@ -6,6 +6,7 @@
 
 # imports
 import sys
+import Rooms as rm
 
 class Encounter():
 
@@ -70,11 +71,112 @@ def intro():            # Intro to the game
             answer = input("Enter yes or no ")
             
 # Introduction Ends
-        
-# Numbered Encounters Start
-# Numbered Encounters - Encounters that happen in the rooms. This occurs after the room desc has been read in main game, this will be the battle that takes place or event
-# Parameters:  
-# Return: 
-# def room_encounters(room_obj):
+
+# random encounters start
+# Cases for each room in game and what to do with dictionary lookup
+# each function will return the new room number based on direction inputted
+
+# rm_entrance Starts
+# rm_entrance - First encounter within the actual pyramid
+# Parameters:   desc - string - description of the room
+#               rooms_arr - array - array of all rooms
+# Return:       N/A
+def rm_entrance(desc, rooms_arr):
+    print(desc)
+    next_direction = rm.Room.get_player_move(rooms_arr[-3].pathing)     # gets player input on what direction they would like to go
+    new_room = rm.Room.next_room(next_direction, rooms_arr[-3].num)     # gets new room that player has selected
+    print('As you you make your way north, those heavy wooden doors slam shut. Another barrier to ensure you do not escape Shanni\'s Sanctuary.')
     
-# Numbered Encounters End
+    return rooms_arr, new_room
+# room_entrance ends
+
+def rm_1(desc, rooms_arr): 
+    print('Temp!')
+def rm_2(desc, rooms_arr): 
+    print('Temp!')
+def rm_3(desc, rooms_arr): 
+    print('Temp!')
+def rm_4(desc, rooms_arr): 
+    print('Temp!')
+def rm_5(desc, rooms_arr): 
+    print('Temp!')
+def rm_6(desc, rooms_arr): 
+    print('Temp!')
+def rm_7(desc, rooms_arr): 
+    print('Temp!')
+def rm_8(desc, rooms_arr): 
+    print('Temp!')
+def rm_9(desc, rooms_arr): 
+    print('Temp!')
+def rm_10(desc, rooms_arr): 
+    print('Temp!')
+def rm_11(desc, rooms_arr): 
+    print('Temp!')
+def rm_12(desc, rooms_arr): 
+    print('Temp!')
+def rm_13(desc, rooms_arr): 
+    print('Temp!')
+def rm_14(desc, rooms_arr): 
+    print('Temp!')
+def rm_15(desc, rooms_arr): 
+    print('Temp!')
+def rm_16(desc, rooms_arr): 
+    print('Temp!')
+def rm_17(desc, rooms_arr): 
+    print('Temp!')
+def rm_18(desc, rooms_arr): 
+    print('Temp!')
+def rm_19(desc, rooms_arr): 
+    print('Temp!')
+def rm_20(desc, rooms_arr): 
+    print('Temp!')
+def rm_21(desc, rooms_arr): 
+    print('Temp!')
+def rm_22(desc, rooms_arr): 
+    print('Temp!')
+def rm_23(desc, rooms_arr): 
+    print('Temp!')
+def rm_24(desc, rooms_arr): 
+    print('Temp!')
+def rm_25(desc, rooms_arr): 
+    print('Temp!')
+def rm_26(desc, rooms_arr): 
+    print('Temp!')
+def rm_27(desc, rooms_arr): 
+    print('Temp!')
+def rm_28(desc, rooms_arr): 
+    print('Temp!')
+def rm_29(desc, rooms_arr): 
+    print('Temp!')
+def rm_30(desc, rooms_arr): 
+    print('Temp!')
+def rm_boss(desc, rooms_arr): 
+    print('TEMP!BOSS')
+def rm_exit(desc, rooms_arr): 
+    print('Temp!Ex')
+
+encounter_dict = {
+    0: rm_entrance, 1: rm_1, 2: rm_2, 3: rm_3, 4: rm_4, 5: rm_5, 6: rm_6, 7: rm_7, 8: rm_8, 9: rm_9, 10: rm_10, 
+    11: rm_11, 12: rm_12, 13: rm_13, 14: rm_14, 15: rm_15, 16: rm_16, 17: rm_17, 18: rm_18, 19: rm_19, 20: rm_20, 
+    21: rm_21, 22: rm_22, 23: rm_23, 24: rm_24, 25: rm_25, 26: rm_26, 27: rm_27, 28: rm_28, 29: rm_29, 30: rm_30, 
+    31: rm_boss, 32: rm_exit
+}
+
+# room_encounters to lookup and execute the function based on players room
+# room_encounters - selects room encounter to play out according to the player current room
+# Parameters:   dict - dictionary - Has dictionary of all functions used to run encounter of every room
+#               c_room - int - Current room the player is in
+#               desc_arr - array - Array of all room descriptions
+#               desc_arr_index - int - Index for current room 
+#               rmms_arr - array - Array of all room objects
+# Returns: returns the output of the corresponding function in the dictionary
+def room_encounters(c_room, desc_arr, rms_arr):
+    # special room descriptions (static encounters) are checked else normal room encounters play out
+    if c_room == 0:
+        return encounter_dict[c_room](desc_arr[-3], rms_arr)
+    elif c_room == 31:
+        return encounter_dict[c_room](desc_arr[-2], rms_arr)
+    elif c_room == 32:
+        return encounter_dict[c_room](desc_arr[-1], rms_arr)
+    else:
+        return encounter_dict[c_room](desc_arr[c_room], rms_arr)

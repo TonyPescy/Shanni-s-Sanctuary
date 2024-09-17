@@ -46,11 +46,8 @@ def main():
     # print(player.name)
 
     # Entrance Encounter
-    print(rm_dsc_lst[rooms_array[-3].e_num])
-    rm.Room.reentry_switch(rooms_array[-3])
-    next_direction = rm.Room.get_player_move(rooms_array[-3].pathing)
-    new_room = rm.Room.next_room(next_direction, rooms_array[-3].num)
-    print(new_room)
+    rooms_array, next_room = en.room_encounters(0, rm_dsc_lst, rooms_array)  # always starts at zero, later we will use next_room for first parameter
+    print(next_room)
 
     # 'Random' Encounters
     
