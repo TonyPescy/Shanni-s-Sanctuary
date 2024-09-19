@@ -34,9 +34,9 @@ def main():
     # Use as rooms_array[desried_room_num].desired_prop
     rooms_array = rm.Room.room_creation(rm_lst)
 
-    #en.intro()
-    #player_name, player_answer = en.user_name_and_ans()
-    #en.entrance(player_name, player_answer)
+    en.intro()
+    player_name, player_answer = en.user_name_and_ans()
+    en.entrance(player_name, player_answer)
 
     # creates character object for player
     # used in combat and the sort

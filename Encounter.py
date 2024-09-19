@@ -40,7 +40,7 @@ def user_name_and_ans(): # Gets players name
 # Return:       N/A
 def entrance(name, answer):         # Entrance to the sanctuary, this decides if user wishes to play the game or not
     if answer == "no":      # If user says no
-        print("No?  Shanni is disappointed with your cowardice, but acknoledges your intellect.  She shall let you live and return to your life, as that is more hellish than what lies within.")
+        print("No?  Shanni is disappointed with your cowardice, but acknowledges your intellect.  She shall let you live and return to your life, as that is more hellish than what lies within.")
         print("You turn away slowly as the invisble weight appears to be lifted from your shoulders.  As you begin away from the sanctuary you take one last look at its devilish stone before it is blown into dust by the wind.")
         sys.exit(1)
     elif answer == "yes":   # If user says yes

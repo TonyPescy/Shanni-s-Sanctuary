@@ -89,7 +89,7 @@ class Room():
         if (len(options) == 5):
             # possible_rms = [6, 15, 16, 17]  with 5 options
             while True:
-                player_direction = input('Enter direction you wish to travel in: %s, %s, %s, %s, %s? ' %(options[0], options[1], options[2], options[3], options[4])).lower()
+                player_direction = input('Enter the direction you wish to travel in: %s, %s, %s, %s, %s? ' %(options[0], options[1], options[2], options[3], options[4])).lower()
                 # checks if player entered direction is valid and breaks while loop
                 if player_direction == options[0].lower() or player_direction == options[1].lower() or player_direction == options[2].lower() or player_direction == options[3].lower() or player_direction == options[4].lower():
                     break
@@ -101,7 +101,7 @@ class Room():
         elif (len(options) == 4):
             # possible_rms = [3, 7, 11, 21]  with 4 options
             while True:
-                player_direction = input('Enter direction you wish to travel in: %s, %s, %s, %s? ' %(options[0], options[1], options[2], options[3])).lower()
+                player_direction = input('Enter the direction you wish to travel in: %s, %s, %s, %s? ' %(options[0], options[1], options[2], options[3])).lower()
                 # checks if player entered direction is valid and breaks while loop
                 if player_direction == options[0].lower() or player_direction == options[1].lower() or player_direction == options[2].lower() or player_direction == options[3].lower():
                     break
@@ -113,7 +113,7 @@ class Room():
         elif (len(options) == 3):
             # possible_rms = [1, 2, 8, 10, 12, 13, 19, 22, 23, 25, 27, 28, 29, 30]  with 3 options
             while True:
-                player_direction = input('Enter direction you wish to travel in: %s, %s, %s? ' %(options[0], options[1], options[2])).lower()
+                player_direction = input('Enter the direction you wish to travel in: %s, %s, %s? ' %(options[0], options[1], options[2])).lower()
                 # checks if player entered direction is valid and breaks while loop
                 if player_direction == options[0].lower() or player_direction == options[1].lower() or player_direction == options[2].lower():
                     break
@@ -125,7 +125,7 @@ class Room():
         elif (len(options) == 2):
             # possible_rms = [4, 9, 18, 20, 24, 26, 31]  with 2 options
             while True:
-                player_direction = input('Enter direction you wish to travel in: %s, %s? ' %(options[0], options[1])).lower()
+                player_direction = input('Enter the direction you wish to travel in: %s, %s? ' %(options[0], options[1])).lower()
                 # checks if player entered direction is valid and breaks while loop
                 if player_direction == options[0].lower() or player_direction == options[1].lower():
                     break
@@ -137,7 +137,7 @@ class Room():
         else:
             # possible_rms = [0, 5, 32] with only 1 option
             while True:
-                player_direction = input('Enter direction you wish to travel in: %s? ' %(options[0])).lower()
+                player_direction = input('Enter the direction you wish to travel in: %s? ' %(options[0])).lower()
                 # checks if player entered direction is valid and breaks while loop
                 if player_direction == options[0].lower():
                     break
@@ -150,7 +150,7 @@ class Room():
 
 # Cases for each room in game and what to do with dictionary lookup
 # each function will return the new room number based on direction inputted
-    def rm_entrance(dir):
+    def rm_entrance(dir):       # only 1 direction to go from here
         return 1
     def rm_1(dir): 
         print('Temp!')
