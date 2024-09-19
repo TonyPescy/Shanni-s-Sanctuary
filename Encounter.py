@@ -8,6 +8,10 @@
 import sys
 import Rooms as rm
 
+# Constants
+DESC_ENTRY = 0      # will be used to access the first element of the room description array, it contains the exit description
+DESC_EXIT = 1       # will be used to access the second element of the room description array, it contains the exit description
+
 class Encounter():
 
     # Initializes basic parts of an encounter
@@ -76,22 +80,41 @@ def intro():            # Intro to the game
 # Cases for each room in game and what to do with dictionary lookup
 # each function will return the new room number based on direction inputted
 
+# IN ROOM DESCRIPTIONS.TXT FOR EVERY ENTRY ADD A DELIMITER "~" THAT CAN BE READ SO THAT WE CAN HAVE FLAVORED ROOM ENTER AND EXIT DESCRIPTIONS
+
 # rm_entrance Starts
 # rm_entrance - First encounter within the actual pyramid
 # Parameters:   desc - string - description of the room
 #               rooms_arr - array - array of all rooms
-# Return:       N/A
+# Return:       new_room - Room that player will move into
+#               rooms_arr - array - Returns modified room array Note: rooms_arr does not change here as rm_entrance cannot be entered again
 def rm_entrance(desc, rooms_arr):
     print(desc)
-    next_direction = rm.Room.get_player_move(rooms_arr[-3].pathing)     # gets player input on what direction they would like to go
-    new_room = rm.Room.next_room(next_direction, rooms_arr[-3].num)     # gets new room that player has selected
+    next_direction = rm.Room.get_player_move(rooms_arr[30].pathing)              # gets player input on what direction they would like to go
+    new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[30].num)      # gets new room that player has selected
     print('As you you make your way north, those heavy wooden doors slam shut. Another barrier to ensure you do not escape Shanni\'s Sanctuary.')
     
     return rooms_arr, new_room
 # room_entrance ends
 
+
+# rm_1 Starts
+# rm_1 - Room 1 with random encounter inside
+# Parameters:   desc - string - description of the room
+#               rooms_arr - array - array of all rooms
+# Return:       new_room - int - Room that player will move into
+#               rooms_arr - array - Returns modified room array
 def rm_1(desc, rooms_arr): 
-    print('Temp!')
+    # print('THIS IS ROOM 1!')
+    print(desc)
+    next_direction = rm.Room.get_player_move(rooms_arr[0].pathing)              # gets player input on what direction they would like to go
+    new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[0].num)      # gets new room that player has selected
+    rooms_arr[0].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 1 has been already entered and conquered
+    print("THIS IS UR EXIT OF ROOM 1")              # all rooms will need a unique exit statement
+
+    return rooms_arr, new_room
+# rm_1 ends
+
 def rm_2(desc, rooms_arr): 
     print('Temp!')
 def rm_3(desc, rooms_arr): 
@@ -148,8 +171,6 @@ def rm_28(desc, rooms_arr):
     print('Temp!')
 def rm_29(desc, rooms_arr): 
     print('Temp!')
-def rm_30(desc, rooms_arr): 
-    print('Temp!')
 def rm_boss(desc, rooms_arr): 
     print('TEMP!BOSS')
 def rm_exit(desc, rooms_arr): 
@@ -158,7 +179,7 @@ def rm_exit(desc, rooms_arr):
 encounter_dict = {
     0: rm_entrance, 1: rm_1, 2: rm_2, 3: rm_3, 4: rm_4, 5: rm_5, 6: rm_6, 7: rm_7, 8: rm_8, 9: rm_9, 10: rm_10, 
     11: rm_11, 12: rm_12, 13: rm_13, 14: rm_14, 15: rm_15, 16: rm_16, 17: rm_17, 18: rm_18, 19: rm_19, 20: rm_20, 
-    21: rm_21, 22: rm_22, 23: rm_23, 24: rm_24, 25: rm_25, 26: rm_26, 27: rm_27, 28: rm_28, 29: rm_29, 30: rm_30, 
+    21: rm_21, 22: rm_22, 23: rm_23, 24: rm_24, 25: rm_25, 26: rm_26, 27: rm_27, 28: rm_28, 29: rm_29, 30: rm_entrance, 
     31: rm_boss, 32: rm_exit
 }
 
@@ -172,7 +193,7 @@ encounter_dict = {
 # Returns: returns the output of the corresponding function in the dictionary
 def room_encounters(c_room, desc_arr, rms_arr):
     # special room descriptions (static encounters) are checked else normal room encounters play out
-    if c_room == 0:
+    if c_room == 30:
         return encounter_dict[c_room](desc_arr[-3], rms_arr)
     elif c_room == 31:
         return encounter_dict[c_room](desc_arr[-2], rms_arr)

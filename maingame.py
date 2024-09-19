@@ -34,9 +34,9 @@ def main():
     # Use as rooms_array[desried_room_num].desired_prop
     rooms_array = rm.Room.room_creation(rm_lst)
 
-    en.intro()
-    player_name, player_answer = en.user_name_and_ans()
-    en.entrance(player_name, player_answer)
+    # en.intro()
+    # player_name, player_answer = en.user_name_and_ans()
+    # en.entrance(player_name, player_answer)
 
     # creates character object for player
     # used in combat and the sort
@@ -44,11 +44,18 @@ def main():
     # print(player.name)
 
     # Entrance Encounter
-    rooms_array, next_room = en.room_encounters(0, rm_dsc_lst, rooms_array)  # always starts at zero, later we will use next_room for first parameter
+    # print(rooms_array[30].num)
+    # print(rooms_array[30].pathing)
+    next_room = 30      # room starts at 30 because non-randomized descriptions are appened after the random ones
+    rooms_array, next_room = en.room_encounters(next_room, rm_dsc_lst, rooms_array)  # always starts at zero, later we will use next_room for first parameter
     print(next_room)
 
     # 'Random' Encounters
-    
+    # maybe a while statemnt that will run until the rooms equal the boxx encounter? (door will close in boss encounter)
+    rooms_array, next_room = en.room_encounters(next_room, rm_dsc_lst, rooms_array)  # always starts at zero, later we will use next_room for first parameter
+    print(next_room)
+
+
     # Boss Encounter
 
     # Exit Encounter

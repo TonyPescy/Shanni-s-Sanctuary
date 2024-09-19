@@ -5,13 +5,7 @@
 #######################################################################################################################################
 
 # Imports
-# import os
-# import pathlib
-# import random
-
-# Constants
-# ENTRANCE_D_NUM = 0
-
+import sys
 
 class Room():
 
@@ -150,68 +144,84 @@ class Room():
 
 # Cases for each room in game and what to do with dictionary lookup
 # each function will return the new room number based on direction inputted
-    def rm_entrance(dir):       # only 1 direction to go from here
-        return 1
+    def rm_0(dir):       # only 1 direction to go from here, takes you to room 1
+        if dir == 'north':
+            return 1
+        else:
+            print('Pathing Error!')
+            sys.exit()
+
     def rm_1(dir): 
-        print('Temp!')
+        if dir == 'north':      # north takes you to room 3
+            return 3
+        elif dir == 'east':     # east takes you to room 4
+            return 4
+        elif dir == 'west':     # west takes you to room 2
+            return 2
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
     def rm_2(dir): 
-        print('Temp!')
+        print('2!')
     def rm_3(dir): 
-        print('Temp!')
+        print('3!')
     def rm_4(dir): 
-        print('Temp!')
+        print('4!')
     def rm_5(dir): 
-        print('Temp!')
+        print('5!')
     def rm_6(dir): 
-        print('Temp!')
+        print('6!')
     def rm_7(dir): 
-        print('Temp!')
+        print('7!')
     def rm_8(dir): 
-        print('Temp!')
+        print('8!')
     def rm_9(dir): 
-        print('Temp!')
+        print('9!')
     def rm_10(dir): 
-        print('Temp!')
+        print('10!')
     def rm_11(dir): 
-        print('Temp!')
+        print('11!')
     def rm_12(dir): 
-        print('Temp!')
+        print('12!')
     def rm_13(dir): 
-        print('Temp!')
+        print('13!')
     def rm_14(dir): 
-        print('Temp!')
+        print('14!')
     def rm_15(dir): 
-        print('Temp!')
+        print('15!')
     def rm_16(dir): 
-        print('Temp!')
+        print('16!')
     def rm_17(dir): 
-        print('Temp!')
+        print('17!')
     def rm_18(dir): 
-        print('Temp!')
+        print('18!')
     def rm_19(dir): 
-        print('Temp!')
+        print('19!')
     def rm_20(dir): 
-        print('Temp!')
+        print('20!')
     def rm_21(dir): 
-        print('Temp!')
+        print('21!')
     def rm_22(dir): 
-        print('Temp!')
+        print('22!')
     def rm_23(dir): 
-        print('Temp!')
+        print('23!')
     def rm_24(dir): 
-        print('Temp!')
+        print('24!')
     def rm_25(dir): 
-        print('Temp!')
+        print('25!')
     def rm_26(dir): 
-        print('Temp!')
+        print('26!')
     def rm_27(dir): 
-        print('Temp!')
+        print('27!')
     def rm_28(dir): 
-        print('Temp!')
+        print('28!')
     def rm_29(dir): 
-        print('Temp!')
+        print('29!')
+
     def rm_30(dir): 
-        print('Temp!')
+        print('30!')
+
     def rm_boss(dir): 
         print('TEMP!BOSS')
     def rm_exit(dir): 
@@ -219,7 +229,7 @@ class Room():
 
     # Dictionary to map rooms to proper room function
     room_dict = {
-        0: rm_entrance, 1: rm_1, 2: rm_2, 3: rm_3, 4: rm_4, 5: rm_5, 6: rm_6, 7: rm_7, 8: rm_8, 9: rm_9, 10: rm_10, 
+        0: rm_0, 1: rm_1, 2: rm_2, 3: rm_3, 4: rm_4, 5: rm_5, 6: rm_6, 7: rm_7, 8: rm_8, 9: rm_9, 10: rm_10, 
         11: rm_11, 12: rm_12, 13: rm_13, 14: rm_14, 15: rm_15, 16: rm_16, 17: rm_17, 18: rm_18, 19: rm_19, 20: rm_20, 
         21: rm_21, 22: rm_22, 23: rm_23, 24: rm_24, 25: rm_25, 26: rm_26, 27: rm_27, 28: rm_28, 29: rm_29, 30: rm_30, 
         31: rm_boss, 32: rm_exit
@@ -242,7 +252,7 @@ class Room():
         return Room.room_move(Room.room_dict, curr_room, direction)
     
     # reentry_switch - flips reentry bool on Room object to true once a room has been entered
-    # Parameters:   room_obj - obj - object of current room entered
+    # Parameters:   N/A
     # Returns: N/A
-    def reentry_switch(room_obj):
-        room_obj.re_entry = True
+    def reentry_switch():
+        return True
