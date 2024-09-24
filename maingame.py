@@ -50,15 +50,15 @@ def main():
     rooms_array, next_room = en.room_encounters(next_room, rm_dsc_lst, rooms_array)  # always starts at zero, later we will use next_room for first parameter
     print(next_room)
 
-    # 'Random' Encounters
+    # 'Random' Encounters and boss encounter
     # maybe a while statemnt that will run until the rooms equal the boxx encounter? (door will close in boss encounter)
-    rooms_array, next_room = en.room_encounters(next_room, rm_dsc_lst, rooms_array)  # always starts at zero, later we will use next_room for first parameter
-    print(next_room)
-
-
-    # Boss Encounter
+    while next_room < 32:
+        rooms_array, next_room = en.room_encounters(next_room, rm_dsc_lst, rooms_array)  # always starts at zero, later we will use next_room for first parameter
+        print(next_room)
 
     # Exit Encounter
+    rooms_array, next_room = en.room_encounters(next_room, rm_dsc_lst, rooms_array) # final room, exit room
+    
 
 main()
 #######################################################################################################################################
