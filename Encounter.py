@@ -614,7 +614,7 @@ def rm_boss(desc, rooms_arr):
 #               rooms_arr - array - array of all rooms
 # Return:       N/A
 def rm_exit(desc, rooms_arr): 
-    print('Temp!Ex')
+    print('Temp!Exit')
 
 encounter_dict = {
     0: rm_entrance, 1: rm_1, 2: rm_2, 3: rm_3, 4: rm_4, 5: rm_5, 6: rm_6, 7: rm_7, 8: rm_8, 9: rm_9, 10: rm_10, 

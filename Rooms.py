@@ -163,25 +163,119 @@ class Room():
             sys.exit(1)
 
     def rm_2(dir): 
-        print('2!')
+        if dir == 'north':      # north takes you to room 6
+            return 6
+        elif dir == 'east':     # east takes you to room 1
+            return 1
+        elif dir == 'west':     # west takes you to room 5
+            return 5
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
     def rm_3(dir): 
-        print('3!')
-    def rm_4(dir): 
-        print('4!')
+        if dir == 'northeast':      # northeast takes you to room 12
+            return 12
+        elif dir == 'northwest':      # northwest takes you to room 11
+            return 11
+        elif dir == 'east':     # east takes you to room 7
+            return 7
+        elif dir == 'west':     # west takes you to room 6
+            return 6
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
+    def rm_4(dir):
+        if dir == 'east':     # east takes you to room 31
+            return 31
+        elif dir == 'west':     # west takes you to room 1
+            return 1
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
     def rm_5(dir): 
-        print('5!')
+        if dir == 'east':      # east takes you to room 2
+            return 2
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
     def rm_6(dir): 
-        print('6!')
+        if dir == 'northeast':      # northeast takes you to room 11
+            return 11
+        elif dir == 'northwest':      # northwest takes you to room 10
+            return 10
+        elif dir == 'east':     # east takes you to room 3
+            return 3
+        elif dir == 'west':     # west takes you to room 9
+            return 9
+        elif dir == 'south':    # south takes you to room 2
+            return 2
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
     def rm_7(dir): 
-        print('7!')
+        if dir == 'northeast':      # northeast takes you to room 13
+            return 13
+        elif dir == 'northwest':      # northwest takes you to room 12
+            return 12
+        elif dir == 'east':     # east takes you to room 8
+            return 8
+        elif dir == 'west':     # west takes you to room 3
+            return 3
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
     def rm_8(dir): 
-        print('8!')
+        if dir == 'northwest':      # northwest takes you to room 13
+            return 13
+        elif dir == 'west':     # west takes you to room 7
+            return 7
+        elif dir == 'south':    # south takes you to room 31
+            return 31
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
     def rm_9(dir): 
-        print('9!')
+        if dir == 'northeast':      # northeast takes you to room 10
+            return 10
+        elif dir == 'east':     # east takes you to room 6
+            return 6
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
     def rm_10(dir): 
-        print('10!')
-    def rm_11(dir): 
-        print('11!')
+        if dir == 'southeast':      # northeast takes you to room 6
+            return 6
+        elif dir == 'southwest':      # northwest takes you to room 9
+            return 9
+        elif dir == 'east':     # east takes you to room 14
+            return 14
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
+    def rm_11(dir): # START HERE TOMRORROW
+        if dir == 'northeast':      # northeast takes you to room 11
+            return 11
+        elif dir == 'northwest':      # northwest takes you to room 10
+            return 10
+        elif dir == 'east':     # east takes you to room 3
+            return 3
+        elif dir == 'west':     # west takes you to room 9
+            return 9
+        elif dir == 'south':    # south takes you to room 2
+            return 2
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+            
     def rm_12(dir): 
         print('12!')
     def rm_13(dir): 
