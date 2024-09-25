@@ -251,9 +251,9 @@ class Room():
             sys.exit(1)
 
     def rm_10(dir): 
-        if dir == 'southeast':      # northeast takes you to room 6
+        if dir == 'southeast':      # southeast takes you to room 6
             return 6
-        elif dir == 'southwest':      # northwest takes you to room 9
+        elif dir == 'southwest':      # southwest takes you to room 9
             return 9
         elif dir == 'east':     # east takes you to room 14
             return 14
@@ -261,7 +261,53 @@ class Room():
             print('Pathing Error!')
             sys.exit(1)
 
-    def rm_11(dir): # START HERE TOMRORROW
+    def rm_11(dir): 
+        if dir == 'north':      # north takes you to room 16
+            return 11
+        elif dir == 'southwest':      # southwest takes you to room 6
+            return 6
+        elif dir == 'east':     # east takes you to room 12
+            return 12
+        elif dir == 'southeast':    # southeast takes you to room 26
+            return 6
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+            
+    def rm_12(dir): 
+        if dir == 'southeast':      # southeast takes you to room 7
+            return 7
+        elif dir == 'southwest':      # southwest takes you to room 3
+            return 3
+        elif dir == 'west':     # west takes you to room 11
+            return 11
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
+    def rm_13(dir): 
+        if dir == 'southeast':      # southeast takes you to room 8
+            return 8
+        elif dir == 'east':     # east takes you to room 18
+            return 18
+        elif dir == 'southwest':    # southwest takes you to room 7
+            return 7
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
+    def rm_14(dir): 
+        if dir == 'north':      # north takes you to room 15
+            return 15
+        elif dir == 'east':     # east takes you to room 11
+            return 11
+        elif dir == 'west':     # west takes you to room 10
+            return 10
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
+    def rm_15(dir): # START HERE TOMORROW
         if dir == 'northeast':      # northeast takes you to room 11
             return 11
         elif dir == 'northwest':      # northwest takes you to room 10
@@ -275,15 +321,7 @@ class Room():
         else:
             print('Pathing Error!')
             sys.exit(1)
-            
-    def rm_12(dir): 
-        print('12!')
-    def rm_13(dir): 
-        print('13!')
-    def rm_14(dir): 
-        print('14!')
-    def rm_15(dir): 
-        print('15!')
+
     def rm_16(dir): 
         print('16!')
     def rm_17(dir): 
