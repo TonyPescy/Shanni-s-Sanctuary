@@ -57,7 +57,7 @@ def main():
         print(next_room)
 
     # Exit Encounter
-    rooms_array, next_room = en.room_encounters(next_room, rm_dsc_lst, rooms_array) # final room, exit room
+    en.room_encounters(next_room, rm_dsc_lst, rooms_array) # final room, exit room
     
 
 main()
