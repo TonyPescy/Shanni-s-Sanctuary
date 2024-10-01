@@ -648,19 +648,19 @@ encounter_dict = {
 
 # room_encounters to lookup and execute the function based on players room
 # room_encounters - selects room encounter to play out according to the player current room
-# Parameters:   dict - dictionary - Has dictionary of all functions used to run encounter of every room
+# Parameters:   
 #               c_room - int - Current room the player is in
 #               desc_arr - array - Array of all room descriptions
 #               desc_arr_index - int - Index for current room 
 #               rmms_arr - array - Array of all room objects
 # Returns: returns the output of the corresponding function in the dictionary
-def room_encounters(c_room, desc_arr, rms_arr):
+def room_encounters(c_room, desc_arr, desc_arr_index, rms_arr):
     # special room descriptions (static encounters) are checked else normal room encounters play out
-    if c_room == 0:
-        return encounter_dict[c_room](desc_arr[-3], rms_arr)
-    elif c_room == 31:
-        return encounter_dict[c_room](desc_arr[-2], rms_arr)
-    elif c_room == 32:
+    if c_room == 0:     # entrance
+        return encounter_dict[c_room](desc_arr[desc_arr_index], rms_arr)
+    elif c_room == 31:      # exit
+        return encounter_dict[c_room](desc_arr[desc_arr_index], rms_arr)
+    elif c_room == 32:      # boss
         return encounter_dict[c_room](desc_arr[-1], rms_arr)
     else:
-        return encounter_dict[c_room](desc_arr[c_room], rms_arr)
+        return encounter_dict[c_room](desc_arr[desc_arr_index], rms_arr)

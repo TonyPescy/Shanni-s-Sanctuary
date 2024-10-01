@@ -46,7 +46,7 @@ class Room():
         r21 = Room(21, e_list[21], ["North", "West", "Southeast", "Southwest"], False)              # Room 21, can go north to Room 29, west to Room 26, south east to Room 15, or south west to Room 20
         r22 = Room(22, e_list[22], ["North", "Southeast", "Southwest"], False)                      # Room 22, can go north to Room 27, south east to Room 16, or south west to Room 15
         r23 = Room(23, e_list[23], ["North", "Southeast", "Southeast"], False)                      # Room 23, can go north to Room 28, south east to Room 17, or south west to Room 16
-        r24 = Room(24, e_list[24], ["North", "South"], False)                                       # Room 24, can go north to Room 28 or south to Room 25
+        r24 = Room(24, e_list[24], ["West", "South"], False)                                        # Room 24, can go west to Room 28 or south to Room 25
         r25 = Room(25, e_list[25], ["North", "Southeast", "Southwest"], False)                      # Room 25, can go north to Room 24, south east to Room 19, or south west to Room 17
         r26 = Room(26, e_list[26], ["North", "East"], False)                                        # Room 26, can go north to Room 30 or east to Room 21
         r27 = Room(27, e_list[27], ["East", "South", "West"], False)                                # Room 27, can go east to Room 28, south to Room 22, or west to Room 29
@@ -421,7 +421,7 @@ class Room():
             sys.exit(1)
 
     def rm_24(dir): 
-        if dir == 'north':      # north takes you to room 28
+        if dir == 'west':      # west takes you to room 28
             return 28
         elif dir == 'south':    # south takes you to room 25
             return 25
