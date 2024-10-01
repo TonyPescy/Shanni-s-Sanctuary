@@ -19,10 +19,12 @@
 
 # ALL STATS SUBJECT TO CHANGE
 # MORE WEAPONS/ITEMS TO BE ADDED
+# BREAK WEAPONS, ARMOR, AND SHIELDS INTO THEIR OWN CLASS
+# EACH WILL HOLD THEIR OWN STATS FOR EXAMPLE WEAPON WILL HAVE THE NAME AND DAMAGE
 
 class Character:
   # Initialize basic stats of the character
-  def __init__(self, name, hp = 100, weapon = 'UNARMED', damage = 5, armor_type = 'WORK  CLOTHES', armor = 5, shield_type = 'NONE', shield_armor = 0, buff_type = 'NONE', buff = 0, debuff_type = 'NONE', debuff = 0, inventory = []):
+  def __init__(self, name, hp = 100, weapon = 'UNARMED', damage = 5, armor_type = 'CLOTHES', armor = 5, shield_type = 'NONE', shield_armor = 0, buff_type = 'NONE', buff = 0, debuff_type = 'NONE', debuff = 0, num_of_atks = 1, inventory = []):
     self.name = name
     self.hp = hp
     self.weapon = weapon
@@ -35,6 +37,7 @@ class Character:
     self.buff = buff
     self.debuff_type = debuff_type
     self.debuff = debuff
+    self.num_of_atk = num_of_atks
     self.inventory = inventory
 
     # Defines pickup weapon action and it's effect on damage
