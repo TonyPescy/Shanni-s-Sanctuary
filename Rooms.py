@@ -25,7 +25,7 @@ class Room():
         rE = Room(0, -3, ["North"], False)                                                          # Entrance room, can only go north from here into room 1
         r1 = Room(1, e_list[1], ["North", "East", "West"], False)                                   # Room 1, can go north to Room 3, east to Room 4, or west to Room 2 - Cannot go south as entrance will close
         r2 = Room(2, e_list[2], ["North", "East", "West"], False)                                   # Room 2, can go north to Room 6, east to Room 1, or west to Room 5
-        r3 = Room(3, e_list[3], ["East", "West", "Northeast", "Northwest"], False)                  # Room 3, can go east to Room 7, west to Room 6, north east to Room 12, or north west to Room 11
+        r3 = Room(3, e_list[3], ["East", "West", "Northeast", "Northwest", "South"], False)         # Room 3, can go east to Room 7, west to Room 6, north east to Room 12, north west to Room 11, or south to room 1
         r4 = Room(4, e_list[4], ["East", "West"], False)                                            # Room 4, can go east to Room 31 or west to Room 1
         r5 = Room(5, e_list[5], ["East"], False)                                                    # Room 5, can go east to Room 2
         r6 = Room(6, e_list[6], ["East", "South", "West", "Northeast", "Northwest"], False)         # Room 6, can go east to Room 3, south to Room 2, west to Room 9, north east to Room 11, or north west to Room 10
@@ -33,7 +33,7 @@ class Room():
         r8 = Room(8, e_list[8], ["South", "West", "Northwest"], False)                              # Room 8, can go south to Room 31, west to Room 7, or north west to Room 13
         r9 = Room(9, e_list[9], ["East", "Northeast"], False)                                       # Room 9, can go east to Room 6 or north east to Room 10
         r10 = Room(10, e_list[10], ["East", "Southeast", "Southwest"], False)                       # Room 10, can go east to Room 14, south east to Room 6, or south west to Room 9
-        r11 = Room(11, e_list[11], ["North", "East", "Southeast", "Southwest"], False)              # Room 11, can go north to Room 16, east to Room 12, south east to Room 3, or south west to Room 6
+        r11 = Room(11, e_list[11], ["North", "East", "Southeast", "Southwest", "West"], False)      # Room 11, can go north to Room 16, east to Room 12, south east to Room 3, west to room 14, or south west to Room 6
         r12 = Room(12, e_list[12], ["West", "Southeast", "Southwest"], False)                       # Room 12, can go west to Room 11, south east to Room 7, or south west to Room 3
         r13 = Room(13, e_list[13], ["East", "Southeast", "Southwest"], False)                       # Room 13, can go east to Room 18, south east to Room 8, or south west to Room 7
         r14 = Room(14, e_list[14], ["North", "East", "West"], False)                                # Room 14, can go north to Room 15, east to Room 11, or west to Room 10
@@ -56,7 +56,7 @@ class Room():
         r31 = Room(31, -1, ["North", "West"], False)                                                # Room 31, can go north to Room 8 or west to Room 4
         rW = Room(32, -2, ["North"], False)                                                         # Room win, can go north to exit (Exit room will be handled as more of an encounter thing as of right now)
         
-        room_array = [r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26, r27, r28, r29, r30, rE, r31, rW]
+        room_array = [r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26, r27, r28, r29, r30, r31, rW, rE]
         return room_array
     # room_creation Ends
 
@@ -81,7 +81,7 @@ class Room():
     def get_player_move(options):
         
         if (len(options) == 5):
-            # possible_rms = [6, 15, 16, 17]  with 5 options
+            # possible_rms = [3, 6, 15, 16, 17, 11]  with 5 options
             while True:
                 player_direction = input('Enter the direction you wish to travel in: %s, %s, %s, %s, %s? ' %(options[0], options[1], options[2], options[3], options[4])).lower()
                 # checks if player entered direction is valid and breaks while loop
@@ -93,7 +93,7 @@ class Room():
             return player_direction
         
         elif (len(options) == 4):
-            # possible_rms = [3, 7, 11, 21]  with 4 options
+            # possible_rms = [7, 11, 21]  with 4 options
             while True:
                 player_direction = input('Enter the direction you wish to travel in: %s, %s, %s, %s? ' %(options[0], options[1], options[2], options[3])).lower()
                 # checks if player entered direction is valid and breaks while loop
@@ -182,6 +182,8 @@ class Room():
             return 7
         elif dir == 'west':     # west takes you to room 6
             return 6
+        elif dir == "south":    # south takes you to room 1
+            return 1
         else:
             print('Pathing Error!')
             sys.exit(1)
@@ -263,13 +265,15 @@ class Room():
 
     def rm_11(dir): 
         if dir == 'north':      # north takes you to room 16
-            return 11
+            return 16
         elif dir == 'southwest':      # southwest takes you to room 6
             return 6
         elif dir == 'east':     # east takes you to room 12
             return 12
         elif dir == 'southeast':    # southeast takes you to room 26
             return 6
+        elif dir == 'west':         # west takes you to room 14
+            return 14
         else:
             print('Pathing Error!')
             sys.exit(1)
@@ -307,55 +311,198 @@ class Room():
             print('Pathing Error!')
             sys.exit(1)
 
-    def rm_15(dir): # START HERE TOMORROW
-        if dir == 'northeast':      # northeast takes you to room 11
-            return 11
-        elif dir == 'northwest':      # northwest takes you to room 10
-            return 10
-        elif dir == 'east':     # east takes you to room 3
-            return 3
-        elif dir == 'west':     # west takes you to room 9
-            return 9
-        elif dir == 'south':    # south takes you to room 2
-            return 2
+    def rm_15(dir): 
+        if dir == 'northeast':      # northeast takes you to room 22
+            return 22
+        elif dir == 'northwest':      # northwest takes you to room 21
+            return 21
+        elif dir == 'east':     # east takes you to room 16
+            return 16
+        elif dir == 'west':     # west takes you to room 20
+            return 20
+        elif dir == 'south':    # south takes you to room 14
+            return 14
         else:
             print('Pathing Error!')
             sys.exit(1)
 
     def rm_16(dir): 
-        print('16!')
+        if dir == 'northeast':      # northeast takes you to room 23
+            return 23
+        elif dir == 'northwest':      # northwest takes you to room 22
+            return 22
+        elif dir == 'east':     # east takes you to room 17
+            return 17
+        elif dir == 'west':     # west takes you to room 15
+            return 15
+        elif dir == 'south':    # south takes you to room 11
+            return 11
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
     def rm_17(dir): 
-        print('17!')
+        if dir == 'northeast':      # northeast takes you to room 25
+            return 25
+        elif dir == 'northwest':      # northwest takes you to room 23
+            return 23
+        elif dir == 'east':     # east takes you to room 19
+            return 19
+        elif dir == 'west':     # west takes you to room 16
+            return 16
+        elif dir == 'south':    # south takes you to room 12
+            return 12
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
     def rm_18(dir): 
-        print('18!')
+        if dir == 'north':      # north takes you to room 19
+            return 19
+        elif dir == 'west':     # west takes you to room 13
+            return 13
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
     def rm_19(dir): 
-        print('19!')
+        if dir == 'northeast':      # northeast takes you to room 25
+            return 25
+        elif dir == 'west':     # west takes you to room 17
+            return 17
+        elif dir == 'south':    # south takes you to room 18
+            return 18
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
     def rm_20(dir): 
-        print('20!')
+        if dir == 'northeast':      # northeast takes you to room 21
+            return 21
+        elif dir == 'east':     # east takes you to room 15
+            return 15
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
     def rm_21(dir): 
-        print('21!')
+        if dir == 'southwest':      # southwest takes you to room 20
+            return 21
+        elif dir == 'north':     # north takes you to room 29
+            return 16
+        elif dir == 'west':     # west takes you to room 26
+            return 26
+        elif dir == 'southeast':    # south takes you to room 15
+            return 15
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
     def rm_22(dir): 
-        print('22!')
+        if dir == 'southeast':      # southeast takes you to room 16
+            return 16
+        elif dir == 'southwest':      # southwest takes you to room 15
+            return 15
+        elif dir == 'north':     # north takes you to room 27
+            return 27
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
     def rm_23(dir): 
-        print('23!')
+        if dir == 'southeast':      # southeast takes you to room 17
+            return 17
+        elif dir == 'southwest':      # southwest takes you to room 16
+            return 16
+        elif dir == 'north':     # north takes you to room 28
+            return 28
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
     def rm_24(dir): 
-        print('24!')
+        if dir == 'north':      # north takes you to room 28
+            return 28
+        elif dir == 'south':    # south takes you to room 25
+            return 25
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
     def rm_25(dir): 
-        print('25!')
+        if dir == 'southeast':      # southeast takes you to room 19
+            return 19
+        elif dir == 'southwest':      # southwest takes you to room 17
+            return 17
+        elif dir == 'north':     # north takes you to room 24
+            return 24
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
     def rm_26(dir): 
-        print('26!')
+        if dir == 'north':      # north takes you to room 30
+            return 30
+        elif dir == 'east':     # east takes you to room 21
+            return 21
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
     def rm_27(dir): 
-        print('27!')
+        if dir == 'east':     # east takes you to room 28
+            return 28
+        elif dir == 'west':     # west takes you to room 29
+            return 29
+        elif dir == 'south':    # south takes you to room 22
+            return 22
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
     def rm_28(dir): 
-        print('28!')
+        if dir == 'east':     # east takes you to room 24
+            return 24
+        elif dir == 'west':     # west takes you to room 27
+            return 27
+        elif dir == 'south':    # south takes you to room 23
+            return 23
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
     def rm_29(dir): 
-        print('29!')
+        if dir == 'east':     # east takes you to room 27
+            return 27
+        elif dir == 'west':     # west takes you to room 30
+            return 30
+        elif dir == 'south':    # south takes you to room 22
+            return 22
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
 
     def rm_30(dir): 
-        print('30!')
+        print('THIS IS THE BOOS ENCOUNTER')
+        if dir == 'north':      # north takes you to room exit
+            return 32
+        elif dir == 'east':     # east takes you to room 29
+            return 29
+        elif dir == 'south':    # south takes you to room 26
+            return 26
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
 
     def rm_boss(dir): 
-        print('TEMP!BOSS')
+        if dir == 'north':      # north takes you to room 8
+            return 8
+        elif dir == 'west':     # west takes you to room 4
+            return 4
+        else:
+            print('Pathing Error!')
+            sys.exit(1)
+
     def rm_exit(dir): 
         print('Temp!Ex')
 

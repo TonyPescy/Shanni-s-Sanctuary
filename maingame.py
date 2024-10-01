@@ -46,7 +46,7 @@ def main():
     # Entrance Encounter
     # print(rooms_array[30].num)
     # print(rooms_array[30].pathing)
-    next_room = 30      # room starts at 30 because non-randomized descriptions are appened after the random ones
+    next_room = 0      # room starts at 0 because non-randomized descriptions are appened after the random ones
     rooms_array, next_room = en.room_encounters(next_room, rm_dsc_lst, rooms_array)  # always starts at zero, later we will use next_room for first parameter
     print(next_room)
 
