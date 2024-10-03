@@ -87,3 +87,6 @@ class Armors:
 
         return a_list
     # create_armors ends
+
+
+
