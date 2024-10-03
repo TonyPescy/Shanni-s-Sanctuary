@@ -11,11 +11,6 @@ import Rooms as rm
 # Constants
 DESC_ENTRY = 0      # will be used to access the first element of the room description array, it contains the exit description
 DESC_EXIT = 1       # will be used to access the second element of the room description array, it contains the exit description
-#SPECIAL_ENCOUNTERS = [
-#    "As you walk through the short hallway the heavy doors slam shut behind you. Slowly your eyes adjust to the dim light revealing weathered stone brick covered with thick vines and wet moss. As you scan the room there is nothing that you can see and the doors behind you won't budge. There won't be any turning back now, the only way is through the thick wooden doors before you.",
-#    "Boss",
-#    "Exit"
-#    ]
 
 class Encounter():
 
