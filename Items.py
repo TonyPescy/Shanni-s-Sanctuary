@@ -7,13 +7,20 @@
 # imports
 
 
+# identifiers
+WEAPON_ID = 1
+SHIELD_ID = 2
+ARMOR_ID = 3
+CONSUMABLE_ID = 4
+
 class Weapons:
-    def __init__(self, name, desc, damage, durability = 99, infusion = 'NONE'):
+    def __init__(self, name, desc, damage, durability = 99, infusion = 'NONE', identifier = WEAPON_ID):
         self.name = name
-        self.damage = damage
         self.desc = desc
+        self.damage = damage
         self.durability = durability
         self.infusion = infusion
+        self.identifier = identifier
 
     # create_weapons Starts
     # Creates all weapons that are in the game
@@ -50,10 +57,11 @@ class Weapons:
     # create_weapons Ends
 
 class Shields:
-    def __init__(self, name, desc, defence):
+    def __init__(self, name, desc, defence, identifier = SHIELD_ID):
         self.name = name
         self.desc = desc
         self.defence = defence
+        self.identifier - identifier
 
     # create_shields Starts
     # Creates all shields that are in the game
@@ -70,10 +78,11 @@ class Shields:
     # create_shields ends
 
 class Armors:
-    def __init__(self, name, desc, defence):
+    def __init__(self, name, desc, defence, identifier = ARMOR_ID):
         self.name = name
         self.desc = desc
         self.defence = defence
+        self.identifier = identifier
 
     # create_armors Starts
     # Creates all armors that are in the game
@@ -95,10 +104,11 @@ class Armors:
     # create_armors ends
 
 class Consumables():
-    def __init__(self, name, desc, quantity = 1):
+    def __init__(self, name, desc, quantity = 1, identifier = CONSUMABLE_ID):
         self.name = name
         self.desc = desc
         self.quantity = quantity
+        self.identifier = identifier
 
     # create_consumables Starts
     # Creates all consumables that are in the game

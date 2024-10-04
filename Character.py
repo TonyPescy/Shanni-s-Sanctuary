@@ -4,19 +4,6 @@
 # Description: Character Class to define the player character.
 #######################################################################################################################################
 
-################################################################################
-# CHECKLIST
-# 
-# _X_ Initialize stats on creation of character
-# ___ Create Weapon slot (awaiting final weapon/damage list)
-# ___ Create Armor slot (awaiting final armor type/armor list)
-# ___ Create Buff slot (awaiting final buff type/buff list)
-# ___ Create Debuff slot (awaiting final debuff type/debuff list)
-# ___ Create small Inventory list - approx. 5 items (awaiting final item list)
-# ___ Create Attack action (awaiting battle system)
-# ___ Create Receive Damage action (awaiting damage system)
-################################################################################
-
 # imports
 import sys
 import Items as it
@@ -29,15 +16,15 @@ import random as rand
 
 class Character:
   # Initialize basic stats of the character
-  def __init__(self, name, hp = 200, weapon = 'NONE', armor_type = 'NONE', shield_type = 'NONE', inventory = [], buff_type = 'NONE', debuff_type = 'NONE', num_of_atks = 1, handicap = 0):
+  def __init__(self, name, hp = 200, weapon = 'NONE', armor = 'NONE', shield = 'NONE', inventory = [], buff = 'NONE', debuff = 'NONE', num_of_atks = 1, handicap = 0):
     self.name = name
     self.hp = hp
     self.weapon = weapon
-    self.armor_type =armor_type
-    self.shield_type = shield_type
+    self.armor = armor
+    self.shield = shield
     self.inventory = inventory
-    self.buff_type = buff_type
-    self.debuff_type = debuff_type
+    self.buff = buff
+    self.debuff = debuff
     self.num_of_atk = num_of_atks
     self.handicap = handicap
 
@@ -114,20 +101,20 @@ class Character:
     match num:
       # 1 harpy
       case 1:
-        harpy = Character('Harpy', 75, w_list[12])
+        harpy = Character('Harpy', 75, w_list[12], 'NONE', 'NONE', [], 'NONE', 'NONE', 2)
         return harpy
       
       # 2 harpies
       case 2:
-        harpy1 = Character('Harpy 1', 75, w_list[12])
-        harpy2 = Character('Harpy 2', 60, w_list[12])
+        harpy1 = Character('Harpy 1', 75, w_list[12], 'NONE', 'NONE', [], 'NONE', 'NONE', 2)
+        harpy2 = Character('Harpy 2', 60, w_list[12], 'NONE', 'NONE', [], 'NONE', 'NONE', 2)
         return harpy1, harpy2
       
       # 3 harpies
       case 3:
-        harpy1 = Character('Harpy 1', 65, w_list[12])
-        harpy2 = Character('Harpy 2', 50, w_list[12])
-        harpy3 = Character('Harpy 3', 65, w_list[12])
+        harpy1 = Character('Harpy 1', 65, w_list[12], 'NONE', 'NONE', [], 'NONE', 'NONE', 2)
+        harpy2 = Character('Harpy 2', 50, w_list[12], 'NONE', 'NONE', [], 'NONE', 'NONE', 2)
+        harpy3 = Character('Harpy 3', 65, w_list[12], 'NONE', 'NONE', [], 'NONE', 'NONE', 2)
         return harpy1, harpy2, harpy3
 
   def create_mino(w_list):
@@ -158,4 +145,38 @@ class Character:
     hellknight = Character('Hellknight', 125, w_list[5], a_list[2], s_list[2])
     return hellknight
   
-  def
+  def create_travelers(w_list, a_list):
+    traveler1 = Character('Lost Traveler 1', 100, w_list[9], a_list[1])
+    traveler2 = Character('Lost Traveler 2', 100, w_list[9], a_list[1])
+    return traveler1, traveler2
+  
+  def create_mage(w_list, a_list):
+    mage = Character('Forsaken Mage', 100, w_list[7], a_list[1], 'NONE', [], 'NONE', 'NONE', 2)
+    return mage
+  
+  def create_shadow(player):
+    name = 'shadow' + player.name
+    shadow = Character(name, 100, player.weapon, player.armor, player.shield, player.inventory, player.buff, player.debuff)
+    return shadow
+  
+  def create_toad(w_list):
+    toad = Character('Overgrown Toad', 80, w_list[10])
+    return toad
+  
+  def create_hounds(w_list, num):
+    match num:
+      case 1:
+        hound = Character('Hell Hound', 70, w_list[17])
+        return hound
+      case 2:
+        hound1 = Character('Hell Hound 1', 60, w_list[17])
+        hound2 = Character('Hell Hound 2', 65, w_list[17])
+        return hound1, hound2
+      
+  def create_brd(w_list, a_list):
+    brd = Character('Baby Red Dragon', 125, w_list[18], a_list[3])
+    return brd
+  
+  def create_ard(w_list, a_list):
+    ard = Character('Adult Red Dragon', 250, w_list[20], a_list[4], 'NONE', [w_list[20], w_list[19]])
+    return ard

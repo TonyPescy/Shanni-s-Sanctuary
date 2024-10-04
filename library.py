@@ -52,7 +52,6 @@ def item_pickup(inventory, new_item):
 #               a_list - List - List of all armors
 #               s_list - List - List of all shield
 def create_all():
-
     # rooms
     rm_nums = list(rand.sample(range(50), 31))  # randomize rooms in layout
     rm_list = rm.Room.room_creation(rm_nums)
@@ -71,3 +70,60 @@ def create_all():
     c_list = it.Consumables.create_consumables()
 
     return rm_list, rm_dsc_lst, w_list, a_list, s_list, c_list
+
+
+# switch loadout starts
+# Asks players if they wish to switch weapons, armor, or shields if they are able
+# Parameters:   player - Character object - current player
+# Return:       player - Character object - player with updated loadout
+#               weapon_index - list - list of all weapon indexes, used for hot swapping weapons during combat
+def switch_loadout(player):
+    # lists of indexes for items
+    weapon_index = []
+    shield_index = []
+    armor_index = []
+    # gets counts of all item in loadout (armor, shield, and weapon) that player has at start of combat
+    for i in range(0, len(player.inventory) - 1):
+        if player.inventory[i].identifier == 1:
+            weapon_count += 1
+            weapon_index.append[i]
+        elif player.inventory[i].identifier == 2:
+            shield_count += 1
+            shield_index.append[i]
+        elif player.inventory[i].identifier == 3:
+            armor_count += 1
+            armor_index.append[i]
+    
+    # weapon swap
+    if weapon_count > 0:    # fists are not considered part of the inventory, therefore items above 0 mean there are more weapon options
+        # lists all options
+        print('Currents weapons in inventory:')
+        for i in range(1, weapon_count):
+            print(f'{i}. {player.inventory[weapon_index[i - 1]].name}, Damage: {player.inventory[weapon_index[i - 1]].damage}, Durability: {player.inventory[weapon_index[i - 1]].durability} ')
+        print(f'You currently have {player.weapon.name} equipped.')
+        choice = input('Please enter the number of the weapon you would like to have equipped: ')
+        player.weapon = player.inventory[weapon_index[choice - 1]]
+    
+    # shield swap
+    if shield_count > 1:
+        # lists all options
+        print('Currents shields in inventory:')
+        for i in range(1, shield_count):
+            print(f'{i}. {player.inventory[shield_index[i - 1]].name}, Armor Remaining: {player.inventory[shield_index[i - 1]].defence} ')
+        print(f'You currently have {player.shield.name} equipped.')
+        choice = input('Please enter the number of the shield you would like to have equipped: ')
+        player.shield = player.inventory[shield_index[choice - 1]]
+    
+    # armor swap
+    if armor_count > 1:
+        # lists all options
+        print('Currents armors in inventory:')
+        for i in range(1, armor_count):
+            print(f'{i}. {player.inventory[armor_index[i - 1]].name}, Armor Remaining: {player.inventory[armor_index[i - 1]].defence} ')
+        print(f'You currently have {player.armor.name} equipped.')
+        choice = input('Please enter the number of the armor you would like to have equipped: ')
+        player.armor = player.inventory[armor_index[choice - 1]]
+
+    return player, weapon_index
+# switch loadout ends
+
