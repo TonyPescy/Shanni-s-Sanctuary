@@ -8,7 +8,6 @@
 import sys
 import Items as it
 import Rooms as rm
-import Enemies as en
 import random as rand
 
 # seed
@@ -69,6 +68,6 @@ def create_all():
     s_list = it.Shields.create_shields()
 
     # consumables
-    #c_list = 
+    c_list = it.Consumables.create_consumables()
 
-    return rm_list, rm_dsc_lst, w_list, a_list, s_list
+    return rm_list, rm_dsc_lst, w_list, a_list, s_list, c_list

@@ -15,13 +15,13 @@ class Weapons:
         self.durability = durability
         self.infusion = infusion
 
-
     # create_weapons Starts
     # Creates all weapons that are in the game
     # Parameters:   None
     # Return:       w_list - List - Contains all weapons in the game
     def create_weapons():
         # players have access to these weapons
+        unarmed = Weapons('Fists', 'Just your bare fists', 5)
         anc_swd = Weapons('Ancient Sword', 'All over the sword\'s  cracked blade intricate engravings glow faintly, whirring with power', 25, 10)
         shrt_swd = Weapons('Short Sword', 'A simple straight sword, a sidearm for hundreds of years', 10, 20)
         spear = Weapons('Spear', 'A pointy stick that has proven itself on the battlefield time and time again', 20, 30)
@@ -44,7 +44,7 @@ class Weapons:
         ard_maw = Weapons('Large Maw', 'NONE', 25)
         ard_brth = Weapons('Fire Breath', 'NONE', 40, 99, 'fiery')
 
-        w_list = [anc_swd, shrt_swd, spear, rapier, grt_swd, scrl_fb, scrl_arc_msl, glm_fst, undead_grb, tongue, stn_plr, hrpy_claw, bow, mino_hrn, srn_claw, vmt_teeth, hh_bite, brd_maw, ard_maw, ard_brth]
+        w_list = [unarmed, anc_swd, shrt_swd, spear, rapier, grt_swd, scrl_fb, scrl_arc_msl, glm_fst, undead_grb, tongue, stn_plr, hrpy_claw, bow, mino_hrn, srn_claw, vmt_teeth, hh_bite, brd_maw, ard_maw, ard_brth]
 
         return w_list
     # create_weapons Ends
@@ -80,13 +80,41 @@ class Armors:
     # Parameters:   None
     # Return:       a_list - List - Contains all armors in the game
     def create_armors():
+        # player and enemy armors
+        clothes = Armors('Clothes', 'Just your standard clothes with minimal protection', 5)
         lght_arm = Armors('Light Armor', 'Lightweight and flexible armor made of boiled leather', 20)
         hvy_arm = Armors('Heavy Armor', 'Plates of metal to cover the whole body from head to toe, it is suprisingly lightweight and easy to move in', 40)
 
-        a_list = [lght_arm, hvy_arm]
+        # enemy only armors
+        sft_scales = Armors('Soft Scales', 'Soft glistening red scales of a young dragon', 20)
+        hrd_scales = Armors('Hard Scales', 'Hard glowing red scales of a fully grown dragon', 40)
+
+        a_list = [clothes, lght_arm, hvy_arm, sft_scales, hrd_scales]
 
         return a_list
     # create_armors ends
 
+class Consumables():
+    def __init__(self, name, desc, quantity = 1):
+        self.name = name
+        self.desc = desc
+        self.quantity = quantity
 
+    # create_consumables Starts
+    # Creates all consumables that are in the game
+    # Parameters:   None
+    # Return:       c_list - List - Contains all consumables in the game
+    def create_consumables():
+        s_hp = Consumables('Small Health Potion', 'A red liquid that heals you for 30 health points when drank, it tastes strangely of a cranberry lemon-lime drink')
+        m_hp = Consumables('Medium Health Potion', 'A red liquid that heals you for 60 health points when drank, it tastes strangely of a cranberry lemon-lime drink')
+        l_hp = Consumables('Large Health Potion', 'A red liquid that heals you for 100 health points when drank, it tastes strangely of a cranberry lemon-lime drink')
+        cl_pot = Consumables('Cleanse Potion', 'A glowing blue liquid that cures all ailments when drank')
+        bandages = Consumables('Bandages', 'Somewhat fresh bandages infused with healing properties, used to stop bleeding and heals 15 health points')
+        str_pot = Consumables('Potion of Strength', 'A foul tasting brown liquid that grants you strength increasing damage dealt by 5')
+        hrd_pot = Consumables('Potion of Hardness', 'A silvery liquid that hardens fast when it touches armor and shield, increasing their effectiveness by 10')
+        port_ward = Consumables('Portable Ward', 'A small bubble that covers you when thrown, blocking all incoming damage for the 2 turns')
 
+        c_list = [s_hp, m_hp, l_hp, cl_pot, bandages, str_pot, hrd_pot, port_ward]
+
+        return c_list
+    # create_consumables ends

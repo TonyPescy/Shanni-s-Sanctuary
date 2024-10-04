@@ -17,6 +17,11 @@
 # ___ Create Receive Damage action (awaiting damage system)
 ################################################################################
 
+# imports
+import sys
+import Items as it
+import random as rand
+
 # ALL STATS SUBJECT TO CHANGE
 # MORE WEAPONS/ITEMS TO BE ADDED
 # BREAK WEAPONS, ARMOR, AND SHIELDS INTO THEIR OWN CLASS
@@ -24,79 +29,133 @@
 
 class Character:
   # Initialize basic stats of the character
-  def __init__(self, name, hp = 100, weapon = 'UNARMED', damage = 5, armor_type = 'CLOTHES', armor = 5, shield_type = 'NONE', shield_armor = 0, buff_type = 'NONE', buff = 0, debuff_type = 'NONE', debuff = 0, num_of_atks = 1, inventory = []):
+  def __init__(self, name, hp = 200, weapon = 'NONE', armor_type = 'NONE', shield_type = 'NONE', inventory = [], buff_type = 'NONE', debuff_type = 'NONE', num_of_atks = 1, handicap = 0):
     self.name = name
     self.hp = hp
     self.weapon = weapon
-    self.damage = damage
     self.armor_type =armor_type
-    self.armor = armor
     self.shield_type = shield_type
-    self.shield_armor = shield_armor
-    self.buff_type = buff_type
-    self.buff = buff
-    self.debuff_type = debuff_type
-    self.debuff = debuff
-    self.num_of_atk = num_of_atks
     self.inventory = inventory
+    self.buff_type = buff_type
+    self.debuff_type = debuff_type
+    self.num_of_atk = num_of_atks
+    self.handicap = handicap
 
-    # Defines pickup weapon action and it's effect on damage
-    # Parameters:   new_weapon = string
-    # Return:       N/A
-    def pickup_weapon(self, new_weapon):
+  # creates the player character
+  def create_player(name, w_list, a_list):
+    player = Character(name, 200, w_list[0], a_list[0], 'NONE', [w_list[0], a_list[0]])
+    return player
+
+
+# all enemies created
+
+  # honorable duelist
+  def create_duelist(w_list, a_list, s_list):
+    duelist = Character('Honorable Duelist', 100, w_list[4], a_list[1], s_list[0])
+    return duelist
+
+  # skeletons of various types
+  def create_skeleton(variant, w_list, a_list, s_list, num):
+    if variant == 'bow':  # skeletons using bow and arrows
+      match num:
+        # case for 1 skeletons appearing
+        case 1:   
+          skeleton = Character('Bow Skeleton', 40, w_list[13], a_list[1])
+          return skeleton
+
+        # case for 2 skeleton appearing
+        case 2:
+          skeleton1 = Character('Bow Skeleton 1', 30, w_list[13], a_list[1])
+          skeleton2 = Character('Bow Skeleton 2', 30, w_list[13], a_list[1])
+          return skeleton1, skeleton2
+        
+    elif variant == 'sword':
+      match num:
+        # case for 1 skeleton appearing
+        case 1:   
+          skeleton = Character('Sword Skeleton', 50, w_list[13], s_list[0])
+          return skeleton
+
+        # case for 2 skeletons appearing
+        case 2:
+          skeleton1 = Character('Sword Skeleton 1', 40, w_list[13], s_list[0])
+          skeleton2 = Character('Sword Skeleton 2', 40, w_list[13], s_list[0])
+          return skeleton1, skeleton2
+        
+        # case for 3 skeletons appearing
+        case 3:
+          skeleton1 = Character('Sword Skeleton 1', 40, w_list[13], s_list[0])
+          skeleton2 = Character('Sword Skeleton 2', 40, w_list[13], s_list[0])
+          skeleton3 = Character('Sword Skeleton 2', 40, w_list[13], s_list[0])
+          return skeleton1, skeleton2, skeleton3
+    else:
+      print('Enemy Creation Error!')
+      sys.exit(1) 
+
+  # decaying ancient captain
+  def create_decay_capt(w_list, s_list):
+    capt = Character('Decayed Ancient Captain', 100, w_list[3], 'NONE', s_list[2])
+    return capt
+  
+  # golem
+  def create_golem(w_list):
+    golem = Character('Stone Golem', 110, w_list[8], 'NONE', 'NONE', [], 'warded')
+    return golem
+  
+  def create_mummy(w_list):
+    mummy = Character('Mummy', 100, w_list[9])
+    return mummy
+  
+  def create_cyclops(w_list, a_list):
+    cyclops = Character('Cyclops', 125, w_list[11], a_list[0])
+    return cyclops
+  
+  def create_harpies(num, w_list):
+    match num:
+      # 1 harpy
+      case 1:
+        harpy = Character('Harpy', 75, w_list[12])
+        return harpy
       
-      # Switch statement to equip weapon and update damage amount
-      match new_weapon:
-        case 'UNARMED':
-          self.damage = 5
+      # 2 harpies
+      case 2:
+        harpy1 = Character('Harpy 1', 75, w_list[12])
+        harpy2 = Character('Harpy 2', 60, w_list[12])
+        return harpy1, harpy2
+      
+      # 3 harpies
+      case 3:
+        harpy1 = Character('Harpy 1', 65, w_list[12])
+        harpy2 = Character('Harpy 2', 50, w_list[12])
+        harpy3 = Character('Harpy 3', 65, w_list[12])
+        return harpy1, harpy2, harpy3
 
-        case 'ANCIENT SWORD':
-          self.damage = 30
-
-        case 'SPEAR':
-          self.damage = 10
-
-
-    # Defines pickup armor action and it's effect on armor
-    # Parameters:   new_armor = string
-    # Return:       N/A
-    def pickup_armor(self, new_armor):
-      # Switch statement to equip armor and update armor amount
-      match new_armor:
-        case 'NONE':
-          self.armor = 0
-
-    # Defines pickup shield action and it's effect on shield
-    # Parameters:   new_shield = string
-    # Return:       N/A
-    def pickup_shield(self, new_shield):
-      # Switch statement to equip shield and update shield amount
-      match new_shield:
-        case 'NONE':
-          self.shield = 0
-
-    # Defines pickup buff action and it's effects
-    # Parameters:   new_buff = string
-    # Return:       N/A
-    def pickup_buff(self, new_buff):
-      # Switch statement to activate buff and it's effects
-      match new_buff:
-          case 'NONE':
-            self.buff = 0
-
-    # Defines pickup buff action and it's effects
-    # Parameters:   new_debuff = string
-    # Return:       N/A
-    def pickup_debuff(self, new_debuff):
-      # Switch statement to activate buff and it's effects
-      match new_debuff:
-          case 'NONE':
-            self.buff = 0
-
-  '''
-    # Item functions need working Items List to fully implement.
-    def pickupItem(item):
-      self.inventory.append(item)
-
-    def dropItem(item):
-  '''
+  def create_mino(w_list):
+    mino = Character('Minotaur', 130, w_list[14])
+    return mino
+  
+  def create_siren(w_list):
+    siren = Character('Siren', 150, w_list[15])
+    return siren
+  
+  def create_vmt(w_list):
+    vmt = Character('Venus Mantrap', 115, w_list[16])
+    return vmt
+  
+  def create_pristine_capt(w_list, a_list, s_list):
+    infused_anc_sword = w_list[1]
+    infused_anc_sword.infusion = 'magic'
+    capt = Character('Pristine Ancient Captain', 100, infused_anc_sword, a_list[2], s_list[2])
+    return capt
+  
+  def create_spellspear(w_list, a_list, s_list):
+    infused_spear = w_list[3]
+    infused_spear.infusion = 'magic'
+    splspear = Character('Ancient Spell Spear', 100, infused_spear, a_list[1], s_list[1])
+    return splspear
+  
+  def create_hellknight(w_list, a_list, s_list):
+    hellknight = Character('Hellknight', 125, w_list[5], a_list[2], s_list[2])
+    return hellknight
+  
+  def
