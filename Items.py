@@ -5,16 +5,10 @@
 #######################################################################################################################################
 
 # imports
-
-
-# identifiers
-WEAPON_ID = 1
-SHIELD_ID = 2
-ARMOR_ID = 3
-CONSUMABLE_ID = 4
+import library as lib
 
 class Weapons:
-    def __init__(self, name, desc, damage, durability = 99, infusion = 'NONE', identifier = WEAPON_ID):
+    def __init__(self, name, desc, damage, durability = 99, infusion = 'NONE', identifier = lib.WEAPON_ID):
         self.name = name
         self.desc = desc
         self.damage = damage
@@ -57,7 +51,7 @@ class Weapons:
     # create_weapons Ends
 
 class Shields:
-    def __init__(self, name, desc, defence, identifier = SHIELD_ID):
+    def __init__(self, name, desc, defence, identifier = lib.SHIELD_ID):
         self.name = name
         self.desc = desc
         self.defence = defence
@@ -78,7 +72,7 @@ class Shields:
     # create_shields ends
 
 class Armors:
-    def __init__(self, name, desc, defence, identifier = ARMOR_ID):
+    def __init__(self, name, desc, defence, identifier = lib.ARMOR_ID):
         self.name = name
         self.desc = desc
         self.defence = defence
@@ -104,7 +98,7 @@ class Armors:
     # create_armors ends
 
 class Consumables():
-    def __init__(self, name, desc, quantity = 1, identifier = CONSUMABLE_ID):
+    def __init__(self, name, desc, quantity = 1, identifier = lib.CONSUMABLE_ID):
         self.name = name
         self.desc = desc
         self.quantity = quantity
@@ -121,7 +115,7 @@ class Consumables():
         cl_pot = Consumables('Cleanse Potion', 'A glowing blue liquid that cures all ailments when drank')
         bandages = Consumables('Bandages', 'Somewhat fresh bandages infused with healing properties, used to stop bleeding and heals 15 health points')
         str_pot = Consumables('Potion of Strength', 'A foul tasting brown liquid that grants you strength increasing damage dealt by 5')
-        hrd_pot = Consumables('Potion of Hardness', 'A silvery liquid that hardens fast when it touches armor and shield, increasing their effectiveness by 10')
+        hrd_pot = Consumables('Potion of Hardness', 'A silvery liquid that hardens fast when it touches armor and shield, increasing their effectiveness by 25')
         port_ward = Consumables('Portable Ward', 'A small bubble that covers you when thrown, blocking all incoming damage for the 2 turns')
 
         c_list = [s_hp, m_hp, l_hp, cl_pot, bandages, str_pot, hrd_pot, port_ward]

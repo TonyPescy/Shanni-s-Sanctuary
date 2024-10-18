@@ -16,7 +16,7 @@ import random as rand
 
 class Character:
   # Initialize basic stats of the character
-  def __init__(self, name, hp = 200, weapon = 'NONE', armor = 'NONE', shield = 'NONE', inventory = [], buff = 'NONE', debuff = 'NONE', num_of_atks = 1, handicap = 0):
+  def __init__(self, name, hp = 200, weapon = 'NONE', armor = 'NONE', shield = 'NONE', inventory = [], buff = 'NONE', debuff = 'NONE', num_of_atks = 1, handicap = 0, buff_stack = 0, debuff_stack = 0, warded = False):
     self.name = name
     self.hp = hp
     self.weapon = weapon
@@ -27,6 +27,10 @@ class Character:
     self.debuff = debuff
     self.num_of_atk = num_of_atks
     self.handicap = handicap
+    self.buff_stack = buff_stack
+    self.debuff_stack = debuff_stack
+    self.warded = warded
+
 
   # creates the player character
   def create_player(name, w_list, a_list):
@@ -86,7 +90,7 @@ class Character:
   
   # golem
   def create_golem(w_list):
-    golem = Character('Stone Golem', 110, w_list[8], 'NONE', 'NONE', [], 'warded')
+    golem = Character('Stone Golem', 110, w_list[8], 'NONE', 'NONE', [], 'warded', 'NONE', 1, 0, 2, 0, True)
     return golem
   
   def create_mummy(w_list):
