@@ -159,8 +159,8 @@ class Character:
     return mage
   
   def create_shadow(player):
-    name = 'shadow' + player.name
-    shadow = Character(name, 100, player.weapon, player.armor, player.shield, player.inventory, player.buff, player.debuff)
+    shad_name = 'Shadow' + player.name
+    shadow = Character(shad_name, 100, player.weapon, player.armor, player.shield, player.inventory, player.buff, player.debuff)
     return shadow
   
   def create_toad(w_list):
