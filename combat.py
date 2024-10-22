@@ -376,8 +376,11 @@ def deal_damage(attacker, target):
     while temp_dmg > 0:     # stops the damage application loop once damage runs out
         if target.shield != 'NONE':     # checks to see if target has a shield
             def_rem = target.shield - temp_dmg
-            if def_rem < 0:     # overflow damage through shield
-                temp_dmg
+            if def_rem < 0:     # overflow damage, shield destroyed
+                temp_dmg = abs(def_rem)
+            elif def_rem == 0:  # no overflow but shield destroyed
+                temp_dmg = 0
+                
 
 
 

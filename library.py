@@ -158,11 +158,13 @@ def item_removal(player, item, w_list):
                         player.weapon = w_list[0]
                     # player has exactly 1 weapon in inventory
                     elif w_count == 1:
-                        player.weapon = player.inventory[w_index[0]]
+                        for i in range(0, w_count - 1):
+                            if player.weapon.name == player.inventory[w_index[i]].name: # finding where current weapon is in the inventory
+                                player.weapon = player.inventory[w_index[i]]            # assigns new weapon
                     # player has 2+ weapons in inventory
                     else: 
                         random_weapon = rand.randint(0, w_count)
-
+                        player.weapon 
 # create all starts
 # Game creates all aspects of the game; rooms, armors, weapons, shields, consumables, and enemies
 # Parameters:   inventory - list - current inventory of player
