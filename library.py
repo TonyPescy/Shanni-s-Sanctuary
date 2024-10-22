@@ -153,11 +153,8 @@ def item_removal(player, item, w_list):
             match item.identifier:
                 case WEAPON_ID:
                     w_count, w_index = weapon_counter(player)
-                    # if no weapons remain in inventory, equip unarmed
-                    if w_count == 0:
-                        player.weapon = w_list[0]
                     # player has exactly 1 weapon in inventory
-                    elif w_count == 1:
+                    if w_count == 1:
                         for i in range(0, w_count - 1):
                             if player.weapon.name == player.inventory[w_index[i]].name: # finding where current weapon is in the inventory
                                 player.weapon = player.inventory[w_index[i]]            # assigns new weapon

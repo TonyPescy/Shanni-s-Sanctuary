@@ -5,7 +5,7 @@
 #######################################################################################################################################
 
 # imports
-import library as lib
+import Library as lib
 import random as rand
 
 # set loadout starts
