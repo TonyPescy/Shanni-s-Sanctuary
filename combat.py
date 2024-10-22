@@ -5,7 +5,7 @@
 #######################################################################################################################################
 
 # imports
-import Library as lib
+import library as lib
 import random as rand
 
 # set loadout starts
@@ -28,7 +28,8 @@ def set_loadout(player):
         while True:
             choice = input('Please enter the number of the weapon you would like to have equipped: ')
             try:
-                if choice > 0 and choice < weapon_count:  # choice entered was valid
+                choice = int(choice)
+                if choice > 0 and choice <= weapon_count:  # choice entered was valid
                     break
             except: # choice was not entered correctly
                 print('Please enter a number corresponding to an item above.')
@@ -45,6 +46,7 @@ def set_loadout(player):
         while True:
             choice = input('Please enter the number of the shield you would like to have equipped: ')
             try:
+                choice = int(choice)
                 if choice > 0 and choice <= shield_count:  # choice entered was valid
                     break
             except: # choice was not entered correctly
@@ -62,6 +64,7 @@ def set_loadout(player):
         while True:
             choice = input('Please enter the number of the armor you would like to have equipped: ')
             try:
+                choice = int(choice)
                 if choice > 0 and choice <= armor_count:  # choice entered was valid
                     break
             except: # choice was not entered correctly
@@ -88,11 +91,13 @@ def use_cons(player, cons_index):
     while True:
         choice = input('Please enter the number of the consumable you would like to use: ')
         try:
+            choice = int(choice)
             if choice > 0 and choice <= len(cons_index):  # choice entered was valid
                 break
         except: # choice was not entered correctly
             print('Please enter a number corresponding to an item above.')
             continue    # retries for choice 
+
     consumable_to_be_used = player.inventory[cons_index[choice - 1].name]
     player.inventory.pop(cons_index[choice - 1])    # removes consumable from inventory when used
     cons_index.pop(choice - 1)                      # removes item from list of consumables indexes
@@ -310,6 +315,7 @@ def weapon_switch(player, wep_index):
     while True:
         choice = input('Please enter the number of the weapon you would like to use: ')
         try:
+            choice = int(choice)
             if choice > 0 and choice <= len(wep_index):  # choice entered was valid
                 break
         except: # choice was not entered correctly
