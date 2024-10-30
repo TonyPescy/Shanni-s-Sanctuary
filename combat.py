@@ -331,9 +331,16 @@ def weapon_switch(player, wep_index):
 # Performs damage calculations and applies them to characters
 # Parameters:   attacker - object - attacker character
 #               target - object - target of the attack
+#               w_list - list - list of all weapons in the game, used for item-removal
 # Return:       attacker - object - attacker after the attack
 #               target - object - target after the attack
-def deal_damage(attacker, target):
+def deal_damage(attacker, target, w_list):
+
+    # checks if target is warded, which would render this process useless
+    if target.warded == True:
+        print(f'{target.name} is warded! The attacks bounce off!')
+        return attacker, target     # ends function as target would not take damage
+
     # damage calculation
     temp_dmg = attacker.weapon.damage
     if attacker.weapon.infusion == 'magic':
@@ -344,7 +351,7 @@ def deal_damage(attacker, target):
         temp_dmg += (attacker.buff_stack*5)
     if attacker.debuff == 'crushed':
         temp_dmg -= (attacker.debuff_stack*5)
-    if temp_dmg <= 0:
+    if temp_dmg < 5:
         temp_dmg = 5    # 5 in minimum amount of damage dealt
     
     # debuff application
@@ -380,13 +387,50 @@ def deal_damage(attacker, target):
     # damage is applied as follows: shield --> armor --> health points
     # damage over flows from shield to armor to health
     while temp_dmg > 0:     # stops the damage application loop once damage runs out
-        if target.shield != 'NONE':     # checks to see if target has a shield
-            def_rem = target.shield - temp_dmg
-            if def_rem < 0:     # overflow damage, shield destroyed
-                temp_dmg = abs(def_rem)
-            elif def_rem == 0:  # no overflow but shield destroyed
+        if target.shield != 'NONE':     # checks to see if target has a shield, only runs if they have one
+            target.shield.defence -= temp_dmg
+            if target.shield.defence < 0:     # overflow damage, shield destroyed
+                temp_dmg = abs(target.shield.defence)
+                print(f'{target.name}\'s shield has been destroyed by the attack!')
+                lib.item_removal(target, target.shield, w_list)     # removes destroyed shield
+                continue
+            elif target.shield.defence == 0:  # no overflow but shield destroyed
                 temp_dmg = 0
-                
+                print(f'{target.name}\'s shield has been destroyed by the attack!')
+                lib.item_removal(target, target.shield, w_list)     # removes destroyed shield
+                break
+            else:   # shield is not destroyed after attack, no overflow
+                print(f'{attacker.name} dealt {temp_dmg} damage to {target.name}\'s shield!')
+                temp_dmg = 0
+                break
+        if target.armor != 'NONE':  # checks to see if target has any armor, only runs if they have some
+            target.armor.defence -= temp_dmg
+            if target.armor.defence < 0:     # overflow damage, armor destroyed
+                temp_dmg = abs(target.armor.defence)
+                print(f'{target.name}\'s armor has broken from the attack!')
+                lib.item_removal(target, target.armor, w_list)     # removes destroyed armor
+                continue
+            elif target.armor.defence == 0:  # no overflow but armor destroyed
+                temp_dmg = 0
+                print(f'{target.name}\'s armor has broken from the attack!')
+                lib.item_removal(target, target.armor, w_list)     # removes destroyed armor
+                break
+            else:   # armor is not destroyed after attack, no overflow
+                print(f'{attacker.name} dealt {temp_dmg} damage to {target.name}\'s armor!')
+                temp_dmg = 0
+                break
+        # damage below is dealt directly to health points of target
+        # only able to proceed if target has no armor or shield remaining or they were destroyed
+        target.hp -= temp_dmg
+        if target.hp <= 0:     # target has died
+            print(f'{target.name} has died from their injuries!')
+            temp_dmg = 0
+            break
+        else:               # targets is still alive
+            print(f'{attacker.name} dealt {temp_dmg} damage to {target.name}!')
+            # POSSIBLY MAKE CHECKS ON TARGET.HP AND CHANGE THE PRINT ACCORIDNG TO HOW MUCH HP THEY HAVE LEFT?
+            print(f'{target.name} still has {target.hp} health points remaining!')      # TEMP UNTIL ABOVE IS DONE
+
 
 
 
@@ -411,6 +455,7 @@ def combat(enemy_list, player):
     match num_of_enemies:
         # combat with one enemy
         case 1:
+            # HANDLE DEATH OF PLAYER OR ENEMY(S) HERE!!!
             while enemy_list[0].hp > 0 or player.hp > 0:
                 player, turn_skip = status_check(player)  # checks player status' and applies buffs/debuffs
                 # player turn
