@@ -144,7 +144,7 @@ def item_pickup(inventory, new_item):
 # Parameters:   player - object - current player
 #               item - object - item to be removed
 # Return:       player - object - updated player
-def item_removal(player, item, w_list):
+def item_removal(player, item):
 # ITERATE OVER INVENTORY COUNTING UNTIL ITEM IS FOUNND
 # REMOVE IT FROM INVENTORY USING POP AND CURRENT INDEX
     current_index = -1     # initialize current inventory index at -1 so it will start index at 0 instead of 1
@@ -160,7 +160,7 @@ def item_removal(player, item, w_list):
                     if w_count == 1:
                         # the only w_index is the one to be removed
                         player.inventory.pop(current_index)
-                        player.weapon = w_list[0]   # gives player 'unarmed' as a weapon
+                        player.weapon = it.Weapons('Fists', 'Just your bare fists', 5)   # gives player 'unarmed' as a weapon
 
                     # player has 2 weapons in inventory - one to be removed and the other to be equipped
                     elif w_count == 2:

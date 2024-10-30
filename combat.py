@@ -169,7 +169,7 @@ def use_cons(player, cons_index):
         
         case 'Potion of Hardness':
             if player.armor == 'NONE' and player.shield == 'NONE':      # player does not have anything to use it on
-                print('You just wasted your potion of hardness! (There was nothing to use it on...)')
+                print('There was nothing to use it on... You just wasted your potion of hardness!')
             elif player.armor != 'NONE' and player.shield == 'NONE':    # player only has armor
                 player.armor.defence += 25
             elif player.armor == 'NONE' and player.shield != 'NONE':    # player only has a shield
@@ -202,7 +202,7 @@ def use_cons(player, cons_index):
                 return player, cons_index
             else:                           #  if player has a ward already
                 player.buff_stack += 2
-                print("Your ward grows around you!")
+                print("Your ward grows stronger around you!")
                 return player, cons_index
 # use consumable end
 
@@ -331,10 +331,9 @@ def weapon_switch(player, wep_index):
 # Performs damage calculations and applies them to characters
 # Parameters:   attacker - object - attacker character
 #               target - object - target of the attack
-#               w_list - list - list of all weapons in the game, used for item-removal
 # Return:       attacker - object - attacker after the attack
 #               target - object - target after the attack
-def deal_damage(attacker, target, w_list):
+def deal_damage(attacker, target):
 
     # checks if target is warded, which would render this process useless
     if target.warded == True:
@@ -392,45 +391,47 @@ def deal_damage(attacker, target, w_list):
             if target.shield.defence < 0:     # overflow damage, shield destroyed
                 temp_dmg = abs(target.shield.defence)
                 print(f'{target.name}\'s shield has been destroyed by the attack!')
-                lib.item_removal(target, target.shield, w_list)     # removes destroyed shield
+                lib.item_removal(target, target.shield)     # removes destroyed shield
                 continue
             elif target.shield.defence == 0:  # no overflow but shield destroyed
                 temp_dmg = 0
                 print(f'{target.name}\'s shield has been destroyed by the attack!')
-                lib.item_removal(target, target.shield, w_list)     # removes destroyed shield
-                break
+                lib.item_removal(target, target.shield)     # removes destroyed shield
+                return attacker, target
             else:   # shield is not destroyed after attack, no overflow
                 print(f'{attacker.name} dealt {temp_dmg} damage to {target.name}\'s shield!')
                 temp_dmg = 0
-                break
+                return attacker, target
+            
         if target.armor != 'NONE':  # checks to see if target has any armor, only runs if they have some
             target.armor.defence -= temp_dmg
             if target.armor.defence < 0:     # overflow damage, armor destroyed
                 temp_dmg = abs(target.armor.defence)
                 print(f'{target.name}\'s armor has broken from the attack!')
-                lib.item_removal(target, target.armor, w_list)     # removes destroyed armor
+                lib.item_removal(target, target.armor)     # removes destroyed armor
                 continue
             elif target.armor.defence == 0:  # no overflow but armor destroyed
                 temp_dmg = 0
                 print(f'{target.name}\'s armor has broken from the attack!')
-                lib.item_removal(target, target.armor, w_list)     # removes destroyed armor
-                break
+                lib.item_removal(target, target.armor)     # removes destroyed armor
+                return attacker, target
             else:   # armor is not destroyed after attack, no overflow
                 print(f'{attacker.name} dealt {temp_dmg} damage to {target.name}\'s armor!')
                 temp_dmg = 0
-                break
+                return attacker, target
+            
         # damage below is dealt directly to health points of target
         # only able to proceed if target has no armor or shield remaining or they were destroyed
         target.hp -= temp_dmg
         if target.hp <= 0:     # target has died
             print(f'{target.name} has died from their injuries!')
             temp_dmg = 0
-            break
+            return attacker, target
         else:               # targets is still alive
             print(f'{attacker.name} dealt {temp_dmg} damage to {target.name}!')
             # POSSIBLY MAKE CHECKS ON TARGET.HP AND CHANGE THE PRINT ACCORIDNG TO HOW MUCH HP THEY HAVE LEFT?
             print(f'{target.name} still has {target.hp} health points remaining!')      # TEMP UNTIL ABOVE IS DONE
-
+            return attacker, target
 
 
 
@@ -474,13 +475,15 @@ def combat(enemy_list, player):
                         if player_action == 'consumable' and turn_skip != True:
                             player, cons_index = use_cons(player)
                             # enemy turn
+                            enemy_list[0], player = deal_damage(enemy_list[0], player)
                             # continue to restart combat loop
-                            print('ooo')
+                            continue
                         elif player_action == 'attack' and turn_skip != True:
                             #nothing happens?
                             print('zzzz')
 
                     else:       # player does not have any items to use
+                        # player attack
                         if len(weapon_index) > 1:   # more than 1 weapon in player inventory
                             print(f'Your current weapon is: {player.weapon.name} - DMG: {player.weapon.damage} - DUR: {player.weapon.durability} - INF: {player.weapon.infusion}')
                             while True: 
@@ -491,10 +494,15 @@ def combat(enemy_list, player):
                                 except: # swap input was not entered correctly
                                     print('Please enter yes or no.')
                                     continue    # retries for swap input 
-                            if swap == 'no':
+                            if swap == 'no':    # weapon not swapped
+                                player, enemy = deal_damage(player, enemy)
+                            else:               # weapon is to be swapped
+                                player = weapon_switch(player, weapon_index)
+                                
 
 
-                        else:                       # player only has 1 weapon to use
+                        else:                       # player only has 1 weapon to use 
+
 
                         # what weapon do u want to use?
                         # deal damage
