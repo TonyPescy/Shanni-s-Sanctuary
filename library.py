@@ -26,13 +26,15 @@ rand.seed(420)        # Hahaha funni number, for testing
 # Return:       weapon_index - lists - contains location of weapons in list
 #               weapon_count - ints - number of weapons in inventory
 def weapon_counter(player):
+    # init
+    weapon_count = 0
     # lists of indexes for items
     weapon_index = []
     # gets counts of weapons in inventory
-    for i in range(0, len(player.inventory) - 1):
+    for i in range(0, len(player.inventory)):
         if player.inventory[i].identifier == WEAPON_ID:
             weapon_count += 1
-            weapon_index.append[i]
+            weapon_index.append(i)
     return weapon_count, weapon_index
 # weapon counter ends
 
@@ -42,13 +44,15 @@ def weapon_counter(player):
 # Return:       shield_index - lists - contains location of shields in list
 #               shield_count - ints - number of shields in inventory
 def shield_counter(player):
+    # init
+    shield_count = 0
     # lists of indexes for items
     shield_index = []
     # gets counts of all shields in inventory
-    for i in range(0, len(player.inventory) - 1):
+    for i in range(0, len(player.inventory)):
         if player.inventory[i].identifier == SHIELD_ID:
             shield_count += 1
-            shield_index.append[i]
+            shield_index.append(i)
     return shield_count, shield_index
 # shield counter ends
 
@@ -58,13 +62,15 @@ def shield_counter(player):
 # Return:       armor_index - lists - contains location of armors in list
 #               armor_count - ints - number of armors in inventory
 def armor_counter(player):
+    # init
+    armor_count = 0
     # lists of indexes for items
     armor_index = []
     # gets counts of armor in inventory
-    for i in range(0, len(player.inventory) - 1):
+    for i in range(0, len(player.inventory)):
         if player.inventory[i].identifier == ARMOR_ID:
             armor_count += 1
-            armor_index.append[i]
+            armor_index.append(i)
     return armor_count, armor_index
 # weapon counter ends
 
@@ -76,9 +82,9 @@ def consumable_indexer(player):
     # lists of indexes for items
     consumable_index = []
     # gets indexes of consumables in inventory
-    for i in range(0, len(player.inventory) - 1):
+    for i in range(0, len(player.inventory)):
         if player.inventory[i].identifier == CONSUMABLE_ID:
-            consumable_index.append[i]
+            consumable_index.append(i)
     return consumable_index
 # consumable indexer ends
 
@@ -88,24 +94,29 @@ def consumable_indexer(player):
 # Return:       x_index - lists - contains location of x (weapons, shield, armor, and consumables) in list
 #               x_count - ints - number of x (weapons, shields, and armors) in inventory
 def loadout_count(player):
+    # initialization of item counts
+    weapon_count = 0
+    shield_count = 0
+    armor_count = 0
+
     # lists of indexes for items
     weapon_index = []
     shield_index = []
     armor_index = []
     consumable_index = []
     # gets counts of all item in loadout (armor, shield, and weapon) that player has at start of combat
-    for i in range(0, len(player.inventory) - 1):
+    for i in range(0, len(player.inventory)):
         if player.inventory[i].identifier == WEAPON_ID:
             weapon_count += 1
-            weapon_index.append[i]
+            weapon_index.append(i)
         elif player.inventory[i].identifier == SHIELD_ID:
             shield_count += 1
-            shield_index.append[i]
+            shield_index.append(i)
         elif player.inventory[i].identifier == ARMOR_ID:
             armor_count += 1
-            armor_index.append[i]
+            armor_index.append(i)
         elif player.inventory[i].identifier == CONSUMABLE_ID:
-            consumable_index.append[i]
+            consumable_index.append(i)
     return weapon_index, weapon_count, shield_index, shield_count, armor_index, armor_count, consumable_index
 # loadout count ends
 
@@ -149,18 +160,19 @@ def item_removal(player, item):
 # REMOVE IT FROM INVENTORY USING POP AND CURRENT INDEX
     current_index = -1     # initialize current inventory index at -1 so it will start index at 0 instead of 1
     for x in player.inventory:
+        print(x.name)
+        print(item.name)
         current_index += 1          # current index of inventory is calculated
         if x.name == item.name:     # item was found in inventory
             # see if item is a weapon, shield, armor, or consumable
             match item.identifier:
                 case 1:         # would use WEAPON_ID but it is considered a irrefutable pattern
-                    #PRITN STSATEMENT ABOUT WHAT BROJK (MAYBE IN COMBAT PART)
                     w_count, w_index = weapon_counter(player)
                     # player has exactly 1 weapon in inventory - the one to be removed
                     if w_count == 1:
+                        player.weapon = it.Weapons('Fists', 'Just your bare fists', 5)   # gives player 'unarmed' as a weapon
                         # the only w_index is the one to be removed
                         player.inventory.pop(current_index)
-                        player.weapon = it.Weapons('Fists', 'Just your bare fists', 5)   # gives player 'unarmed' as a weapon
 
                     # player has 2 weapons in inventory - one to be removed and the other to be equipped
                     elif w_count == 2:
@@ -191,14 +203,14 @@ def item_removal(player, item):
                     s_count, s_index = shield_counter(player)
                     # player has exactly 1 shield in inventory - the one to be removed
                     if s_count == 1:
+                        player.shield = 'NONE'   # gives player no shield
                         # the only s_index is the one to be removed
                         player.inventory.pop(current_index)
-                        player.shield = 'NONE'   # gives player no shield
 
                     # player has 2 shields in inventory - one to be removed and the other to be equipped
                     elif s_count == 2:
                         for s in s_index:
-                            if s != current_index:      # weapon that is not currently equipped
+                            if s != current_index:      # shield that is not currently equipped
                                 player.shield = player.invetory[s]  # assign new shield
                                 player.inventory.pop(current_index) # remove old shield
                                 break
@@ -224,14 +236,15 @@ def item_removal(player, item):
                     a_count, a_index = armor_counter(player)
                     # player has exactly 1 armor in inventory - the one to be removed
                     if a_count == 1:
+                        player.armor = 'NONE'   # gives player no armor
                         # the only a_index is the one to be removed
                         player.inventory.pop(current_index)
-                        player.armor = 'NONE'   # gives player no armor
+                
 
                     # player has 2 armors in inventory - one to be removed and the other to be equipped
                     elif a_count == 2:
                         for a in a_index:
-                            if a != current_index:      # weapon that is not currently equipped
+                            if a != current_index:      # armor that is not currently equipped
                                 player.armor = player.invetory[a]  # assign new armor
                                 player.inventory.pop(current_index) # remove old armor
                                 break
@@ -279,5 +292,8 @@ def create_all():
 
     # consumables
     c_list = it.Consumables.create_consumables()
+
+    # enemy creation
+
 
     return rm_list, rm_dsc_lst, w_list, a_list, s_list, c_list

@@ -31,10 +31,14 @@ class Encounter():
 def user_name_and_ans(): # Gets players name
     name = str(input("The voice within asks:  'What is your name?' "))
     name = name[0].upper() + name[1:].lower()       # Makes name look nice
-    answer = str(input(name + ", do you wish to enter Shanni's Sanctuary?  Yes or no? "))
-    answer = answer.lower()
-    if (answer != 'yes' or answer != 'no'):
-        input
+    while True:
+        answer = str(input(name + ", do you wish to enter Shanni's Sanctuary?  Yes or no? "))
+        answer = answer.lower()
+        if (answer == 'yes' or answer == 'no'):
+            break
+        else:
+            print('Please enter yes or no.')
+            continue
     return name, answer
 # Username Ends
 
@@ -43,17 +47,18 @@ def user_name_and_ans(): # Gets players name
 # Parameters:   name = players name
 # Return:       N/A
 def entrance(name, answer):         # Entrance to the sanctuary, this decides if user wishes to play the game or not
-    if answer == "no":      # If user says no
-        print("No?  Shanni is disappointed with your cowardice, but acknowledges your intellect.  She shall let you live and return to your life, as that is more hellish than what lies within.")
-        print("You turn away slowly as the invisble weight appears to be lifted from your shoulders.  As you begin away from the sanctuary you take one last look at its devilish stone before it is blown into dust by the wind.")
-        sys.exit(1)
-    elif answer == "yes":   # If user says yes
-        print("Yes?  Shanni is delighted with your stupidity, it's not everyday she gets a sacrifice so eager.  Please enter.")
-        print("The weight one your shoulders grows heavier as you walk into the black abyss beyond the door.")
-        print("Welcome to Shanni's Sanctuary " + name + ", good luck in there, you'll need it.")
-    else:                   # If no proper answer is given, program tries again
-        answer = input("Enter yes or no ")
-        entrance(name, answer)
+    while True:
+        if answer == "no":      # If user says no
+            print("No?  Shanni is disappointed with your cowardice, but acknowledges your intellect.  She shall let you live and return to your life, as that is more hellish than what lies within.")
+            print("You turn away slowly as the invisble weight appears to be lifted from your shoulders.  As you begin away from the sanctuary you take one last look at its devilish stone before it is blown into dust by the wind.")
+            sys.exit(1)
+        elif answer == "yes":   # If user says yes
+            print("Yes?  Shanni is delighted with your stupidity, it's not everyday she gets a sacrifice so eager.  Please enter.")
+            print("The weight one your shoulders grows heavier as you walk into the black abyss beyond the door.")
+            print("Welcome to Shanni's Sanctuary " + name + ", good luck in there, you'll need it.")
+            break
+        else:                   # If no proper answer is given, program tries again *This is a double check should not ever occur*
+            answer = input("Enter yes or no ")
 # Entrance Ends
 
 # Introduction Starts
@@ -64,13 +69,13 @@ def intro():            # Intro to the game
     temp = 0        # temp for while loop to ensure yes or no is provided
     print("You are walking down the side walk of the city you've spent your entire life in, during that time nothing much has changed.  It was always a small city, but now that you've grown up it seems to have gotten smaller and much duller.  You know every inch of this city like the back of your hand, you could walk the streets blindfolded and make it to work on time.  However today was odd, a peculiar weight was on you shoulders, maybe work was getting to you?  But that can't be making you feel this way can it?.")
     answer = str(input("That's when something catches your eye, something you never saw before.  A large overgrown pyramid in the center of the street, how have you never noticed this before?  A voice speaks to you, it comes from within your own mind, it's beckoning you forth.  Come closer it says, egging you on and on.  Do you listen to what the voice says?  Yes or no? ").lower())
-    while temp == 0:
+    while True:
         if answer.lower() == "no":
             print("Your body does not listen to you, instead it does the opposite and begins towards the massive black pyramid.")
-            temp = 1
+            break
         elif answer.lower() == "yes":
             print("Your begin towards the massive black pyramid, unaware of the implications it will have for your future... or if there will be one to come back to. ")
-            temp = 1
+            break
         else:               # If no proper answer is given, program tries again
             answer = input("Enter yes or no ")
             

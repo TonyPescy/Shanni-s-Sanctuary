@@ -19,22 +19,23 @@ def set_loadout(player):
     weapon_index, weapon_count, shield_index, shield_count, armor_index, armor_count, cons_index = lib.loadout_count(player)
     
     # weapon swap
-    if weapon_count > 0:    # fists are not considered part of the inventory, therefore items above 0 mean there are more weapon options
+    if weapon_count > 1:    # fists are not considered part of the inventory, therefore items above 0 mean there are more weapon options
         # lists all options
         print('Current weapons in inventory:')
         for i in range(1, weapon_count + 1):
             print(f'{i}. {player.inventory[weapon_index[i - 1]].name}, Damage: {player.inventory[weapon_index[i - 1]].damage}, Durability: {player.inventory[weapon_index[i - 1]].durability} ')
         print(f'You currently have {player.weapon.name} equipped.')
-        while True:
-            choice = input('Please enter the number of the weapon you would like to have equipped: ')
-            try:
-                choice = int(choice)
-                if choice > 0 and choice <= weapon_count:  # choice entered was valid
-                    break
-            except: # choice was not entered correctly
-                print('Please enter a number corresponding to an item above.')
-                continue    # retries for choice 
-        player.weapon = player.inventory[weapon_index[choice - 1]]
+        if weapon_count > 1:
+            while True:
+                choice = input('Please enter the number of the weapon you would like to have equipped: ')
+                try:
+                    choice = int(choice)
+                    if choice > 0 and choice <= weapon_count:  # choice entered was valid
+                        break
+                except: # choice was not entered correctly
+                    print('Please enter a number corresponding to an item above.')
+                    continue    # retries for choice 
+            player.weapon = player.inventory[weapon_index[choice - 1]]
     
     # shield swap
     if shield_count > 1:
@@ -359,7 +360,7 @@ def deal_damage(attacker, target):
         # checks if attacker has infusion that causes status affect
         if attacker.weapon.infusion != 'None' or attacker.weapon.infusion != 'magic +1' or attacker.weapon.infusion != 'magic': 
             # apply status effects based on infusion
-            match attacker.infusion:
+            match attacker.weapon.infusion:
                 case 'crusher':
                     target.debuff = 'crushed'
                     target.debuff_stack = 4    # Starts at 4, instead of the max of 3, because it will lose a stack before its calculations can be used. This ensures it will function according to the max of 3
@@ -390,9 +391,8 @@ def deal_damage(attacker, target):
             target.shield.defence -= temp_dmg
             if target.shield.defence < 0:     # overflow damage, shield destroyed
                 temp_dmg = abs(target.shield.defence)
-                print(f'{target.name}\'s shield has been destroyed by the attack!')
+                print(f'{target.name}\'s shield has been destroyed by the attack! (overflow)')
                 lib.item_removal(target, target.shield)     # removes destroyed shield
-                continue
             elif target.shield.defence == 0:  # no overflow but shield destroyed
                 temp_dmg = 0
                 print(f'{target.name}\'s shield has been destroyed by the attack!')
@@ -407,9 +407,8 @@ def deal_damage(attacker, target):
             target.armor.defence -= temp_dmg
             if target.armor.defence < 0:     # overflow damage, armor destroyed
                 temp_dmg = abs(target.armor.defence)
-                print(f'{target.name}\'s armor has broken from the attack!')
+                print(f'{target.name}\'s armor has broken from the attack! OVERFLOW')
                 lib.item_removal(target, target.armor)     # removes destroyed armor
-                continue
             elif target.armor.defence == 0:  # no overflow but armor destroyed
                 temp_dmg = 0
                 print(f'{target.name}\'s armor has broken from the attack!')
@@ -425,44 +424,44 @@ def deal_damage(attacker, target):
         target.hp -= temp_dmg
         if target.hp <= 0:     # target has died
             print(f'{target.name} has died from their injuries!')
-            temp_dmg = 0
+            temp_dmg = 0        # reset damage
             return attacker, target
+        
         else:               # targets is still alive
             print(f'{attacker.name} dealt {temp_dmg} damage to {target.name}!')
             # POSSIBLY MAKE CHECKS ON TARGET.HP AND CHANGE THE PRINT ACCORIDNG TO HOW MUCH HP THEY HAVE LEFT?
             print(f'{target.name} still has {target.hp} health points remaining!')      # TEMP UNTIL ABOVE IS DONE
+            temp_dmg = 0        # reset damage
             return attacker, target
 
 
 
 
 
-# combat start
+# combat_loop start
 # Basic loop that combat will follow
 # Parameters:   enemy_list - List of objects - List of all enemies in combat
 #               player - object - Player character
 # Return:       
 #               
-def combat(enemy_list, player):
+def combat_loop(enemy_list, player):
     num_of_enemies = len(enemy_list)
     # loadout swap
     # weapons can be switched later, armor and shields can only be done here
     player, weapon_index, cons_index = set_loadout(player)   # gets a list of the weapon and item indexes in player inventory for swapping weaopons and using items in combat
     
     # initializing varibles for use inside while loop
-    temp_dmg = 0
     turn_skip = False
 
     match num_of_enemies:
         # combat with one enemy
         case 1:
-            # HANDLE DEATH OF PLAYER OR ENEMY(S) HERE!!!
-            while enemy_list[0].hp > 0 or player.hp > 0:
+            enemy = enemy_list[0]
+            while enemy.hp > 0 and player.hp > 0:
                 player, turn_skip = status_check(player)  # checks player status' and applies buffs/debuffs
                 # player turn
                 if turn_skip != True:   # if player turn is not skipped, player turn is allowed to continue
                     if len(cons_index) > 0:         # if player has items
-
                         while True:         # repeats until valid choice is made
                             player_action = input('Would you like to attack or use a consumable? (Enter \'attack\' or \'consumable\'): ').lower()
                             try:
@@ -474,13 +473,8 @@ def combat(enemy_list, player):
 
                         if player_action == 'consumable' and turn_skip != True:
                             player, cons_index = use_cons(player)
-                            # enemy turn
-                            enemy_list[0], player = deal_damage(enemy_list[0], player)
-                            # continue to restart combat loop
-                            continue
                         elif player_action == 'attack' and turn_skip != True:
-                            #nothing happens?
-                            print('zzzz')
+                            player, enemy = deal_damage(player, enemy)
 
                     else:       # player does not have any items to use
                         # player attack
@@ -498,17 +492,18 @@ def combat(enemy_list, player):
                                 player, enemy = deal_damage(player, enemy)
                             else:               # weapon is to be swapped
                                 player = weapon_switch(player, weapon_index)
-                                
+                                player, enemy = deal_damage(player, enemy)
 
+                        else:                       # player only has 1 weapon to use /  no swap available 
+                            player, enemy = deal_damage(player, enemy)
 
-                        else:                       # player only has 1 weapon to use 
-
-
-                        # what weapon do u want to use?
-                        # deal damage
-                        # enemy turn
-                        # continue to repeat combat loop
-
-
+                # enemy turn will always run after all player actions have been completed, or if player turn has been skipped
                 # enemy turn
-                
+                enemy, player = deal_damage(enemy, player)
+                # continue to restart combat loop
+                continue
+        #case 2:
+    if enemy.hp > 0:
+        print('Enemy survived the encounter with ' + str(enemy.hp) + ' health points left!')
+    elif player.hp > 0:
+        print('Player survived the encounter with ' + str(player.hp) + ' health points left!')

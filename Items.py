@@ -55,7 +55,7 @@ class Shields:
         self.name = name
         self.desc = desc
         self.defence = defence
-        self.identifier - identifier
+        self.identifier = identifier
 
     # create_shields Starts
     # Creates all shields that are in the game
