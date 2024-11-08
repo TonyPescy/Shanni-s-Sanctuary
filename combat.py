@@ -498,12 +498,16 @@ def combat_loop(enemy_list, player):
                             player, enemy = deal_damage(player, enemy)
 
                 # enemy turn will always run after all player actions have been completed, or if player turn has been skipped
-                # enemy turn
-                enemy, player = deal_damage(enemy, player)
-                # continue to restart combat loop
-                continue
+                # since enemy goes after player, we must add a check to ensure enemy has not died before they attack
+                if enemy.hp <= 0:
+                    break
+                else:
+                    # enemy turn
+                    enemy, player = deal_damage(enemy, player)
+                    # continue to restart combat loop
+                    continue
         #case 2:
     if enemy.hp > 0:
         print('Enemy survived the encounter with ' + str(enemy.hp) + ' health points left!')
     elif player.hp > 0:
-        print('Player survived the encounter with ' + str(player.hp) + ' health points left!')
+        print(player.name + ' survived the encounter with ' + str(player.hp) + ' health points left!')
