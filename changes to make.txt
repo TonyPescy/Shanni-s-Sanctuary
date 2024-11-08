@@ -1,0 +1,21 @@
+1. Add inventory to all enemy creation functions, so that they function properly with losing their shield and armor etc..
+
+
+
+
+2. Add combast for more than 1 enemy
+
+
+
+
+3. Integrate combats into rooms
+
+
+
+
+4. Add all room descriptions
+
+
+
+
+5. get game fully running
