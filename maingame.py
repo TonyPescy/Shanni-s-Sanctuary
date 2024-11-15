@@ -12,6 +12,7 @@ import Rooms as rm
 import Character as char
 import random as rand
 import library as lib
+import combat as com
 #######################################################################################################################################
 
 #######################################################################################################################################
@@ -28,7 +29,17 @@ def main():
 
     # game item, room, and other generation
     rooms_array, rm_dsc_lst, weapon_list, armor_list, shield_list, consume_list = lib.create_all()
+    
+    # combat tester
+    player_name, player_answer = en.user_name_and_ans()
+    player = char.Character.create_player(player_name, weapon_list, armor_list)
+    test_char = char.Character.create_spellspear(weapon_list, armor_list, shield_list)
+    test_char_2 = char.Character.create_hellknight(weapon_list, armor_list, shield_list)
+    enemy1 = char.Character.create_mummy(weapon_list)
+    e_list = [test_char_2]
+    com.combat_loop(e_list, test_char)
 
+    '''
     en.intro()
     player_name, player_answer = en.user_name_and_ans()
     en.entrance(player_name, player_answer)
@@ -51,7 +62,7 @@ def main():
 
     # Exit Encounter
     en.room_encounters(next_room, rm_dsc_lst, -2, rooms_array) # final room, exit room
-    
+    '''
 
 main()
 #######################################################################################################################################
