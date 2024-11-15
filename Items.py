@@ -64,7 +64,7 @@ class Shields:
     def create_shields():
         buckler = Shields('Buckler', 'A small round shield made for parrying and deflecting blows', 15)
         mag_shi = Shields('Magic Shield', 'A medium square shield made of pure energy', 30)
-        sturdy_shi = Shields('Study Shield', 'A large kite shield that can cover most of your body with ease', 40)
+        sturdy_shi = Shields('Sturdy Shield', 'A large kite shield that can cover most of your body with ease', 40)
 
         s_list = [buckler, mag_shi, sturdy_shi]
 

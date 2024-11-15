@@ -33,11 +33,19 @@ def main():
     # combat tester
     player_name, player_answer = en.user_name_and_ans()
     player = char.Character.create_player(player_name, weapon_list, armor_list)
+
+    player.weapon = weapon_list[5]
+    player.armor = armor_list[2]
+    player.shield = shield_list[2]
+    player.inventory.append(weapon_list[5])
+    player.inventory.append(armor_list[2])
+    player.inventory.append(shield_list[2])
+
     test_char = char.Character.create_spellspear(weapon_list, armor_list, shield_list)
     test_char_2 = char.Character.create_hellknight(weapon_list, armor_list, shield_list)
     enemy1 = char.Character.create_mummy(weapon_list)
     e_list = [test_char_2]
-    com.combat_loop(e_list, test_char)
+    com.combat_loop(e_list, player)
 
     '''
     en.intro()

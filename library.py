@@ -178,7 +178,7 @@ def item_removal(player, item):
                     elif w_count == 2:
                         for w in w_index:
                             if w != current_index:      # weapon that is not currently equipped
-                                player.weapon = player.invetory[w]  # assign new weapon
+                                player.weapon = player.inventory[w]  # assign new weapon
                                 player.inventory.pop(current_index) # remove old weapon
                                 break
 
@@ -211,7 +211,7 @@ def item_removal(player, item):
                     elif s_count == 2:
                         for s in s_index:
                             if s != current_index:      # shield that is not currently equipped
-                                player.shield = player.invetory[s]  # assign new shield
+                                player.shield = player.inventory[s]  # assign new shield
                                 player.inventory.pop(current_index) # remove old shield
                                 break
 
@@ -245,7 +245,7 @@ def item_removal(player, item):
                     elif a_count == 2:
                         for a in a_index:
                             if a != current_index:      # armor that is not currently equipped
-                                player.armor = player.invetory[a]  # assign new armor
+                                player.armor = player.inventory[a]  # assign new armor
                                 player.inventory.pop(current_index) # remove old armor
                                 break
 
