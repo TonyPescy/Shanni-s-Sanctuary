@@ -41,10 +41,10 @@ def main():
     player.inventory.append(armor_list[2])
     player.inventory.append(shield_list[2])
 
-    test_char = char.Character.create_spellspear(weapon_list, armor_list, shield_list)
+    test_char = char.Character.create_mino(weapon_list)
     test_char_2 = char.Character.create_hellknight(weapon_list, armor_list, shield_list)
     enemy1 = char.Character.create_mummy(weapon_list)
-    e_list = [test_char_2]
+    e_list = [test_char]
     com.combat_loop(e_list, player)
 
     '''
