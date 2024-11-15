@@ -155,7 +155,7 @@ class Character:
     return traveler1, traveler2
   
   def create_mage(w_list, a_list):
-    mage = Character('Forsaken Mage', 100, w_list[7], a_list[1], 'NONE', [], 'NONE', 'NONE', 2)
+    mage = Character('Forsaken Mage', 100, w_list[7], a_list[1], 'NONE', [w_list[7], a_list[1]], 'NONE', 'NONE', 2)
     return mage
   
   def create_shadow(player):
@@ -164,23 +164,23 @@ class Character:
     return shadow
   
   def create_toad(w_list):
-    toad = Character('Overgrown Toad', 80, w_list[10])
+    toad = Character('Overgrown Toad', 80, w_list[10], 'NONE', 'NONE', [w_list[10]])
     return toad
   
   def create_hounds(w_list, num):
     match num:
       case 1:
-        hound = Character('Hell Hound', 70, w_list[17])
+        hound = Character('Hell Hound', 70, w_list[17], 'NONE', 'NONE', [w_list[17]])
         return hound
       case 2:
-        hound1 = Character('Hell Hound 1', 60, w_list[17])
-        hound2 = Character('Hell Hound 2', 65, w_list[17])
+        hound1 = Character('Hell Hound 1', 50, w_list[17], 'NONE', 'NONE', [w_list[17]])
+        hound2 = Character('Hell Hound 2', 45, w_list[17], 'NONE', 'NONE', [w_list[17]])
         return hound1, hound2
       
   def create_brd(w_list, a_list):
-    brd = Character('Baby Red Dragon', 125, w_list[18], a_list[3])
+    brd = Character('Baby Red Dragon', 125, w_list[18], a_list[3], 'NONE', [w_list[18], a_list[3]])
     return brd
   
   def create_ard(w_list, a_list):
-    ard = Character('Adult Red Dragon', 250, w_list[20], a_list[4], 'NONE', [w_list[20], w_list[19]])
+    ard = Character('Adult Red Dragon', 250, w_list[20], a_list[4], 'NONE', [w_list[20], w_list[19], a_list[4]])
     return ard
