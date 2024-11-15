@@ -42,7 +42,7 @@ class Character:
 
   # honorable duelist
   def create_duelist(w_list, a_list, s_list):
-    duelist = Character('Honorable Duelist', 100, w_list[4], a_list[1], s_list[0])
+    duelist = Character('Honorable Duelist', 100, w_list[4], a_list[1], s_list[0], [w_list[4], a_list[1], s_list[0]])
     return duelist
 
   # skeletons of various types
@@ -51,33 +51,33 @@ class Character:
       match num:
         # case for 1 skeletons appearing
         case 1:   
-          skeleton = Character('Bow Skeleton', 40, w_list[13], a_list[1])
+          skeleton = Character('Bow Skeleton', 40, w_list[13], a_list[1], 'NONE', [w_list[13], a_list[1]])
           return skeleton
 
         # case for 2 skeleton appearing
         case 2:
-          skeleton1 = Character('Bow Skeleton 1', 30, w_list[13], a_list[1])
-          skeleton2 = Character('Bow Skeleton 2', 30, w_list[13], a_list[1])
+          skeleton1 = Character('Bow Skeleton 1', 30, w_list[13], a_list[1], 'NONE', [w_list[13], a_list[1]])
+          skeleton2 = Character('Bow Skeleton 2', 30, w_list[13], a_list[1], 'NONE', [w_list[13], a_list[1]])
           return skeleton1, skeleton2
         
     elif variant == 'sword':
       match num:
         # case for 1 skeleton appearing
         case 1:   
-          skeleton = Character('Sword Skeleton', 50, w_list[13], s_list[0])
+          skeleton = Character('Sword Skeleton', 50, w_list[13], 'NONE', s_list[0], [w_list[13], s_list[0]])
           return skeleton
 
         # case for 2 skeletons appearing
         case 2:
-          skeleton1 = Character('Sword Skeleton 1', 40, w_list[13], s_list[0])
-          skeleton2 = Character('Sword Skeleton 2', 40, w_list[13], s_list[0])
+          skeleton1 = Character('Sword Skeleton 1', 40, w_list[13], 'NONE', s_list[0], [w_list[13], s_list[0]])
+          skeleton2 = Character('Sword Skeleton 2', 40, w_list[13], 'NONE', s_list[0], [w_list[13], s_list[0]])
           return skeleton1, skeleton2
         
         # case for 3 skeletons appearing
         case 3:
-          skeleton1 = Character('Sword Skeleton 1', 40, w_list[13], s_list[0])
-          skeleton2 = Character('Sword Skeleton 2', 40, w_list[13], s_list[0])
-          skeleton3 = Character('Sword Skeleton 2', 40, w_list[13], s_list[0])
+          skeleton1 = Character('Sword Skeleton 1', 40, w_list[13], 'NONE', s_list[0], [w_list[13], s_list[0]])
+          skeleton2 = Character('Sword Skeleton 2', 40, w_list[13], 'NONE', s_list[0], [w_list[13], s_list[0]])
+          skeleton3 = Character('Sword Skeleton 2', 40, w_list[13], 'NONE', s_list[0], [w_list[13], s_list[0]])
           return skeleton1, skeleton2, skeleton3
     else:
       print('Enemy Creation Error!')
@@ -85,73 +85,73 @@ class Character:
 
   # decaying ancient captain
   def create_decay_capt(w_list, s_list):
-    capt = Character('Decayed Ancient Captain', 100, w_list[3], 'NONE', s_list[2])
+    capt = Character('Decayed Ancient Captain', 100, w_list[3], 'NONE', s_list[2], [w_list[3], s_list[2]])
     return capt
   
   # golem
   def create_golem(w_list):
-    golem = Character('Stone Golem', 110, w_list[8], 'NONE', 'NONE', [], 'warded', 'NONE', 1, 0, 2, 0, True)
+    golem = Character('Stone Golem', 110, w_list[8], 'NONE', 'NONE', [w_list[8]], 'warded', 'NONE', 1, 0, 2, 0, True)
     return golem
   
   def create_mummy(w_list):
-    mummy = Character('Mummy', 100, w_list[9])
+    mummy = Character('Mummy', 100, w_list[9], 'NONE', 'NONE', [w_list[9]])
     return mummy
   
   def create_cyclops(w_list, a_list):
-    cyclops = Character('Cyclops', 125, w_list[11], a_list[0])
+    cyclops = Character('Cyclops', 125, w_list[11], a_list[0], 'NONE', [w_list[11], a_list[0]])
     return cyclops
   
   def create_harpies(num, w_list):
     match num:
       # 1 harpy
       case 1:
-        harpy = Character('Harpy', 75, w_list[12], 'NONE', 'NONE', [], 'NONE', 'NONE', 2)
+        harpy = Character('Harpy', 75, w_list[12], 'NONE', 'NONE', [w_list[12]], 'NONE', 'NONE', 2)
         return harpy
       
       # 2 harpies
       case 2:
-        harpy1 = Character('Harpy 1', 75, w_list[12], 'NONE', 'NONE', [], 'NONE', 'NONE', 2)
-        harpy2 = Character('Harpy 2', 60, w_list[12], 'NONE', 'NONE', [], 'NONE', 'NONE', 2)
+        harpy1 = Character('Harpy 1', 55, w_list[12], 'NONE', 'NONE', [w_list[12]], 'NONE', 'NONE', 2)
+        harpy2 = Character('Harpy 2', 60, w_list[12], 'NONE', 'NONE', [w_list[12]], 'NONE', 'NONE', 2)
         return harpy1, harpy2
       
       # 3 harpies
       case 3:
-        harpy1 = Character('Harpy 1', 65, w_list[12], 'NONE', 'NONE', [], 'NONE', 'NONE', 2)
-        harpy2 = Character('Harpy 2', 50, w_list[12], 'NONE', 'NONE', [], 'NONE', 'NONE', 2)
-        harpy3 = Character('Harpy 3', 65, w_list[12], 'NONE', 'NONE', [], 'NONE', 'NONE', 2)
+        harpy1 = Character('Harpy 1', 45, w_list[12], 'NONE', 'NONE', [w_list[12]], 'NONE', 'NONE', 2)
+        harpy2 = Character('Harpy 2', 50, w_list[12], 'NONE', 'NONE', [w_list[12]], 'NONE', 'NONE', 2)
+        harpy3 = Character('Harpy 3', 40, w_list[12], 'NONE', 'NONE', [w_list[12]], 'NONE', 'NONE', 2)
         return harpy1, harpy2, harpy3
 
   def create_mino(w_list):
-    mino = Character('Minotaur', 130, w_list[14])
+    mino = Character('Minotaur', 130, w_list[14], 'NONE', 'NONE', [w_list[14]])
     return mino
   
   def create_siren(w_list):
-    siren = Character('Siren', 150, w_list[15])
+    siren = Character('Siren', 150, w_list[15], 'NONE', 'NONE', [w_list[15]])
     return siren
   
   def create_vmt(w_list):
-    vmt = Character('Venus Mantrap', 115, w_list[16])
+    vmt = Character('Venus Mantrap', 115, w_list[16], 'NONE', 'NONE', [w_list[14]])
     return vmt
   
   def create_pristine_capt(w_list, a_list, s_list):
     infused_anc_sword = w_list[1]
     infused_anc_sword.infusion = 'magic'
-    capt = Character('Pristine Ancient Captain', 100, infused_anc_sword, a_list[2], s_list[2])
+    capt = Character('Pristine Ancient Captain', 100, infused_anc_sword, a_list[2], s_list[2], [infused_anc_sword, a_list[2], s_list[2]])
     return capt
   
   def create_spellspear(w_list, a_list, s_list):
     infused_spear = w_list[3]
     infused_spear.infusion = 'magic'
-    splspear = Character('Ancient Spell Spear', 100, infused_spear, a_list[1], s_list[1])
+    splspear = Character('Ancient Spell Spear', 100, infused_spear, a_list[1], s_list[1], [infused_spear, a_list[1], s_list[1]])
     return splspear
   
   def create_hellknight(w_list, a_list, s_list):
-    hellknight = Character('Hellknight', 125, w_list[5], a_list[2], s_list[2])
+    hellknight = Character('Hellknight', 125, w_list[5], a_list[2], s_list[2], [w_list[5], a_list[2], s_list[2]])
     return hellknight
   
   def create_travelers(w_list, a_list):
-    traveler1 = Character('Lost Traveler 1', 100, w_list[9], a_list[1])
-    traveler2 = Character('Lost Traveler 2', 100, w_list[9], a_list[1])
+    traveler1 = Character('Lost Traveler 1', 100, w_list[9], a_list[1], 'NONE', [w_list[9], a_list[1]])
+    traveler2 = Character('Lost Traveler 2', 100, w_list[9], a_list[1], 'NONE', [w_list[9], a_list[1]])
     return traveler1, traveler2
   
   def create_mage(w_list, a_list):
