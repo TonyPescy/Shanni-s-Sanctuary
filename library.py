@@ -160,8 +160,8 @@ def item_removal(player, item):
 # REMOVE IT FROM INVENTORY USING POP AND CURRENT INDEX
     current_index = -1     # initialize current inventory index at -1 so it will start index at 0 instead of 1
     for x in player.inventory:
-        print(x.name)
-        print(item.name)
+        print(x.name + 'ITEM_REMOVAL')
+        print(item.name + 'ITEM_REMOVAL')
         current_index += 1          # current index of inventory is calculated
         if x.name == item.name:     # item was found in inventory
             # see if item is a weapon, shield, armor, or consumable

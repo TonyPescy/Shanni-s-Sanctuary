@@ -435,6 +435,12 @@ def deal_damage(attacker, target):
             return attacker, target
 
 
+# player_wep_use start
+# Everytime a player uses a weapon this will change its durability accordingly
+# Parameters:   user - character object - the user of the weapon
+# Return:       
+# 
+
 
 
 
@@ -509,5 +515,6 @@ def combat_loop(enemy_list, player):
         #case 2:
     if enemy.hp > 0:
         print('Enemy survived the encounter with ' + str(enemy.hp) + ' health points left!')
+        print('You Died!')
     elif player.hp > 0:
         print(player.name + ' survived the encounter with ' + str(player.hp) + ' health points left!')
