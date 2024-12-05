@@ -465,6 +465,9 @@ def deal_damage(attacker, target):
 #               player - object - Player character
 # Return:       
 #               
+# NOTES: Combat can be trimmed and optimized alot with match cases annd better ordering of operations. This is especially true for when there are 
+# multiple enemies in the combat. 
+# PLAN: Reduce repeat code as much as possible - Break it down into more functions, better system for swapping and targetting together.
 def combat_loop(enemy_list, player):
     num_of_enemies = len(enemy_list)
     # loadout swap
@@ -525,9 +528,128 @@ def combat_loop(enemy_list, player):
                 else:
                     # enemy turn
                     enemy, player = deal_damage(enemy, player)
-                    # continue to restart combat loop
+                    # restart combat loop
                     continue
-        #case 2:
+
+        # combat with two enemies
+        case 2:
+            enemy1 = enemy_list[0]
+            enemy2 = enemy_list[1]
+            enemy_total_hp = enemy1.hp + enemy2.hp
+            while enemy_total_hp > 0 and player.hp > 0: # ensures the player or at least 1 enemy is still alive
+
+                player, turn_skip = status_check(player)  # checks player status' and applies buffs/debuffs
+                # player turn
+                if turn_skip != True:   # if player turn is not skipped, player turn is allowed to continue
+                    if len(cons_index) > 0:         # if player has items
+                        while True:         # repeats until valid choice is made
+                            player_action = input('Would you like to attack or use a consumable? (Enter \'attack\' or \'consumable\'): ').lower()
+                            try:
+                                if player_action == 'consumable' or player_action == 'attack':  # choice entered was valid
+                                    break
+                            except: # choice was not entered correctly
+                                print('Please enter \'attack\' or \'consumable\'.')
+                                continue    # retries for player_action 
+
+                        if player_action == 'consumable' and turn_skip != True:
+                            player, cons_index = use_cons(player)
+                        elif player_action == 'attack' and turn_skip != True:
+                            player, enemy = deal_damage(player, enemy)
+
+                    else:       # player does not have any items to use
+                        # player attack
+                        if len(weapon_index) > 1:   # more than 1 weapon in player inventory
+                            print(f'Your current weapon is: {player.weapon.name} - DMG: {player.weapon.damage} - DUR: {player.weapon.durability} - INF: {player.weapon.infusion}')
+                            while True: 
+                                swap = input('Do you want to swap weapon? (Enter yes or no): ').lower()
+                                try:
+                                    if swap == 'yes' or swap == 'no':  # swap input entered was valid
+                                        break
+                                except: # swap input was not entered correctly
+                                    print('Please enter yes or no.')
+                                    continue    # retries for swap input
+
+                            if enemy1.hp > 0 and enemy2.hp > 0:     # asks for player to target an enemy if there are more than 1 alive
+                                while True:     # player chooses which enemy to attack this round
+                                    print(f'1. {enemy1.name} - HP: {enemy1.hp}')
+                                    print(f'2. {enemy2.name} - HP: {enemy2.hp}')
+        
+                                    target = input('Please enter the enemy you would like to target (Enter 1 or 2): ').lower()
+                                    try:
+                                        if target == '1' or swap == '2':  # target input entered was valid
+
+                                            break
+                                    except: # target input was not entered correctly
+                                        print('Please enter 1 or 2.')
+                                        continue    # retries for target input 
+                            else:   # determines what enemy player will target when the other enemy has died
+                                match enemy1.hp > 0:
+                                    case True:      # enemy1 is the last alive enemy
+                                        target = '1'
+                                    case False:     # enemy2 is the last alive enemy
+                                        target = '2'
+
+                            if swap == 'no':        # weapon not swapped
+                                match target:
+                                    case '1':       # enemy1 was chosen as target
+                                        player, enemy1 = deal_damage(player, enemy1)    # player attacks enemy1
+                                    case '2':       # enemy2 chosen as target
+                                        player, enemy2 = deal_damage(player, enemy2)    # player attacks enemy2
+                            else:                   # weapon is to be swapped
+                                player = weapon_switch(player, weapon_index)
+                                match target:
+                                    case '1':       # enemy1 was chosen as target
+                                        player, enemy1 = deal_damage(player, enemy1)    # player attacks enemy1
+                                    case '2':       # enemy2 chosen as target
+                                        player, enemy2 = deal_damage(player, enemy2)    # player attacks enemy2
+
+                        # no weapon swap
+                        else:       # player only has 1 weapon to use /  no swap available
+                            if enemy1.hp > 0 and enemy2.hp > 0:     # asks for player to target an enemy if there are more than 1 alive
+                                while True:     # player chooses which enemy to attack this round
+                                    print(f'1. {enemy1.name} - HP: {enemy1.hp}')
+                                    print(f'2. {enemy2.name} - HP: {enemy2.hp}')
+        
+                                    target = input('Please enter the enemy you would like to target (Enter 1 or 2): ').lower()
+                                    try:
+                                        if target == '1' or swap == '2':  # target input entered was valid
+
+                                            break
+                                    except: # target input was not entered correctly
+                                        print('Please enter 1 or 2.')
+                                        continue    # retries for target input 
+                            else:   # determines what enemy player will target when the other enemy has died
+                                match enemy1.hp > 0:
+                                    case True:      # enemy1 is the last alive enemy
+                                        target = '1'
+                                    case False:     # enemy2 is the last alive enemy
+                                        target = '2'
+                            match target:
+                                    case '1':       # enemy1 was chosen as target
+                                        player, enemy1 = deal_damage(player, enemy1)    # player attacks enemy1
+                                    case '2':       # enemy2 chosen as target
+                                        player, enemy2 = deal_damage(player, enemy2)    # player attacks enemy2
+                        
+                        # Enemy(s) turn
+                        if enemy1.hp > 0 and enemy2.hp > 0: # only occurs if both enemies are alive
+                            enemy1, player = deal_damage(enemy1, player)    # enemy1 attacks player
+                            enemy2, player = deal_damage(enemy2, player)    # enemy2 attacks player
+                        else:   # one of the enemies have died
+                            match enemy1.hp > 0:
+                                case True:  # enemy1 is the only enemy alive
+                                    enemy1, player = deal_damage(enemy1, player)    # enemy1 attacks player
+                                case False: # enemy2 is the only enemy alive
+                                    enemy2, player = deal_damage(enemy2, player)    # enemy2 attacks player
+
+        case 3:
+            print('needs implementation')
+
+
+
+
+
+
+    # Universal print statments, only reached when all enemies have been killed or player has been killed
     if enemy.hp > 0:
         print('Enemy survived the encounter with ' + str(enemy.hp) + ' health points left!')
         print('You Died!')
