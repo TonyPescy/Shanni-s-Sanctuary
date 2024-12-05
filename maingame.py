@@ -26,7 +26,6 @@ import combat as com
 # DEBUFFS CAN ONLY BE APPLIED 1 AT A TIME AND CANNOT OVERWRITE EACH OTHER
 
 def main():
-
     # game item, room, and other generation
     rooms_array, rm_dsc_lst, weapon_list, armor_list, shield_list, consume_list = lib.create_all()
     

@@ -270,21 +270,36 @@ def status_check(char):
                 
             case 'lacerated' | 'poisoned':  # lose 5 hp, ignores armor
                 char.hp -= 5
+                print(f'{char.name} lost 5 health points due to its \'{char.debuff}\' affliction!')
+                print(f'{char.name} has {char.hp} health points remaining!')
                 char.debuff_stack -= 1
                 if char.debuff_stack == 0:  # debuff has run out
                     char.debuff = 'NONE'
+                    print(f'{char.name} has lost its affliction!')
+                else:                       # prints how much is left of the debuff
+                    print(f'{char.name} has {char.debuff_stack} turns left on its affliction!')
 
             case 'acidic' | 'burned':  # lose 10 hp, ignores armor
                 char.hp -= 10
+                print(f'{char.name} lost 10 health points due to its \'{char.debuff}\' affliction!')
+                print(f'{char.name} has {char.hp} health points remaining!')
                 char.debuff_stack -= 1
                 if char.debuff_stack == 0:  # debuff has run out
                     char.debuff = 'NONE'
-            
+                    print(f'{char.name} has lost its affliction!')
+                else:                       # prints how much is left of the debuff
+                    print(f'{char.name} has {char.debuff_stack} turns left on its affliction!')
+
             case 'gored':  # lose 15 hp, ignores armor
                 char.hp -= 15
+                print(f'{char.name} lost 15 health points due to its \'{char.debuff}\' affliction!')
+                print(f'{char.name} has {char.hp} health points remaining!')
                 char.debuff_stack -= 1
                 if char.debuff_stack == 0:  # debuff has run out
                     char.debuff = 'NONE'
+                    print(f'{char.name} has lost its affliction!')
+                else:                       # prints how much is left of the debuff
+                    print(f'{char.name} has {char.debuff_stack} turns left on its affliction!')
 
     if char.buff != 'NONE':
         match char.buff:

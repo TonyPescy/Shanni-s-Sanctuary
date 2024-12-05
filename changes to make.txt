@@ -1,5 +1,5 @@
 1. Add inventory to all enemy creation functions, so that they function properly with losing their shield and armor etc..
-
+    COMPLETED
 
 
 
@@ -19,3 +19,6 @@
 
 
 5. get game fully running
+
+6. Add infliction print statements
+    COMPLETED
