@@ -524,6 +524,7 @@ def deal_damage(attacker, target):
     # damage is applied as follows: shield --> armor --> health points
     # damage over flows from shield to armor to health
     while temp_dmg > 0:     # stops the damage application loop once damage runs out
+        attacker.weapon.durability -= 1    # weapon durability decreases by 1 with every successful attack
         if target.shield != 'NONE':     # checks to see if target has a shield, only runs if they have one
             target.shield.defence -= temp_dmg
             if target.shield.defence < 0:     # overflow damage, shield destroyed

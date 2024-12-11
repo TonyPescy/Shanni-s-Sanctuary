@@ -12,7 +12,7 @@
 2.1 Move item removal to combat as it is a combat only function 
     COMPLETED
     A drop item function will be added to library for room interactions YET TO BE 
-        IMPLEMENTED
+        TO BE IMPLEMENTED
         > Might just be included in the item pickup function
 
 2.2 Swap Weapon working
@@ -35,12 +35,16 @@
 
 
 
-5. get game fully running
+5. Get game fully running before January
+    > Additional testing and code cleanup in January on
 
 
 6. Add infliction print statements
     COMPLETED
 
 7. Add weapon durability functionality
+    COMPLETED
+
 
 8. Consumables Testing
+
