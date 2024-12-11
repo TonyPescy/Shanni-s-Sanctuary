@@ -29,3 +29,4 @@ All other types and abilities (WIP)
     - The fix for this is optimizing and creating more functions to reduce code reuse, updating code practices...
     - The cause of this is learning more efficient ways to solve certain problems as I programmed leading to new practices being used as I wrote and older code still being outdated.
     - The solution will be implemented for this later after a working product has been produced as the possible performance issues of these bad practices should be negliable due to the smaller nature of the game. These issues are noted and currently being worked on.
+1. 

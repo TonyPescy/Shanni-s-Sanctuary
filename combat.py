@@ -23,8 +23,8 @@ def set_loadout(player):
     if weapon_count > 1:    # fists are not considered part of the inventory, therefore items above 0 mean there are more weapon options
         # lists all options
         print('Current weapons in inventory:')
-        for i in range(1, weapon_count + 1):
-            print(f'{i}. {player.inventory[weapon_index[i - 1]].name}, Damage: {player.inventory[weapon_index[i - 1]].damage}, Durability: {player.inventory[weapon_index[i - 1]].durability} ')
+        for i in range(weapon_count):
+            print(f'{i+1}. {player.inventory[weapon_index[i]].name}, Damage: {player.inventory[weapon_index[i]].damage}, Durability: {player.inventory[weapon_index[i]].durability} ')
         print(f'You currently have {player.weapon.name} equipped.')
         if weapon_count > 1:
             while True:
@@ -42,8 +42,8 @@ def set_loadout(player):
     if shield_count > 1:
         # lists all options
         print('Current shields in inventory:')
-        for i in range(1, shield_count + 1):
-            print(f'{i}. {player.inventory[shield_index[i - 1]].name}, Armor Remaining: {player.inventory[shield_index[i - 1]].defence} ')
+        for i in range(shield_count):
+            print(f'{i+1}. {player.inventory[shield_index[i]].name}, Armor Remaining: {player.inventory[shield_index[i]].defence} ')
         print(f'You currently have {player.shield.name} equipped.')
         while True:
             choice = input('Please enter the number of the shield you would like to have equipped: ')
@@ -60,8 +60,8 @@ def set_loadout(player):
     if armor_count > 1:
         # lists all options
         print('Current armors in inventory:')
-        for i in range(1, armor_count + 1):
-            print(f'{i}. {player.inventory[armor_index[i - 1]].name}, Armor Remaining: {player.inventory[armor_index[i - 1]].defence} ')
+        for i in range(armor_count):
+            print(f'{i+1}. {player.inventory[armor_index[i]].name}, Armor Remaining: {player.inventory[armor_index[i]].defence} ')
         print(f'You currently have {player.armor.name} equipped.')
         while True:
             choice = input('Please enter the number of the armor you would like to have equipped: ')
@@ -72,7 +72,7 @@ def set_loadout(player):
             except: # choice was not entered correctly
                 print('Please enter a number corresponding to an item above.')
                 continue    # retries for choice 
-        player.armor = player.inventory[armor_index[choice - 1]]
+        player.armor = player.inventory[armor_index[choice-1]]
 
     return player, weapon_index, cons_index
 # set loadout ends
@@ -325,10 +325,13 @@ def status_check(char):
 # Parameters:   player - object - players character
 #               wep_index - list - list of location of all weapons in inventory
 # Return:       player - object - player after weapon was swapped
+#               wep_index - list - updated list of location of all weapons in inventory
 def weapon_switch(player, wep_index):
     print('Current weapons in inventory:')
-    for i in range(1, len(wep_index) + 1):
-        print(f'{i}. {player.inventory[wep_index[i - 1]].name} - DMG: {player.inventory[wep_index[i - 1]].damage} - DUR: {player.inventory[wep_index[i - 1]].durability} - INF: {player.inventory[wep_index[i - 1]].infusion}')
+    for i in range(len(wep_index)):
+        print('WEP IND = ' + str(wep_index))
+        print('i = ' + str(i) + ', Wep_index = ' + str(len(wep_index)))
+        print(f'{i+1}. {player.inventory[wep_index[i]].name} - DMG: {player.inventory[wep_index[i]].damage} - DUR: {player.inventory[wep_index[i]].durability} - INF: {player.inventory[wep_index[i]].infusion}')
     while True:
         choice = input('Please enter the number of the weapon you would like to use: ')
         try:
@@ -338,9 +341,9 @@ def weapon_switch(player, wep_index):
         except: # choice was not entered correctly
             print('Please enter a number corresponding to a weapon above.')
             continue    # retries for choice 
-    player.weapon = player.inventory[wep_index[choice - 1]]     # assigns weapon to player weapon slot
-
-    return player
+    player.weapon = player.inventory[wep_index[choice-1]]     # assigns weapon to player weapon slot
+    temp, wep_index = lib.weapon_counter(player)
+    return player, wep_index
 # weapon switch end
 
 # item removal starts
@@ -578,7 +581,9 @@ def deal_damage(attacker, target):
 # multiple enemies in the combat. 
 # PLAN: Reduce repeat code as much as possible - Break it down into more functions, better system for swapping and targetting together.
 def combat_loop(enemy_list, player):
-    num_of_enemies = len(enemy_list)
+    num_of_enemies = len(enemy_list)    # number of enemies in combat
+    first_round = True      # resets first round of combat indicator for use to reduce redundant weapon swap attempts when set_loadout does it in the first round
+    first_swap = True       # resets first swap so player cna only swap once per battle to increase use of strategic swapping
     # loadout swap
     # weapons can be switched later, armor and shields can only be done here
     player, weapon_index, cons_index = set_loadout(player)   # gets a list of the weapon and item indexes in player inventory for swapping weaopons and using items in combat
@@ -607,14 +612,40 @@ def combat_loop(enemy_list, player):
                         if player_action == 'consumable' and turn_skip != True:
                             player, cons_index = use_cons(player)
                         elif player_action == 'attack' and turn_skip != True:
-                            player, enemy = deal_damage(player, enemy)
+                            # player attack
+                            if len(weapon_index) > 1 and first_swap == True:   # more than 1 weapon in player inventory and player has not used their swap:   # more than 1 weapon in player inventory
+                                print(f'Your current weapon is: {player.weapon.name} - DMG: {player.weapon.damage} - DUR: {player.weapon.durability} - INF: {player.weapon.infusion}')
+                                while True:
+                                    if first_round == True:     # skips swap during first round of combat
+                                        swap = 'no'
+                                        first_round = False
+                                    else:
+                                        swap = input('Do you want to swap weapon? (Enter yes or no): ').lower()
+                                    try:
+                                        if swap == 'yes' or swap == 'no':  # swap input entered was valid
+                                            break
+                                    except: # swap input was not entered correctly
+                                        print('Please enter yes or no.')
+                                        continue    # retries for swap input 
+                                if swap == 'no':    # weapon not swapped
+                                    player, enemy = deal_damage(player, enemy)
+                                else:               # weapon is to be swapped
+                                    player, weapon_index = weapon_switch(player, weapon_index)
+                                    player, enemy = deal_damage(player, enemy)
+
+                            else:                       # player only has 1 weapon to use /  no swap available 
+                                player, enemy = deal_damage(player, enemy)
 
                     else:       # player does not have any items to use
                         # player attack
-                        if len(weapon_index) > 1:   # more than 1 weapon in player inventory
+                        if len(weapon_index) > 1 and first_swap == True:   # more than 1 weapon in player inventory and player has not used their swap
                             print(f'Your current weapon is: {player.weapon.name} - DMG: {player.weapon.damage} - DUR: {player.weapon.durability} - INF: {player.weapon.infusion}')
-                            while True: 
-                                swap = input('Do you want to swap weapon? (Enter yes or no): ').lower()
+                            while True:
+                                if first_round == True:     # skips swap during first round of combat
+                                    swap = 'no'
+                                    first_round = False
+                                else:
+                                    swap = input('Do you want to swap weapon? (Enter yes or no): ').lower()
                                 try:
                                     if swap == 'yes' or swap == 'no':  # swap input entered was valid
                                         break
@@ -624,7 +655,8 @@ def combat_loop(enemy_list, player):
                             if swap == 'no':    # weapon not swapped
                                 player, enemy = deal_damage(player, enemy)
                             else:               # weapon is to be swapped
-                                player = weapon_switch(player, weapon_index)
+                                first_swap = False  # updates first_swap
+                                player, weapon_index = weapon_switch(player, weapon_index)
                                 player, enemy = deal_damage(player, enemy)
 
                         else:                       # player only has 1 weapon to use /  no swap available 
@@ -653,7 +685,7 @@ def combat_loop(enemy_list, player):
             enemy2 = enemy_list[1]
             enemy_total_hp = enemy1.hp + enemy2.hp
             while enemy_total_hp > 0 and player.hp > 0: # ensures the player or at least 1 enemy is still alive
-
+                enemy_total_hp = enemy1.hp + enemy2.hp      # enemy_total_hp will now update as enemies take damage
                 player, turn_skip = status_check(player)  # checks player status' and applies buffs/debuffs
                 # player turn
                 if turn_skip != True:   # if player turn is not skipped, player turn is allowed to continue
@@ -670,20 +702,92 @@ def combat_loop(enemy_list, player):
                         if player_action == 'consumable' and turn_skip != True:
                             player, cons_index = use_cons(player)
                         elif player_action == 'attack' and turn_skip != True:
-                            player, enemy = deal_damage(player, enemy)
+                            # player attack
+                            if len(weapon_index) > 1 and first_swap == True:   # more than 1 weapon in player inventory and player has not used their swap
+                                print(f'Your current weapon is: {player.weapon.name} - DMG: {player.weapon.damage} - DUR: {player.weapon.durability} - INF: {player.weapon.infusion}')
+                                while True:
+                                    if first_round == True:     # skips swap during first round of combat
+                                        swap = 'no'
+                                        first_round = False
+                                    else:
+                                        swap = input('Do you want to swap weapon? (Enter yes or no): ').lower()
+                                    try:
+                                        if swap == 'yes' or swap == 'no':  # swap input entered was valid
+                                            break
+                                    except: # swap input was not entered correctly
+                                        print('Please enter yes or no.')
+                                        continue    # retries for swap input
+
+                                if swap == 'yes':   # player chooses to swap weapon
+                                    first_swap = False  # updates first_swap
+                                    player, weapon_index = weapon_switch(player, weapon_index)
+
+                                if enemy1.hp > 0 and enemy2.hp > 0:     # asks for player to target an enemy if there are more than 1 alive
+                                    while True:     # player chooses which enemy to attack this round
+                                        print(f'1. {enemy1.name} - HP: {enemy1.hp}')
+                                        print(f'2. {enemy2.name} - HP: {enemy2.hp}')
+            
+                                        target = input('Please enter the enemy number you would like to target (Enter 1 or 2): ')
+                                        try:
+                                            if target == '1' or target == '2':  # target input entered was valid
+                                                break
+                                        except: # target input was not entered correctly
+                                            print('Please enter 1 or 2.')
+                                            continue    # retries for target input 
+                                else:   # determines what enemy player will target when the other enemy has died
+                                    match enemy1.hp > 0:
+                                        case True:      # enemy1 is the last alive enemy
+                                            target = '1'
+                                        case False:     # enemy2 is the last alive enemy
+                                            target = '2'
+
+                            # no weapon swap
+                            else:       # player only has 1 weapon to use /  no swap available
+                                if enemy1.hp > 0 and enemy2.hp > 0:     # asks for player to target an enemy if there are more than 1 alive
+                                    while True:     # player chooses which enemy to attack this round
+                                        print(f'1. {enemy1.name} - HP: {enemy1.hp}')
+                                        print(f'2. {enemy2.name} - HP: {enemy2.hp}')
+            
+                                        target = input('Please enter the enemy you would like to target (Enter 1 or 2): ').lower()
+                                        try:
+                                            if target == '1' or swap == '2':  # target input entered was valid
+
+                                                break
+                                        except: # target input was not entered correctly
+                                            print('Please enter 1 or 2.')
+                                            continue    # retries for target input 
+                                else:   # determines what enemy player will target when the other enemy has died
+                                    match enemy1.hp > 0:
+                                        case True:      # enemy1 is the last alive enemy
+                                            target = '1'
+                                        case False:     # enemy2 is the last alive enemy
+                                            target = '2'
+                            match target:
+                                case '1':       # enemy1 was chosen as target
+                                    player, enemy1 = deal_damage(player, enemy1)    # player attacks enemy1
+                                case '2':       # enemy2 chosen as target
+                                    player, enemy2 = deal_damage(player, enemy2)    # player attacks enemy2
 
                     else:       # player does not have any items to use
                         # player attack
-                        if len(weapon_index) > 1:   # more than 1 weapon in player inventory
+                        if len(weapon_index) > 1 and first_swap == True:   # more than 1 weapon in player inventory and player has not used their swap
                             print(f'Your current weapon is: {player.weapon.name} - DMG: {player.weapon.damage} - DUR: {player.weapon.durability} - INF: {player.weapon.infusion}')
-                            while True: 
-                                swap = input('Do you want to swap weapon? (Enter yes or no): ').lower()
+                            while True:
+                                if first_round == True:     # skips swap during first round of combat
+                                    swap = 'no'
+                                    first_round = False
+                                else:
+                                    swap = input('Do you want to swap weapon? (Enter yes or no): ').lower()
                                 try:
                                     if swap == 'yes' or swap == 'no':  # swap input entered was valid
                                         break
                                 except: # swap input was not entered correctly
                                     print('Please enter yes or no.')
                                     continue    # retries for swap input
+
+                            if swap == 'yes':   # player chooses to swap weapon
+                                first_swap = False  # updates first_swap
+                                player, weapon_index = weapon_switch(player, weapon_index)
 
                             if enemy1.hp > 0 and enemy2.hp > 0:     # asks for player to target an enemy if there are more than 1 alive
                                 while True:     # player chooses which enemy to attack this round
@@ -703,20 +807,6 @@ def combat_loop(enemy_list, player):
                                         target = '1'
                                     case False:     # enemy2 is the last alive enemy
                                         target = '2'
-
-                            if swap == 'no':        # weapon not swapped
-                                match target:
-                                    case '1':       # enemy1 was chosen as target
-                                        player, enemy1 = deal_damage(player, enemy1)    # player attacks enemy1
-                                    case '2':       # enemy2 chosen as target
-                                        player, enemy2 = deal_damage(player, enemy2)    # player attacks enemy2
-                            else:                   # weapon is to be swapped
-                                player = weapon_switch(player, weapon_index)
-                                match target:
-                                    case '1':       # enemy1 was chosen as target
-                                        player, enemy1 = deal_damage(player, enemy1)    # player attacks enemy1
-                                    case '2':       # enemy2 chosen as target
-                                        player, enemy2 = deal_damage(player, enemy2)    # player attacks enemy2
 
                         # no weapon swap
                         else:       # player only has 1 weapon to use /  no swap available
@@ -739,13 +829,13 @@ def combat_loop(enemy_list, player):
                                         target = '1'
                                     case False:     # enemy2 is the last alive enemy
                                         target = '2'
-                            match target:
-                                    case '1':       # enemy1 was chosen as target
-                                        player, enemy1 = deal_damage(player, enemy1)    # player attacks enemy1
-                                    case '2':       # enemy2 chosen as target
-                                        player, enemy2 = deal_damage(player, enemy2)    # player attacks enemy2
+                        match target:
+                                case '1':       # enemy1 was chosen as target
+                                    player, enemy1 = deal_damage(player, enemy1)    # player attacks enemy1
+                                case '2':       # enemy2 chosen as target
+                                    player, enemy2 = deal_damage(player, enemy2)    # player attacks enemy2
                         
-                        # Enemyies turn
+                        # Enemies turn
                         if enemy1.hp > 0 and enemy2.hp > 0: # only occurs if both enemies are alive
                             enemy1, player = deal_damage(enemy1, player)    # enemy1 attacks player
                             enemy2, player = deal_damage(enemy2, player)    # enemy2 attacks player
@@ -758,7 +848,7 @@ def combat_loop(enemy_list, player):
 
             # player and enemy survival messages
             if enemy1.hp > 0 or enemy2.hp > 0:
-                print('Enemies survived the encounter with ' + str(enemy_total_hp) + ' health points left!')
+                print('Enemies survived the encounter with ' + str(enemy1.hp + enemy2.hp) + ' health points left!')
                 print('You Died!')
             elif player.hp > 0:
                 print(player.name + ' survived the encounter with ' + str(player.hp) + ' health points left!')

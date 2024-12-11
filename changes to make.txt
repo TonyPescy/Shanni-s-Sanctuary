@@ -7,9 +7,18 @@
     2 enemies implemented
         working on testing
     3 enemies needed
-2.5 Move item removal to combat as it is a combat only function
-    A drop item function will be added to library for room interactions
+
+2.1 Move item removal to combat as it is a combat only function 
+    COMPLETED
+    A drop item function will be added to library for room interactions YET TO BE 
+        IMPLEMENTED
         > Might just be included in the item pickup function
+
+2.2 Swap Weapon working
+    - fix out of index error
+    - Fix swap message in first round of combat
+
+2.3 
 
 
 
