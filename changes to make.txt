@@ -5,8 +5,9 @@
 
 2. Add combast for more than 1 enemy
     2 enemies implemented
-        working on testing
+        COMPLETED
     3 enemies needed
+        implementaion and tetsing needed
 
 2.1 Move item removal to combat as it is a combat only function 
     COMPLETED
@@ -16,7 +17,9 @@
 
 2.2 Swap Weapon working
     - fix out of index error
+        COMPLETED
     - Fix swap message in first round of combat
+        COMPLETED
 
 2.3 
 
