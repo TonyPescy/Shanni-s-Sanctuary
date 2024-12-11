@@ -7,6 +7,7 @@
 # imports
 import library as lib
 import random as rand
+import Items as it
 
 # set loadout starts
 # Asks players if they wish to switch weapons, armor, or shields if they are able
@@ -342,6 +343,124 @@ def weapon_switch(player, wep_index):
     return player
 # weapon switch end
 
+# item removal starts
+# Removes item from player inventory
+# Parameters:   player - object - current player
+#               item - object - item to be removed
+# Return:       player - object - updated player
+def item_removal(player, item):
+# ITERATE OVER INVENTORY COUNTING UNTIL ITEM IS FOUNND
+# REMOVE IT FROM INVENTORY USING POP AND CURRENT INDEX
+    current_index = -1     # initialize current inventory index at -1 so it will start index at 0 instead of 1
+    for x in player.inventory:
+        print('Current Item in inventory: ' + x.name)
+        print('Item To be removed: ' + item.name)
+        current_index += 1          # current index of inventory is calculated
+        if x.name == item.name:     # item was found in inventory
+            # see if item is a weapon, shield, armor, or consumable
+            match item.identifier:
+                case 1:         # would use WEAPON_ID but it is considered a irrefutable pattern
+                    w_count, w_index = lib.weapon_counter(player)
+                    # player has exactly 1 weapon in inventory - the one to be removed
+                    if w_count == 1:
+                        player.weapon = it.Weapons('Fists', 'Just your bare fists', 5)   # gives player 'unarmed' as a weapon
+                        # the only w_index is the one to be removed
+                        player.inventory.pop(current_index)
+
+                    # player has 2 weapons in inventory - one to be removed and the other to be equipped
+                    elif w_count == 2:
+                        for w in w_index:
+                            if w != current_index:      # weapon that is not currently equipped
+                                player.weapon = player.inventory[w]  # assign new weapon
+                                player.inventory.pop(current_index) # remove old weapon
+                                break
+
+                    # player has more than 2 weapons in invertory, asks for what weapon to equip
+                    elif w_count > 2: 
+                        print('Choose what weapon you want to equip from the following: ')
+                        for i in range(1, len(w_index) + 1):
+                            print(f'{i}. {player.inventory[w_index[i - 1]].name} - DMG: {player.inventory[w_index[i - 1]].damage} - DUR: {player.inventory[w_index[i - 1]].durability} - INF: {player.inventory[w_index[i - 1]].infusion}')
+                        while True:
+                            choice = input('Please enter the number of the weapon you would like to use: ')
+                            try:
+                                choice = int(choice)        # converts str choice to int choice
+                                if choice > 0 and choice <= len(w_index):  # choice entered was valid
+                                    break
+                            except: # choice was not entered correctly
+                                print('Please enter a number corresponding to a weapon above.')
+                                continue    # retries for choice 
+                        player.weapon = player.inventory[choice - 1]
+                        player.inventory.pop(current_index)
+
+                case 2:         # would use SHIELD_ID but it is considered a irrefutable pattern
+                    s_count, s_index = lib.shield_counter(player)
+                    # player has exactly 1 shield in inventory - the one to be removed
+                    if s_count == 1:
+                        player.shield = 'NONE'   # gives player no shield
+                        # the only s_index is the one to be removed
+                        player.inventory.pop(current_index)
+
+                    # player has 2 shields in inventory - one to be removed and the other to be equipped
+                    elif s_count == 2:
+                        for s in s_index:
+                            if s != current_index:      # shield that is not currently equipped
+                                player.shield = player.inventory[s]  # assign new shield
+                                player.inventory.pop(current_index) # remove old shield
+                                break
+
+                    # player has more than 2 shields in invertory, asks for what shield to equip
+                    elif s_count > 2: 
+                        print('Choose what shield you want to equip from the following: ')
+                        for i in range(1, len(s_index) + 1):
+                            print(f'{i}. {player.inventory[s_index[i - 1]].name} - DEF: {player.inventory[s_index[i - 1]].defence}')
+                        while True:
+                            choice = input('Please enter the number of the shield you would like to use: ')
+                            try:
+                                choice = int(choice)        # converts str choice to int choice
+                                if choice > 0 and choice <= len(s_index):  # choice entered was valid
+                                    break
+                            except: # choice was not entered correctly
+                                print('Please enter a number corresponding to a shield above.')
+                                continue    # retries for choice 
+                        player.shield = player.inventory[choice - 1]
+                        player.inventory.pop(current_index)
+
+                case 3:         # would use ARMOR_ID but it is considered a irrefutable pattern
+                    a_count, a_index = lib.armor_counter(player)
+                    # player has exactly 1 armor in inventory - the one to be removed
+                    if a_count == 1:
+                        player.armor = 'NONE'   # gives player no armor
+                        # the only a_index is the one to be removed
+                        player.inventory.pop(current_index)
+                
+
+                    # player has 2 armors in inventory - one to be removed and the other to be equipped
+                    elif a_count == 2:
+                        for a in a_index:
+                            if a != current_index:      # armor that is not currently equipped
+                                player.armor = player.inventory[a]  # assign new armor
+                                player.inventory.pop(current_index) # remove old armor
+                                break
+
+                    # player has more than 2 armors in invertory, asks for what armor to equip
+                    elif a_count > 2: 
+                        print('Choose what armor you want to equip from the following:')
+                        for i in range(1, len(a_index) + 1):
+                            print(f'{i}. {player.inventory[a_index[i - 1]].name} - DEF: {player.inventory[a_index[i - 1]].defence}')
+                        while True:
+                            choice = input('Please enter the number of the armor you would like to use: ')
+                            try:
+                                choice = int(choice)        # converts str choice to int choice
+                                if choice > 0 and choice <= len(a_index):  # choice entered was valid
+                                    break
+                            except: # choice was not entered correctly
+                                print('Please enter a number corresponding to a armor above.')
+                                continue    # retries for choice 
+                        player.armor = player.inventory[choice - 1]
+                        player.inventory.pop(current_index)
+            print(player.inventory)
+            print(item.name + ' Removed!')
+
 
 # deal damage start
 # Performs damage calculations and applies them to characters
@@ -407,11 +526,11 @@ def deal_damage(attacker, target):
             if target.shield.defence < 0:     # overflow damage, shield destroyed
                 temp_dmg = abs(target.shield.defence)
                 print(f'{target.name}\'s shield has been destroyed by the attack! (overflow)')
-                lib.item_removal(target, target.shield)     # removes destroyed shield
+                item_removal(target, target.shield)     # removes destroyed shield
             elif target.shield.defence == 0:  # no overflow but shield destroyed
                 temp_dmg = 0
                 print(f'{target.name}\'s shield has been destroyed by the attack!')
-                lib.item_removal(target, target.shield)     # removes destroyed shield
+                item_removal(target, target.shield)     # removes destroyed shield
                 return attacker, target
             else:   # shield is not destroyed after attack, no overflow
                 print(f'{attacker.name} dealt {temp_dmg} damage to {target.name}\'s shield!')
@@ -423,11 +542,11 @@ def deal_damage(attacker, target):
             if target.armor.defence < 0:     # overflow damage, armor destroyed
                 temp_dmg = abs(target.armor.defence)
                 print(f'{target.name}\'s armor has broken from the attack! OVERFLOW')
-                lib.item_removal(target, target.armor)     # removes destroyed armor
+                item_removal(target, target.armor)     # removes destroyed armor
             elif target.armor.defence == 0:  # no overflow but armor destroyed
                 temp_dmg = 0
                 print(f'{target.name}\'s armor has broken from the attack!')
-                lib.item_removal(target, target.armor)     # removes destroyed armor
+                item_removal(target, target.armor)     # removes destroyed armor
                 return attacker, target
             else:   # armor is not destroyed after attack, no overflow
                 print(f'{attacker.name} dealt {temp_dmg} damage to {target.name}\'s armor!')
@@ -448,16 +567,6 @@ def deal_damage(attacker, target):
             print(f'{target.name} still has {target.hp} health points remaining!')      # TEMP UNTIL ABOVE IS DONE
             temp_dmg = 0        # reset damage
             return attacker, target
-
-
-# player_wep_use start
-# Everytime a player uses a weapon this will change its durability accordingly
-# Parameters:   user - character object - the user of the weapon
-# Return:       
-# 
-
-
-
 
 # combat_loop start
 # Basic loop that combat will follow
@@ -531,6 +640,13 @@ def combat_loop(enemy_list, player):
                     # restart combat loop
                     continue
 
+            # player and enemy survival messages
+            if enemy.hp > 0:
+                print('Enemy survived the encounter with ' + str(enemy.hp) + ' health points left!')
+                print('You Died!')
+            elif player.hp > 0:
+                print(player.name + ' survived the encounter with ' + str(player.hp) + ' health points left!')
+
         # combat with two enemies
         case 2:
             enemy1 = enemy_list[0]
@@ -574,10 +690,9 @@ def combat_loop(enemy_list, player):
                                     print(f'1. {enemy1.name} - HP: {enemy1.hp}')
                                     print(f'2. {enemy2.name} - HP: {enemy2.hp}')
         
-                                    target = input('Please enter the enemy you would like to target (Enter 1 or 2): ').lower()
+                                    target = input('Please enter the enemy number you would like to target (Enter 1 or 2): ')
                                     try:
-                                        if target == '1' or swap == '2':  # target input entered was valid
-
+                                        if target == '1' or target == '2':  # target input entered was valid
                                             break
                                     except: # target input was not entered correctly
                                         print('Please enter 1 or 2.')
@@ -630,7 +745,7 @@ def combat_loop(enemy_list, player):
                                     case '2':       # enemy2 chosen as target
                                         player, enemy2 = deal_damage(player, enemy2)    # player attacks enemy2
                         
-                        # Enemy(s) turn
+                        # Enemyies turn
                         if enemy1.hp > 0 and enemy2.hp > 0: # only occurs if both enemies are alive
                             enemy1, player = deal_damage(enemy1, player)    # enemy1 attacks player
                             enemy2, player = deal_damage(enemy2, player)    # enemy2 attacks player
@@ -641,17 +756,11 @@ def combat_loop(enemy_list, player):
                                 case False: # enemy2 is the only enemy alive
                                     enemy2, player = deal_damage(enemy2, player)    # enemy2 attacks player
 
+            # player and enemy survival messages
+            if enemy1.hp > 0 or enemy2.hp > 0:
+                print('Enemies survived the encounter with ' + str(enemy_total_hp) + ' health points left!')
+                print('You Died!')
+            elif player.hp > 0:
+                print(player.name + ' survived the encounter with ' + str(player.hp) + ' health points left!')
         case 3:
             print('needs implementation')
-
-
-
-
-
-
-    # Universal print statments, only reached when all enemies have been killed or player has been killed
-    if enemy.hp > 0:
-        print('Enemy survived the encounter with ' + str(enemy.hp) + ' health points left!')
-        print('You Died!')
-    elif player.hp > 0:
-        print(player.name + ' survived the encounter with ' + str(player.hp) + ' health points left!')

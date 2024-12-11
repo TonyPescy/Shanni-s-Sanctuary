@@ -43,7 +43,7 @@ def main():
     test_char = char.Character.create_mino(weapon_list)
     test_char_2 = char.Character.create_hellknight(weapon_list, armor_list, shield_list)
     enemy1 = char.Character.create_mummy(weapon_list)
-    e_list = [test_char]
+    e_list = [enemy1, test_char]
     com.combat_loop(e_list, player)
 
     '''
