@@ -8,6 +8,7 @@
         COMPLETED
     3 enemies needed
         implementaion and tetsing needed
+        Implementaion and Testing Finished
 
 2.1 Move item removal to combat as it is a combat only function 
     COMPLETED

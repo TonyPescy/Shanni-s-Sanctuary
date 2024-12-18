@@ -931,10 +931,13 @@ def combat_loop(enemy_list, player):
                                                 match enemy_alive:
                                                     case 1:
                                                         target = '1'    # player target set to enemy1
+                                                        break
                                                     case 2:
                                                         target = '2'    # player target set to enemy2
+                                                        break
                                                     case 3:
                                                         target = '3'    # player target set to enemy3
+                                                        break
 
                                             case 2:     # two enemies alive
                                                 for i in range(len(enemy_list)):    # iterates through all enemies to find which is dead
@@ -951,10 +954,10 @@ def combat_loop(enemy_list, player):
                                 
                                                             target = input('Please enter the enemy number you would like to target (Enter 1, or 2): ')
                                                             try:
-                                                                if target == '1' or target == '2':  # target input entered was valid
+                                                                if target == '2' or target == '3':  # target input entered was valid
                                                                     break
                                                             except: # target input was not entered correctly
-                                                                print('Please enter 1 or 2.')
+                                                                print('Please enter 2 or 3.')
                                                                 continue    # retries for target input
 
                                                     case 2: # enemy2 is dead
@@ -964,10 +967,10 @@ def combat_loop(enemy_list, player):
                                 
                                                             target = input('Please enter the enemy number you would like to target (Enter 1, or 2): ')
                                                             try:
-                                                                if target == '1' or target == '2':  # target input entered was valid
+                                                                if target == '1' or target == '3':  # target input entered was valid
                                                                     break
                                                             except: # target input was not entered correctly
-                                                                print('Please enter 1 or 2.')
+                                                                print('Please enter 1 or 3.')
                                                                 continue    # retries for target input
 
                                                     case 3: # enemy3 is dead
@@ -983,17 +986,124 @@ def combat_loop(enemy_list, player):
                                                                 print('Please enter 1 or 2.')
                                                                 continue    # retries for target input
 
-                                match target:
-                                    case '1':       # enemy1 was chosen as target
-                                        player, enemy1 = deal_damage(player, enemy1)    # player attacks enemy1
-                                    case '2':       # enemy2 chosen as target
-                                        player, enemy2 = deal_damage(player, enemy2)    # player attacks enemy2
-                                    case '3':       # enemy3 chosen as target
-                                        player, enemy3 = deal_damage(player, enemy3)    # player attacks enemy3
-
 
                             # no weapon swap
                             else:       # player only has 1 weapon to use /  no swap available
+                                match enemy1.hp > 0 and enemy2.hp > 0 and enemy3.hp > 0:
+                                    case True:     # asks for player to target an enemy if there are more than 1 alive
+                                        while True:     # player chooses which enemy to attack this round
+                                            print(f'1. {enemy1.name} - HP: {enemy1.hp}')
+                                            print(f'2. {enemy2.name} - HP: {enemy2.hp}')
+                                            print(f'3. {enemy3.name} - HP: {enemy3.hp}')
+
+                                            target = input('Please enter the enemy number you would like to target (Enter 1, 2, or 3): ')
+                                            try:
+                                                if target == '1' or target == '2' or target == '3':  # target input entered was valid
+                                                    break
+                                            except: # target input was not entered correctly
+                                                print('Please enter 1, 2, or 3.')
+                                                continue    # retries for target input 
+
+                                    case False:     # One or more enemies have died
+                                        temp_enemies_alive = 0
+                                        # counts enemies alive and adds them to counter 
+                                        if enemy1.hp > 0:
+                                            temp_enemies_alive += 1
+                                        if enemy2.hp > 0:
+                                            temp_enemies_alive += 1
+                                        if enemy3.hp > 0:
+                                            temp_enemies_alive += 1
+
+                                match temp_enemies_alive:
+                                    case 1:     # only one enemy alive
+                                        for i in range(len(enemy_list)):    # iterates through all enemies to find which is alive
+                                            if  enemy_list[i].hp > 0:       # once it finds the last alive enemy in combat 
+                                                enemy_alive = i + 1         # enemy found alive is marked for comparison
+                                            else:
+                                                continue
+
+                                        match enemy_alive:
+                                            case 1:
+                                                target = '1'    # player target set to enemy1
+                                                print(f'1. {enemy1.name} - HP: {enemy1.hp}')
+                                                
+                                            case 2:
+                                                target = '2'    # player target set to enemy2
+                                                print(f'2. {enemy2.name} - HP: {enemy2.hp}')
+                                                
+                                            case 3:
+                                                target = '3'    # player target set to enemy3
+                                                print(f'3. {enemy3.name} - HP: {enemy3.hp}')
+                                                
+
+                                    case 2:     # two enemies alive
+                                        for i in range(len(enemy_list)):    # iterates through all enemies to find which is dead
+                                            if  enemy_list[i].hp <= 0:      # once it finds the dead enemy in combat 
+                                                enemy_dead = i + 1          # enemy found dead is marked for comparison
+                                            else:
+                                                continue
+
+                                        match enemy_dead:
+                                            case 1:     # enemy1 is dead
+                                                while True:     # player chooses which enemy to attack this round
+                                                    print(f'2. {enemy2.name} - HP: {enemy2.hp}')    # enemy2 is alive
+                                                    print(f'3. {enemy3.name} - HP: {enemy3.hp}')    # enemy3 is alive
+                        
+                                                    target = input('Please enter the enemy number you would like to target (Enter 1, or 2): ')
+                                                    try:
+                                                        if target == '2' or target == '3':  # target input entered was valid
+                                                            break
+                                                    except: # target input was not entered correctly
+                                                        print('Please enter 2 or 3.')
+                                                        continue    # retries for target input
+
+                                            case 2: # enemy2 is dead
+                                                while True:     # player chooses which enemy to attack this round
+                                                    print(f'1. {enemy1.name} - HP: {enemy1.hp}')    # enemy1 is alive
+                                                    print(f'3. {enemy3.name} - HP: {enemy3.hp}')    # enemy3 is alive
+                        
+                                                    target = input('Please enter the enemy number you would like to target (Enter 1, or 2): ')
+                                                    try:
+                                                        if target == '1' or target == '3':  # target input entered was valid
+                                                            break
+                                                    except: # target input was not entered correctly
+                                                        print('Please enter 1 or 3.')
+                                                        continue    # retries for target input
+
+                                            case 3: # enemy3 is dead
+                                                while True:     # player chooses which enemy to attack this round
+                                                    print(f'1. {enemy1.name} - HP: {enemy1.hp}')    # enemy1 is alive
+                                                    print(f'2. {enemy2.name} - HP: {enemy2.hp}')    # enemy2 is alive
+                        
+                                                    target = input('Please enter the enemy number you would like to target (Enter 1, or 2): ')
+                                                    try:
+                                                        if target == '1' or target == '2':  # target input entered was valid
+                                                            break
+                                                    except: # target input was not entered correctly
+                                                        print('Please enter 1 or 2.')
+                                                        continue    # retries for target input
+
+                    else:   # player has no items to use
+                        # player attack
+                            if len(weapon_index) > 1 and first_swap == True:   # more than 1 weapon in player inventory and player has not used their swap
+                                print(f'Your current weapon is: {player.weapon.name} - DMG: {player.weapon.damage} - DUR: {player.weapon.durability} - INF: {player.weapon.infusion}')
+                                while True:
+                                    if first_round == True:     # skips swap during first round of combat
+                                        swap = 'no'
+                                        first_round = False
+                                    else:
+                                        swap = input('Do you want to swap weapon? (Enter yes or no): ').lower()
+                                    try:
+                                        if swap == 'yes' or swap == 'no':  # swap input entered was valid
+                                            break
+                                    except: # swap input was not entered correctly
+                                        print('Please enter yes or no.')
+                                        continue    # retries for swap input
+
+                                if swap == 'yes':   # player chooses to swap weapon
+                                    first_swap = False  # updates first_swap
+                                    player, weapon_index = weapon_switch(player, weapon_index)
+
                                 match enemy1.hp > 0 and enemy2.hp > 0 and enemy3.hp > 0:
                                     case True:     # asks for player to target an enemy if there are more than 1 alive
                                         while True:     # player chooses which enemy to attack this round
@@ -1028,10 +1138,13 @@ def combat_loop(enemy_list, player):
                                                 match enemy_alive:
                                                     case 1:
                                                         target = '1'    # player target set to enemy1
+                                                        break
                                                     case 2:
                                                         target = '2'    # player target set to enemy2
+                                                        break
                                                     case 3:
                                                         target = '3'    # player target set to enemy3
+                                                        break
 
                                             case 2:     # two enemies alive
                                                 for i in range(len(enemy_list)):    # iterates through all enemies to find which is dead
@@ -1048,10 +1161,10 @@ def combat_loop(enemy_list, player):
                                 
                                                             target = input('Please enter the enemy number you would like to target (Enter 1, or 2): ')
                                                             try:
-                                                                if target == '1' or target == '2':  # target input entered was valid
+                                                                if target == '2' or target == '3':  # target input entered was valid
                                                                     break
                                                             except: # target input was not entered correctly
-                                                                print('Please enter 1 or 2.')
+                                                                print('Please enter 2 or 3.')
                                                                 continue    # retries for target input
 
                                                     case 2: # enemy2 is dead
@@ -1061,10 +1174,10 @@ def combat_loop(enemy_list, player):
                                 
                                                             target = input('Please enter the enemy number you would like to target (Enter 1, or 2): ')
                                                             try:
-                                                                if target == '1' or target == '2':  # target input entered was valid
+                                                                if target == '1' or target == '3':  # target input entered was valid
                                                                     break
                                                             except: # target input was not entered correctly
-                                                                print('Please enter 1 or 2.')
+                                                                print('Please enter 1 or 3.')
                                                                 continue    # retries for target input
 
                                                     case 3: # enemy3 is dead
@@ -1080,13 +1193,111 @@ def combat_loop(enemy_list, player):
                                                                 print('Please enter 1 or 2.')
                                                                 continue    # retries for target input
 
-                                match target:
-                                    case '1':       # enemy1 was chosen as target
-                                        player, enemy1 = deal_damage(player, enemy1)    # player attacks enemy1
-                                    case '2':       # enemy2 chosen as target
-                                        player, enemy2 = deal_damage(player, enemy2)    # player attacks enemy2
-                                    case '3':       # enemy3 chosen as target
-                                        player, enemy3 = deal_damage(player, enemy3)    # player attacks enemy3
+                            else:   # first swap has been completed and player has no more swaps left
+                                match enemy1.hp > 0 and enemy2.hp > 0 and enemy3.hp > 0:
+                                    case True:     # asks for player to target an enemy if there are more than 1 alive
+                                        while True:     # player chooses which enemy to attack this round
+                                            print(f'1. {enemy1.name} - HP: {enemy1.hp}')
+                                            print(f'2. {enemy2.name} - HP: {enemy2.hp}')
+                                            print(f'3. {enemy3.name} - HP: {enemy3.hp}')
+
+                                            target = input('Please enter the enemy number you would like to target (Enter 1, 2, or 3): ')
+                                            try:
+                                                if target == '1' or target == '2' or target == '3':  # target input entered was valid
+                                                    break
+                                            except: # target input was not entered correctly
+                                                print('Please enter 1, 2, or 3.')
+                                                continue    # retries for target input 
+
+                                    case False:     # One or more enemies have died
+                                        temp_enemies_alive = 0
+                                        # counts enemies alive and adds them to counter 
+                                        if enemy1.hp > 0:
+                                            temp_enemies_alive += 1
+                                        if enemy2.hp > 0:
+                                            temp_enemies_alive += 1
+                                        if enemy3.hp > 0:
+                                            temp_enemies_alive += 1
+
+                                        match temp_enemies_alive:
+                                            case 1:     # only one enemy alive
+                                                print('AUTO COMBAT!!!')
+                                                for i in range(len(enemy_list)):    # iterates through all enemies to find which is alive
+                                                    if  enemy_list[i].hp > 0:       # once it finds the last alive enemy in combat 
+                                                        enemy_alive = i + 1         # enemy found alive is marked for comparison
+                                                    else:
+                                                        continue
+
+                                                match enemy_alive:
+                                                    case 1:
+                                                        target = '1'    # player target set to enemy1
+                                                        print(f'1. {enemy1.name} - HP: {enemy1.hp}')
+                                                        
+                                                    case 2:
+                                                        target = '2'    # player target set to enemy2
+                                                        print(f'2. {enemy2.name} - HP: {enemy2.hp}')
+                                                        
+                                                    case 3:
+                                                        target = '3'    # player target set to enemy3
+                                                        print(f'3. {enemy3.name} - HP: {enemy3.hp}')
+                                                
+
+                                            case 2:     # two enemies alive
+                                                for i in range(len(enemy_list)):    # iterates through all enemies to find which is dead
+                                                    if  enemy_list[i].hp <= 0:      # once it finds the dead enemy in combat 
+                                                        enemy_dead = i + 1          # enemy found dead is marked for comparison
+                                                    else:
+                                                        continue
+
+                                                match enemy_dead:
+                                                    case 1:     # enemy1 is dead
+                                                        while True:     # player chooses which enemy to attack this round
+                                                            print(f'2. {enemy2.name} - HP: {enemy2.hp}')    # enemy2 is alive
+                                                            print(f'3. {enemy3.name} - HP: {enemy3.hp}')    # enemy3 is alive
+                                
+                                                            target = input('Please enter the enemy number you would like to target (Enter 1, or 2): ')
+                                                            try:
+                                                                if target == '2' or target == '3':  # target input entered was valid
+                                                                    break
+                                                            except: # target input was not entered correctly
+                                                                print('Please enter 2 or 3.')
+                                                                continue    # retries for target input
+
+                                                    case 2: # enemy2 is dead
+                                                        while True:     # player chooses which enemy to attack this round
+                                                            print(f'1. {enemy1.name} - HP: {enemy1.hp}')    # enemy1 is alive
+                                                            print(f'3. {enemy3.name} - HP: {enemy3.hp}')    # enemy3 is alive
+                                
+                                                            target = input('Please enter the enemy number you would like to target (Enter 1, or 2): ')
+                                                            try:
+                                                                if target == '1' or target == '3':  # target input entered was valid
+                                                                    break
+                                                            except: # target input was not entered correctly
+                                                                print('Please enter 1 or 3.')
+                                                                continue    # retries for target input
+
+                                                    case 3: # enemy3 is dead
+                                                        while True:     # player chooses which enemy to attack this round
+                                                            print(f'1. {enemy1.name} - HP: {enemy1.hp}')    # enemy1 is alive
+                                                            print(f'2. {enemy2.name} - HP: {enemy2.hp}')    # enemy2 is alive
+                        
+                                                            target = input('Please enter the enemy number you would like to target (Enter 1, or 2): ')
+                                                            try:
+                                                                if target == '1' or target == '2':  # target input entered was valid
+                                                                    break
+                                                            except: # target input was not entered correctly
+                                                                print('Please enter 1 or 2.')
+                                                                continue    # retries for target input
+                    # player attacks enemy
+                    match target:
+                        case '1':       # enemy1 was chosen as target
+                            player, enemy1 = deal_damage(player, enemy1)    # player attacks enemy1
+                        case '2':       # enemy2 chosen as target
+                            player, enemy2 = deal_damage(player, enemy2)    # player attacks enemy2
+                        case '3':       # enemy3 chosen as target
+                            player, enemy3 = deal_damage(player, enemy3)    # player attacks enemy3
+
+                    # enemies turn
 
             # player and enemy survival messages                            
             if enemy_total_hp > 0:
