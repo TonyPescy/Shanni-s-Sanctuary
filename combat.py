@@ -1297,7 +1297,13 @@ def combat_loop(enemy_list, player):
                         case '3':       # enemy3 chosen as target
                             player, enemy3 = deal_damage(player, enemy3)    # player attacks enemy3
 
-                    # enemies turn
+                    # enemies turn, enemies attack player if they are alive
+                    if enemy1.hp > 0:
+                        enemy1, player = deal_damage(enemy1, player)    # enemy1 attacks player
+                    if enemy2.hp > 0:
+                        enemy2, player = deal_damage(enemy2, player)    # enemy2 attacks player
+                    if enemy3.hp > 0:
+                        enemy3, player = deal_damage(enemy3, player)    # enemy3 attacks player
 
             # player and enemy survival messages                            
             if enemy_total_hp > 0:

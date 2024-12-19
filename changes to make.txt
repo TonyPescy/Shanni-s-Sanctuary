@@ -3,7 +3,7 @@
 
 
 
-2. Add combast for more than 1 enemy
+2. Add combats for more than 1 enemy
     2 enemies implemented
         COMPLETED
     3 enemies needed
@@ -22,7 +22,7 @@
     - Fix swap message in first round of combat
         COMPLETED
 
-2.3 
+2.3 Enemy attacks added to 3 enemy combat
 
 
 
