@@ -23,6 +23,7 @@
         COMPLETED
 
 2.3 Enemy attacks added to 3 enemy combat
+    COMPLETED
 
 
 
@@ -49,3 +50,4 @@
 
 8. Consumables Testing
 
+9. Create combat scenarios for each combat room (30 + boss room)

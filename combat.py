@@ -1311,3 +1311,93 @@ def combat_loop(enemy_list, player):
                 print('You Died!')
             elif player.hp > 0:
                 print(player.name + ' survived the encounter with ' + str(player.hp) + ' health points left!')
+
+
+# combat scenarios start
+
+def combat_scenario_1():    # venus mantrap
+    print('temp')
+
+def combat_scenario_2():    # harpies 1-3
+    print('temp')   
+
+def combat_scenario_3():    # sword skeletons 1-3
+    print('temp')
+
+def combat_scenario_4():    # bow skeletons 1-2
+    print('temp')
+
+def combat_scenario_5():    # siren
+    # MAY NEED SPECIAL COMBAT LOOP OR SOMETHING
+    print('temp')
+
+def combat_scenario_6():    # minotaur
+    print('temp')
+
+def combat_scenario_7():    # decayed ancient captain
+    print('temp')
+
+def combat_scenario_8():    # mummy
+    print('temp')
+
+def combat_scenario_9():    # cyclops
+    print('temp')
+
+def combat_scenario_10():   # honorable duelist
+    # ASK IF THEY WISH TO PICKUP THE RAPIER OR NOT
+    print('temp')
+
+def combat_scenario_11():   # golem
+    print('temp')
+
+def combat_scenario_12():   # pristine ancient captain
+    print('temp')
+
+def combat_scenario_13():   # ancient spellspear
+    print('temp')
+
+def combat_scenario_14():   # hellknight
+    # AT END OF COMABT U GAIN HIS SWORD
+    print('temp')
+
+def combat_scenario_15():   # lost travelers (2)
+    print('temp')
+
+def combat_scenario_16():   # forsaken mage
+    print('temp')
+
+def combat_scenario_17():   # shadow
+    # GIVE IT UR EQUIPMENT AND 100 HP ETC
+    print('temp')
+
+def combat_scenario_18():   # overgrown toad
+    print('temp')
+
+def combat_scenario_19():   # hell hounds 1-2
+    print('temp')
+
+def combat_scenario_20():   # baby red dragon
+    print('temp')
+
+combat_scenario_dict = {
+    1: combat_scenario_1,
+    2: combat_scenario_2,
+    3: combat_scenario_3,
+    4: combat_scenario_4,
+    5: combat_scenario_5,
+    6: combat_scenario_6,
+    7: combat_scenario_7,
+    8: combat_scenario_8,
+    9: combat_scenario_9,
+    10: combat_scenario_10,
+    11: combat_scenario_11,
+    12: combat_scenario_12,
+    13: combat_scenario_13,
+    14: combat_scenario_14,
+    15: combat_scenario_15,
+    16: combat_scenario_16,
+    17: combat_scenario_17,
+    18: combat_scenario_18,
+    19: combat_scenario_19,
+    20: combat_scenario_20
+}

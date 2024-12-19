@@ -29,6 +29,7 @@ def main():
     # game item, room, and other generation
     rooms_array, rm_dsc_lst, weapon_list, armor_list, shield_list, consume_list = lib.create_all()
     
+    '''
     # combat tester
     player_name, player_answer = en.user_name_and_ans()
     player = char.Character.create_player(player_name, weapon_list, armor_list)
@@ -45,31 +46,32 @@ def main():
     enemy1 = char.Character.create_mummy(weapon_list)
     e_list = [enemy1, test_char, test_char_2]
     com.combat_loop(e_list, player)
-
     '''
+
+
+    
     en.intro()
     player_name, player_answer = en.user_name_and_ans()
     en.entrance(player_name, player_answer)
 
     # creates character object for player with default values for player character
     # used in combat and the sort
-    player = char.create_player(player_name, weapon_list, armor_list)
+    player = char.Character.create_player(player_name, weapon_list, armor_list)
     # print(player.name)
 
     # Entrance Encounter
     next_room = 0      # room starts at 0 because non-randomized descriptions are appened after the random ones
-    rooms_array, next_room = en.room_encounters(next_room, rm_dsc_lst, -3, rooms_array)  # always starts at zero, later we will use next_room for first parameter
+    rooms_array, next_room, player = en.room_encounters(next_room, rm_dsc_lst, -3, rooms_array)  # always starts at zero, later we will use next_room for first parameter
     print(next_room)
 
     # 'Random' Encounters and boss encounter
-    # maybe a while statemnt that will run until the rooms equal the boxx encounter? (door will close in boss encounter)
     while next_room < 32:
-        rooms_array, next_room = en.room_encounters(next_room, rm_dsc_lst, rooms_array[next_room].e_num, rooms_array)  # always starts at zero, later we will use next_room for first parameter
+        rooms_array, next_room, player = en.room_encounters(next_room, rm_dsc_lst, rooms_array[next_room].e_num, rooms_array)  # always starts at zero, later we will use next_room for first parameter
         print(next_room)
 
     # Exit Encounter
     en.room_encounters(next_room, rm_dsc_lst, -2, rooms_array) # final room, exit room
-    '''
+    
 
 main()
 #######################################################################################################################################

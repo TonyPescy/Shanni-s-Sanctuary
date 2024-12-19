@@ -110,11 +110,16 @@ def rm_entrance(desc, rooms_arr):
 # Return:       new_room - int - Room that player will move into
 #               rooms_arr - array - Returns modified room array
 def rm_1(desc, rooms_arr):
-    print(desc)
-    #COMBAT GOES HERE
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    combat_scenario = desc[:encounter_num_ind]  # selects number from room description
+    print(desc[encounter_num_ind:])
+    if rooms_arr[0].re_entry != True:   # first time entering the room
+        #COMBAT GOES HERE
+        rooms_arr[0].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 1 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is North.')
     next_direction = rm.Room.get_player_move(rooms_arr[0].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[0].num)      # gets new room that player has selected
-    rooms_arr[0].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 1 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 1")              # all rooms will need a unique exit statement
 
     return rooms_arr, new_room
@@ -640,10 +645,39 @@ def rm_exit(desc, rooms_arr):
     print('Temp!Exit')
 
 encounter_dict = {
-    0: rm_entrance, 1: rm_1, 2: rm_2, 3: rm_3, 4: rm_4, 5: rm_5, 6: rm_6, 7: rm_7, 8: rm_8, 9: rm_9, 10: rm_10, 
-    11: rm_11, 12: rm_12, 13: rm_13, 14: rm_14, 15: rm_15, 16: rm_16, 17: rm_17, 18: rm_18, 19: rm_19, 20: rm_20, 
-    21: rm_21, 22: rm_22, 23: rm_23, 24: rm_24, 25: rm_25, 26: rm_26, 27: rm_27, 28: rm_28, 29: rm_29, 30: rm_30, 
-    31: rm_boss, 32: rm_exit
+    0: rm_entrance,
+    1: rm_1,
+    2: rm_2,
+    3: rm_3,
+    4: rm_4,
+    5: rm_5,
+    6: rm_6,
+    7: rm_7,
+    8: rm_8,
+    9: rm_9,
+    10: rm_10, 
+    11: rm_11,
+    12: rm_12,
+    13: rm_13,
+    14: rm_14,
+    15: rm_15,
+    16: rm_16,
+    17: rm_17,
+    18: rm_18,
+    19: rm_19,
+    20: rm_20, 
+    21: rm_21,
+    22: rm_22,
+    23: rm_23,
+    24: rm_24,
+    25: rm_25,
+    26: rm_26,
+    27: rm_27,
+    28: rm_28,
+    29: rm_29,
+    30: rm_30, 
+    31: rm_boss,
+    32: rm_exit
 }
 
 # room_encounters to lookup and execute the function based on players room
