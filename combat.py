@@ -576,8 +576,7 @@ def deal_damage(attacker, target):
 # Basic loop that combat will follow
 # Parameters:   enemy_list - List of objects - List of all enemies in combat
 #               player - object - Player character
-# Return:       
-#               
+# Return:       player - object - Player character\
 # NOTES: Combat can be trimmed and optimized alot with match cases annd better ordering of operations. This is especially true for when there are 
 # multiple enemies in the combat. 
 # PLAN: Reduce repeat code as much as possible - Break it down into more functions, better system for swapping and targetting together.
@@ -677,8 +676,10 @@ def combat_loop(enemy_list, player):
             if enemy.hp > 0:
                 print('Enemy survived the encounter with ' + str(enemy.hp) + ' health points left!')
                 print('You Died!')
+                return player
             elif player.hp > 0:
                 print(player.name + ' survived the encounter with ' + str(player.hp) + ' health points left!')
+                return player
 
         # combat with two enemies
         case 2:
@@ -851,8 +852,10 @@ def combat_loop(enemy_list, player):
             if enemy1.hp > 0 or enemy2.hp > 0:
                 print('Enemies survived the encounter with ' + str(enemy1.hp + enemy2.hp) + ' health points left!')
                 print('You Died!')
+                return player
             elif player.hp > 0:
                 print(player.name + ' survived the encounter with ' + str(player.hp) + ' health points left!')
+                return player
         case 3:
             print('needs full implementation')
             enemy1 = enemy_list[0]
@@ -1309,95 +1312,7 @@ def combat_loop(enemy_list, player):
             if enemy_total_hp > 0:
                 print('Enemies survived the encounter with ' + str(enemy_total_hp) + ' health points left!')
                 print('You Died!')
+                return player
             elif player.hp > 0:
                 print(player.name + ' survived the encounter with ' + str(player.hp) + ' health points left!')
-
-
-# combat scenarios start
-
-def combat_scenario_1():    # venus mantrap
-    print('temp')
-
-def combat_scenario_2():    # harpies 1-3
-    print('temp')   
-
-def combat_scenario_3():    # sword skeletons 1-3
-    print('temp')
-
-def combat_scenario_4():    # bow skeletons 1-2
-    print('temp')
-
-def combat_scenario_5():    # siren
-    # MAY NEED SPECIAL COMBAT LOOP OR SOMETHING
-    print('temp')
-
-def combat_scenario_6():    # minotaur
-    print('temp')
-
-def combat_scenario_7():    # decayed ancient captain
-    print('temp')
-
-def combat_scenario_8():    # mummy
-    print('temp')
-
-def combat_scenario_9():    # cyclops
-    print('temp')
-
-def combat_scenario_10():   # honorable duelist
-    # ASK IF THEY WISH TO PICKUP THE RAPIER OR NOT
-    print('temp')
-
-def combat_scenario_11():   # golem
-    print('temp')
-
-def combat_scenario_12():   # pristine ancient captain
-    print('temp')
-
-def combat_scenario_13():   # ancient spellspear
-    print('temp')
-
-def combat_scenario_14():   # hellknight
-    # AT END OF COMABT U GAIN HIS SWORD
-    print('temp')
-
-def combat_scenario_15():   # lost travelers (2)
-    print('temp')
-
-def combat_scenario_16():   # forsaken mage
-    print('temp')
-
-def combat_scenario_17():   # shadow
-    # GIVE IT UR EQUIPMENT AND 100 HP ETC
-    print('temp')
-
-def combat_scenario_18():   # overgrown toad
-    print('temp')
-
-def combat_scenario_19():   # hell hounds 1-2
-    print('temp')
-
-def combat_scenario_20():   # baby red dragon
-    print('temp')
-
-combat_scenario_dict = {
-    1: combat_scenario_1,
-    2: combat_scenario_2,
-    3: combat_scenario_3,
-    4: combat_scenario_4,
-    5: combat_scenario_5,
-    6: combat_scenario_6,
-    7: combat_scenario_7,
-    8: combat_scenario_8,
-    9: combat_scenario_9,
-    10: combat_scenario_10,
-    11: combat_scenario_11,
-    12: combat_scenario_12,
-    13: combat_scenario_13,
-    14: combat_scenario_14,
-    15: combat_scenario_15,
-    16: combat_scenario_16,
-    17: combat_scenario_17,
-    18: combat_scenario_18,
-    19: combat_scenario_19,
-    20: combat_scenario_20
-}
+                return player

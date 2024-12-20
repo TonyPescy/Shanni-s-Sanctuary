@@ -50,4 +50,8 @@
 
 8. Consumables Testing
 
-9. Create combat scenarios for each combat room (30 + boss room)
+
+9. Create encounter scenarios for each combat room (30 + boss room and all encounters)
+    > update rm_x definitions (starting on 1, use similar formula for the rest)
+    > all need same parameters and same returns
+    > 

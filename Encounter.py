@@ -91,15 +91,17 @@ def intro():            # Intro to the game
 # rm_entrance - First encounter within the actual pyramid
 # Parameters:   desc - string - description of the room
 #               rooms_arr - array - array of all rooms
+#               player - object - player character
 # Return:       new_room - Room that player will move into
 #               rooms_arr - array - Returns modified room array Note: rooms_arr does not change here as rm_entrance cannot be entered again
-def rm_entrance(desc, rooms_arr):
+#               player - object - player character
+def rm_entrance(desc, rooms_arr, player):
     print(desc)
     next_direction = rm.Room.get_player_move(rooms_arr[32].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[32].num)      # gets new room that player has selected
     print('As you you make your way north, those heavy wooden doors slam shut. Another barrier to ensure you do not escape Shanni\'s Sanctuary.')
     
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # room_entrance ends
 
 
@@ -107,9 +109,11 @@ def rm_entrance(desc, rooms_arr):
 # rm_1 - Room 1 with random encounter inside
 # Parameters:   desc - string - description of the room
 #               rooms_arr - array - array of all rooms
+#               player - object - player character
 # Return:       new_room - int - Room that player will move into
 #               rooms_arr - array - Returns modified room array
-def rm_1(desc, rooms_arr):
+#               player - object - player character
+def rm_1(desc, rooms_arr, player):
     encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
     combat_scenario = desc[:encounter_num_ind]  # selects number from room description
     print(desc[encounter_num_ind:])
@@ -122,7 +126,7 @@ def rm_1(desc, rooms_arr):
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[0].num)      # gets new room that player has selected
     print("THIS IS UR EXIT OF ROOM 1")              # all rooms will need a unique exit statement
 
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_1 ends
 
 # rm_2 Starts
@@ -638,9 +642,8 @@ def rm_boss(desc, rooms_arr):
 # rm_exit Starts
 # rm_exit - Exit room with exit story
 # Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
 # Return:       N/A
-def rm_exit(desc, rooms_arr): 
+def rm_exit(desc): 
     print(desc)
     print('Temp!Exit')
 
@@ -688,6 +691,9 @@ encounter_dict = {
 #               desc_arr_index - int - Index for current room 
 #               rmms_arr - array - Array of all room objects
 # Returns: returns the output of the corresponding function in the dictionary
+#          new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
 def room_encounters(c_room, desc_arr, desc_arr_index, rms_arr):
     # special room descriptions (static encounters) are checked else normal room encounters play out
     if c_room == 0:     # entrance
@@ -698,3 +704,228 @@ def room_encounters(c_room, desc_arr, desc_arr_index, rms_arr):
         return encounter_dict[c_room](desc_arr[-1], rms_arr)
     else:
         return encounter_dict[c_room](desc_arr[desc_arr_index], rms_arr)
+
+# encounter scenarios start
+def encounter_scenario_1():    # venus mantrap
+    print('temp')
+
+def encounter_scenario_2():    # harpies 1-3
+    print('temp')   
+
+def encounter_scenario_3():    # sword skeletons 1-3
+    print('temp')
+
+def encounter_scenario_4():    # bow skeletons 1-2
+    print('temp')
+
+def encounter_scenario_5():    # siren
+    # MAY NEED SPECIAL ENCOUNTER LOOP OR SOMETHING
+    print('temp')
+
+def encounter_scenario_6():    # minotaur
+    print('temp')
+
+def encounter_scenario_7():    # decayed ancient captain
+    print('temp')
+
+def encounter_scenario_8():    # mummy
+    print('temp')
+
+def encounter_scenario_9():    # cyclops
+    print('temp')
+
+def encounter_scenario_10():   # honorable duelist
+    # ASK IF THEY WISH TO PICKUP THE RAPIER OR NOT
+    print('temp')
+
+def encounter_scenario_11():   # golem
+    print('temp')
+
+def encounter_scenario_12():   # pristine ancient captain
+    print('temp')
+
+def encounter_scenario_13():   # ancient spellspear
+    print('temp')
+
+def encounter_scenario_14():   # hellknight
+    # AT END OF ENCOUNTER U GAIN HIS SWORD
+    print('temp')
+
+def encounter_scenario_15():   # lost travelers (2)
+    print('temp')
+
+def encounter_scenario_16():   # forsaken mage
+    print('temp')
+
+def encounter_scenario_17():   # shadow
+    # GIVE IT UR EQUIPMENT AND 100 HP ETC
+    print('temp')
+
+def encounter_scenario_18():   # overgrown toad
+    print('temp')
+
+def encounter_scenario_19():   # hell hounds 1-2
+    print('temp')
+
+def encounter_scenario_20():   # baby red dragon
+    print('temp')
+
+def encounter_scenario_21():    # poison floor
+    # APPLIES POISON IF POSSIBLE
+    print('temp')
+
+def encounter_scenario_22():    # poison dart room
+    print('temp')
+
+def encounter_scenario_23():    # arrow trap
+    print('temp')
+
+def encounter_scenario_24():    # spike trap
+    print('temp')
+
+def encounter_scenario_25():    # arcane missle library book
+    print('temp')
+
+def encounter_scenario_26():    # log trap
+    print('temp')
+
+def encounter_scenario_27():    # fireball seal
+    print('temp')
+
+def encounter_scenario_28():    # snake pit 0-3 snake bites
+    print('temp')
+
+def encounter_scenario_29():    # coin flip door
+    print('temp')
+
+def encounter_scenario_30():    # pendulum axes over chasm
+    print('temp')
+
+def encounter_scenario_31():    # ancient sword in the stone
+    print('temp')
+
+def encounter_scenario_32():    # heavy armor on display
+    print('temp')
+
+def encounter_scenario_33():    # apothecary 3-5 random potions
+    print('temp')
+
+def encounter_scenario_34():    # field hospital 1-3 antitoxins and 2-4 bandages
+    print('temp')
+
+def encounter_scenario_35():    # armory room with 1-3 weapons, armor, and shield(s)
+    print('temp')
+
+def encounter_scenario_36():    # wizard tower with 1-2 random scrolls
+    print('temp')
+
+def encounter_scenario_37():    # treasure room with ornate magic shield and 1/3 chance for ornate weapon
+    print('temp')
+
+def encounter_scenario_38():    # travelers old storage room has 1 buckler, short sword, and ligth armor
+    print('temp')
+
+def encounter_scenario_39():    # apothecary with different description and 2-4 random potions
+    print('temp')
+
+def encounter_scenario_40():    # library with emergency fireball scroll
+    print('temp')
+
+def encounter_scenario_41():    # infusion room
+    print('temp')
+
+def encounter_scenario_42():    # different infusion room
+    print('temp')
+
+def encounter_scenario_43():    # other different infusion room
+    print('temp')
+
+def encounter_scenario_44():    # ancient masks
+    print('temp')
+
+def encounter_scenario_45():    # cursed artifacts
+    print('temp')
+
+def encounter_scenario_46():    # ancient ritual room with runes
+    print('temp')
+
+def encounter_scenario_47():    # functioning observatory
+    print('temp')
+
+def encounter_scenario_48():    # stained torture room
+    print('temp')
+
+def encounter_scenario_49():    # ethereal bridge over abyss
+    print('temp')
+
+def encounter_scenario_50():    # mirror of memories
+    print('temp')
+
+def encounter_scenario_51():    # boss
+    print('temp')
+
+def encounter_scenario_52():    # exit
+    print('temp')
+
+encounter_dict = {
+    1: encounter_scenario_1,
+    2: encounter_scenario_2,
+    3: encounter_scenario_3,
+    4: encounter_scenario_4,
+    5: encounter_scenario_5,
+    6: encounter_scenario_6,
+    7: encounter_scenario_7,
+    8: encounter_scenario_8,
+    9: encounter_scenario_9,
+    10: encounter_scenario_10,
+    11: encounter_scenario_11,
+    12: encounter_scenario_12,
+    13: encounter_scenario_13,
+    14: encounter_scenario_14,
+    15: encounter_scenario_15,
+    16: encounter_scenario_16,
+    17: encounter_scenario_17,
+    18: encounter_scenario_18,
+    19: encounter_scenario_19,
+    20: encounter_scenario_20,
+    21: encounter_scenario_21,
+    22: encounter_scenario_22,
+    23: encounter_scenario_23,
+    24: encounter_scenario_24,
+    25: encounter_scenario_25,
+    26: encounter_scenario_26,
+    27: encounter_scenario_27,
+    28: encounter_scenario_28,
+    29: encounter_scenario_29,
+    30: encounter_scenario_30,
+    31: encounter_scenario_31,
+    32: encounter_scenario_32,
+    33: encounter_scenario_33,
+    34: encounter_scenario_34,
+    35: encounter_scenario_35,
+    36: encounter_scenario_36,
+    37: encounter_scenario_37,
+    38: encounter_scenario_38,
+    39: encounter_scenario_39,
+    40: encounter_scenario_40,
+    41: encounter_scenario_41,
+    42: encounter_scenario_42,
+    43: encounter_scenario_43,
+    44: encounter_scenario_44,
+    45: encounter_scenario_45,
+    46: encounter_scenario_46,
+    47: encounter_scenario_47,
+    48: encounter_scenario_48,
+    49: encounter_scenario_49,
+    50: encounter_scenario_50,
+    51: encounter_scenario_51,
+    52: encounter_scenario_52
+}
+
+# encounter_picker starts
+# encounter_picker - selects encounter scenario from dictionary based on room
+# Parameters:   player - object - player character
+#               encounter_num - int - num spliced from encounter desc, used to select and play out any action in a room if there is any
+# Returns:      player - object - player character
+def encounter_picker(player, encounter_num):
+    pass
