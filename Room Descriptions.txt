@@ -28,26 +28,26 @@
 28 A dimly lit stone chamber exudes an air of silent menace, its uneven floor dotted with ancient carvings worn smooth by use. One step into the roomputs you atop a trap door, its edges barely visible beneath you. A faint metallic creak echoes ominously throughout the room, and before you dive away the trapdoor snaps open revealing a writhing pit below teeming with snakes of all sizes, their scales glistening in the faint light that filters through. Hisses and the occasional rattle rise from the darkness, as fangs glint, ready to strike the unfortunate soul who has fallen into their domain.
 29 A stark, silent room stretches out before you, its smooth stone walls and floor devoid of decoration or furniture. The emptiness amplifies the faint sound of your footsteps, each echo lingering in the oppressive stillness. At the far end of the room stands a solitary door, its surface adorned with no handle or keyhole, only two buttons embedded in the wall beside it—one glowing faintly red and the other blue. The air feels heavy with anticipation, as if the room itself is holding its breath, waiting for a choice to be made.
 30 The room is a towering, perilous chamber of stone. A narrow, weathered walkway of bricks stretches across the room, suspended above a deep, foreboding pit shrouded in darkness. On either side of the walkway, colossal, deadly pendulum blades swing rhythmically, their razor-sharp edges gleaming faintly in the dim light. You dash past the first two and attempt to roll past the last one. It cuts deep into your shoulder but you manage to roll beyond it without falling off.
-31 
-32 
-33 
-34 
-35 
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
+31 A grand, cavernous room exudes an aura of age and mystique, its walls carved from rough stone and adorned with faded etchings of forgotten legends. At its center lies a raised pedestal of weathered rock, illuminated by a beam of light cascading from a crack in the ceiling above. Embedded deep within the pedestal is an ancient sword, its blade gleaming faintly despite the passing centuries. The hilt is adorned with intricate patterns of gold and silver, encrusted with small, glimmering gemstones that pulse faintly as if alive. The sword seems to call to you, as though awaiting the one destined to free it from its eternal prison.
+32 The room is dimly lit, with the glow of flickering torches casting dancing shadows across the walls. At the center stands a polished glass display case on a stone pedestal, encasing a set of immaculate plate armor. The armor gleams with a metallic sheen, its surface untouched by rust or wear, as if preserved by some unseen force. Intricate engravings of swirling patterns and heraldic symbols adorn the breastplate, hinting at its noble origins.
+33 The room is small yet brimming with character, its walls lined with shelves crafted from dark, aged wood. Each shelf is packed with glass jars and bottles of varying shapes and sizes, their contents a vibrant array of powders, liquids, and herbs. Bundles of dried plants hang from the ceiling beams, their earthy aromas mingling in the air. A wooden counter, scarred with years of use, occupies the center of the room, its surface cluttered with mortar and pestles, scales, and small tools for grinding and mixing. The flickering glow of a single lantern casts a warm light over the space, highlighting a dusty tome left open on the counter, its pages filled with handwritten recipes and alchemical diagrams.
+34 The room is dimly lit, the faint glow of tallow candles casting flickering shadows across the rough stone walls. The air is thick with the metallic scent of blood and the acrid aroma of herbal poultices. A single wooden bed stands in the center of the room, its straw-filled mattress soaked with dark, dried blood that stains the coarse linen sheets. Beside it, a crude wooden table holds an assortment of tools—rusty saws, forceps, and bloodied rags—alongside bowls filled with murky water and remnants of hastily prepared remedies.
+35 The room is stark and desolate, its stone walls bare and cold, save for the faint marks and outlines where racks and weapons once hung. Dust coats the floor in a thin layer, undisturbed except for a few scattered footprints, hinting at long-forgotten activity. The faint smell of oil and metal lingers in the air, a ghostly remnant of its former purpose. Empty weapon racks and armor stands sit abandoned, their wood warped and splintered with age.
+36 The tower is a solitary, spiraling structure perched high above a desolate landscape. The circular chamber at the top is lined with tall, arched windows that frame the grim view beyond. Outside, a lifeless forest stretches into the distance, its twisted, leafless trees clawing at the ashen sky. Beyond the forest lies a scorched wasteland, where fiery cracks in the earth spew smoke and molten lava, casting an ominous orange glow over the horizon.
+37 The treasure room glimmers with a golden glow, its stone walls reflecting the light of flickering torches mounted in intricate holders. Piles of coins, sparkling gems, and gilded relics are heaped across the floor, creating an almost overwhelming display of opulence. At the center of the room, elevated on a polished marble pedestal, rests an ornate shield of extraordinary craftsmanship. Its massive surface is engraved with intricate patterns of swirling vines and mythological creatures, highlighted with inlays of silver and gold. A large gemstone, deep crimson and pulsating faintly, is embedded in its center.
+38 The cave is dim and damp, its walls rough and jagged, illuminated only by the faint light filtering through cracks in the stone. In one corner, a crude makeshift desk has been assembled from uneven planks of wood, propped up on loose stones. Scattered across its surface are remnants of hurried activity: a burnt-down candle stub, scraps of torn parchment, and a simple inkpot tipped on its side, leaving a dark stain. Among the clutter lies a hastily written note, its words scrawled in uneven handwriting as if penned in great urgency. The paper is smudged and creased, its message fully illegible
+39 The apothecary is a cozy, dimly lit room brimming with the scents of herbs, spices, and mysterious concoctions. Wooden shelves line the walls, packed with glass jars of dried leaves, powdered minerals, and colorful liquids. Bundles of lavender, rosemary, and other plants dangle from the ceiling beams, adding to the earthy aroma. A sturdy oak counter, scarred from years of mixing and grinding, sits at the center, its surface cluttered with mortar and pestles, parchment recipes, and a scale for precise measurements.
+40 The room opened up into an ancient library with towering shelves filled with old, dusty books. In the center of the room, a large glass case stands, illuminated by the soft glow of a nearby lantern. Inside the case, nestled on a velvet cushion, is an ornate scroll with intricate, gold-leafed designs. The scroll is labeled in bold, elegant lettering: "Emergency Use Only".
+41 
+42 
+43 
+44 
+45 
+46 
+47 
+48 
+49 
+50 
 51 As you walk through the short hallway the heavy doors slam shut behind you. Slowly your eyes adjust to the dim light revealing weathered stone brick covered with thick vines and wet moss. As you scan the room there is nothing that you can see and the doors behind you won't budge. There won't be any turning back now, the only way is through the thick wooden doors before you.
 52 EXIT SCENARIO
 53 BOSS FIGHT!
