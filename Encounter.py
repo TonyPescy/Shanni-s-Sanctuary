@@ -7,6 +7,10 @@
 # imports
 import sys
 import Rooms as rm
+import random as rand
+import Character as char
+import combat as com
+import library as lib
 
 # Constants
 DESC_ENTRY = 0      # will be used to access the first element of the room description array, it contains the exit description
@@ -77,15 +81,13 @@ def intro():            # Intro to the game
             print("Your begin towards the massive black pyramid, unaware of the implications it will have for your future... or if there will be one to come back to. ")
             break
         else:               # If no proper answer is given, program tries again
-            answer = input("Enter yes or no ")
+            answer = input("Enter yes or no. ")
             
 # Introduction Ends
 
 # random encounters start
 # Cases for each room in game and what to do with dictionary lookup
 # each function will return the new room number based on direction inputted
-
-# IN ROOM DESCRIPTIONS.TXT FOR EVERY ENTRY ADD A DELIMITER "~" THAT CAN BE READ SO THAT WE CAN HAVE FLAVORED ROOM ENTER AND EXIT DESCRIPTIONS
 
 # rm_entrance Starts
 # rm_entrance - First encounter within the actual pyramid
@@ -113,15 +115,16 @@ def rm_entrance(desc, rooms_arr, player):
 # Return:       new_room - int - Room that player will move into
 #               rooms_arr - array - Returns modified room array
 #               player - object - player character
-def rm_1(desc, rooms_arr, player):
+def rm_1(desc, rooms_arr, player, weapon_list, armor_list, shield_list):
     encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
-    combat_scenario = desc[:encounter_num_ind]  # selects number from room description
-    print(desc[encounter_num_ind:])
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print("ENCOUNTER SCENARIO NUMBER: " + str(desc[encounter_num_ind:]))
     if rooms_arr[0].re_entry != True:   # first time entering the room
-        #COMBAT GOES HERE
+        
         rooms_arr[0].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 1 has been already entered and conquered
     else:       # room has been entered before
         print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is North.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[0].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[0].num)      # gets new room that player has selected
     print("THIS IS UR EXIT OF ROOM 1")              # all rooms will need a unique exit statement
@@ -706,165 +709,297 @@ def room_encounters(c_room, desc_arr, desc_arr_index, rms_arr):
         return encounter_dict[c_room](desc_arr[desc_arr_index], rms_arr)
 
 # encounter scenarios start
-def encounter_scenario_1():    # venus mantrap
-    print('temp')
+# Description: These are to be used in the room encounter functions in their dictionary
+# Returns:  It will return the player character as the player character and/or 
+#           its items will most likely be changed during encounters
+def encounter_scenario_1(player, w_list, a_list, s_list):    # venus mantrap
+    mantrap = char.Character.create_vmt(w_list) # creates enemy for combat
+    enemy_list = [mantrap]                      # list of all enemies to be used in combat function
+    # combat
+    player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
+    return player                                   # returns player after combat
 
-def encounter_scenario_2():    # harpies 1-3
-    print('temp')   
+def encounter_scenario_2(player, w_list, a_list, s_list):    # harpies 1-3
+    # random number of harpies created for combat
+    num_of_harpies = rand.randint(1, 3) # 1-3 inclusive
+    match num_of_harpies:
+        case 1: # 1 harpy
+            harpy = char.Character.create_harpies(1, w_list)
+            enemy_list = [harpy]                    # list of all enemies to be used in combat function
+        case 2: # 2 harpies
+            harpy0, harpy1 = char.Character.create_harpies(2, w_list)
+            enemy_list = [harpy0, harpy1]           # list of all enemies to be used in combat function
+        case 3: # 3 harpies
+            harpy0, harpy1, harpy2 = char.Character.create_harpies(3, w_list)
+            enemy_list = [harpy0, harpy1, harpy2]   # list of all enemies to be used in combat function
+    # combat
+    player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
+    return player                                   # returns player after combat
+        
 
-def encounter_scenario_3():    # sword skeletons 1-3
-    print('temp')
+def encounter_scenario_3(player, w_list, a_list, s_list):    # sword skeletons 1-3
+    # random number of skeletons created for combat
+    num_of_skeletons = rand.randint(1, 3) # 1-3 inclusive
+    match num_of_skeletons:
+        case 1: # 1 skeleton
+            skeleton = char.Character.create_skeleton('sword', w_list, a_list, s_list, 1)
+            enemy_list = [skeleton]                    # list of all enemies to be used in combat function
+        case 2: # 2 skeletons
+            skeleton0, skeleton1 = char.Character.create_skeleton('sword', w_list, a_list, s_list, 2)
+            enemy_list = [skeleton0, skeleton1]           # list of all enemies to be used in combat function
+        case 3: # 3 skeletons
+            skeleton0, skeleton1, skeleton2 = char.Character.create_skeleton('sword', w_list, a_list, s_list, 3)
+            enemy_list = [skeleton0, skeleton1, skeleton2]           # list of all enemies to be used in combat function
+    # combat
+    player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
+    return player                                   # returns player after combat
+    
 
-def encounter_scenario_4():    # bow skeletons 1-2
-    print('temp')
+def encounter_scenario_4(player, w_list, a_list, s_list):    # bow skeletons 1-2
+    # random number of skeletons created for combat
+    num_of_skeletons = rand.randint(1, 2) # 1-2 inclusive
+    match num_of_skeletons:
+        case 1: # 1 skeleton
+            skeleton = char.Character.create_skeleton('bow', w_list, a_list, s_list, 1)
+            enemy_list = [skeleton]                    # list of all enemies to be used in combat function
+        case 2: # 2 skeletons
+            skeleton0, skeleton1 = char.Character.create_skeleton('bow', w_list, a_list, s_list, 2)
+            enemy_list = [skeleton0, skeleton1]           # list of all enemies to be used in combat function
+    # combat
+    player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
+    return player                                   # returns player after combat
 
-def encounter_scenario_5():    # siren
+def encounter_scenario_5(player, w_list, a_list, s_list):    # siren
     # MAY NEED SPECIAL ENCOUNTER LOOP OR SOMETHING
+    # save for later!!!!!
     print('temp')
 
-def encounter_scenario_6():    # minotaur
-    print('temp')
+def encounter_scenario_6(player, w_list, a_list, s_list):    # minotaur
+    minotaur = char.Character.create_mino(w_list) # creates enemy for combat
+    enemy_list = [minotaur]                      # list of all enemies to be used in combat function
+    # combat
+    player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
+    return player                                   # returns player after combat
 
-def encounter_scenario_7():    # decayed ancient captain
-    print('temp')
+def encounter_scenario_7(player, w_list, a_list, s_list):    # decayed ancient captain
+    decay_capt = char.Character.create_decay_capt(w_list, s_list)   # creates enemy for combat
+    enemy_list = [decay_capt]                                       # list of all enemies to be used in combat function
+    # combat
+    player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
+    return player                                   # returns player after combat
 
-def encounter_scenario_8():    # mummy
-    print('temp')
+def encounter_scenario_8(player, w_list, a_list, s_list):    # mummy
+    mummy = char.Character.create_mummy(w_list)     # creates enemy for combat
+    enemy_list = [mummy]                            # list of all enemies to be used in combat function
+    # combat
+    player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
+    return player                                   # returns player after combat
 
-def encounter_scenario_9():    # cyclops
-    print('temp')
+def encounter_scenario_9(player, w_list, a_list, s_list):    # cyclops
+    cyclops = char.Character.create_cyclops(w_list, a_list)       # creates enemy for combat
+    enemy_list = [cyclops]                                        # list of all enemies to be used in combat function
+    # combat
+    player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
+    return player                                   # returns player after combat
 
-def encounter_scenario_10():   # honorable duelist
-    # ASK IF THEY WISH TO PICKUP THE RAPIER OR NOT
-    print('temp')
+def encounter_scenario_10(player, w_list, a_list, s_list):   # honorable duelist
+    # asks player if they wish to pick up the rapier
+    choice = str(input('Do you wish to pick up the rapier? Yes or no?').lower())
+    while True:     # repeats question until a correct response is gotten from user
+        if choice == 'yes':     # player wishes to pickup rapier
+            player.inventory = lib.item_pickup(player.inventory, w_list[4]) # item pickup function used on the rapier
+        elif choice == 'no':    # player does not pick up the rapier
+            break
+        else:   # If no proper answer is given, loop tries again
+            choice = input("Please enter yes or no. ")
+    duelist = char.Character.create_duelist(w_list, a_list, s_list)         # creates enemy for combat
+    enemy_list = [duelist]                                                  # list of all enemies to be used in combat function
+    # combat
+    player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
+    return player                                   # returns player after combat
 
-def encounter_scenario_11():   # golem
-    print('temp')
+def encounter_scenario_11(player, w_list, a_list, s_list):   # golem
+    golem = char.Character.create_golem(w_list)                 # creates enemy for combat
+    enemy_list = [golem]                                        # list of all enemies to be used in combat function
+    # combat
+    player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
+    return player                                   # returns player after combat
 
-def encounter_scenario_12():   # pristine ancient captain
-    print('temp')
+def encounter_scenario_12(player, w_list, a_list, s_list):   # pristine ancient captain
+    pristine_capt = char.Character.create_pristine_capt(w_list, a_list, s_list)         # creates enemy for combat
+    enemy_list = [pristine_capt]                                                        # list of all enemies to be used in combat function
+    # combat
+    player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
+    return player                                   # returns player after combat
 
-def encounter_scenario_13():   # ancient spellspear
-    print('temp')
+def encounter_scenario_13(player, w_list, a_list, s_list):   # ancient spellspear
+    spellspear = char.Character.create_spellspear(w_list, a_list, s_list)       # creates enemy for combat
+    enemy_list = [spellspear]                                                      # list of all enemies to be used in combat function
+    # combat
+    player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
+    return player                                   # returns player after combat
 
-def encounter_scenario_14():   # hellknight
+def encounter_scenario_14(player, w_list, a_list, s_list):   # hellknight
     # AT END OF ENCOUNTER U GAIN HIS SWORD
-    print('temp')
+    hellknight = char.Character.create_hellknight(w_list, a_list, s_list)       # creates enemy for combat
+    enemy_list = [hellknight]                                                   # list of all enemies to be used in combat function
+    # combat
+    player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
+    # asks player if they wish to pick up the hellknights greatsword
+    choice = str(input('Do you wish to pick up the hellknights greatsword? Yes or no?').lower())
+    while True:     # repeats question until a correct response is gotten from user
+        if choice == 'yes':     # player wishes to pickup greatsword
+            player.inventory = lib.item_pickup(player.inventory, w_list[5]) # item pickup function used on the greatsword
+        elif choice == 'no':    # player does not pick up the greatsword
+            break
+        else:   # If no proper answer is given, loop tries again
+            choice = input("Please enter yes or no. ")
+    return player                                   # returns player after combat and decision about greatsword
 
-def encounter_scenario_15():   # lost travelers (2)
-    print('temp')
+def encounter_scenario_15(player, w_list, a_list, s_list):   # lost travelers (2)
+    traveler0, traveler1 = char.Character.create_travelers(w_list, a_list)      # creates enemies for combat
+    enemy_list = [traveler0, traveler1]                                         # list of all enemies to be used in combat function
+    # combat
+    player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
+    return player                                   # returns player after combat
 
-def encounter_scenario_16():   # forsaken mage
-    print('temp')
+def encounter_scenario_16(player, w_list, a_list, s_list):   # forsaken mage
+    mage = char.Character.create_mage(w_list, a_list)   # creates enemy for combat
+    enemy_list = [mage]                                 # list of all enemies to be used in combat function
+    # combat
+    player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
+    return player                                   # returns player after combat
 
-def encounter_scenario_17():   # shadow
-    # GIVE IT UR EQUIPMENT AND 100 HP ETC
-    print('temp')
+def encounter_scenario_17(player, w_list, a_list, s_list):   # shadow
+    shadow = char.Character.create_golem(player)                 # creates enemy for combat, uses player for equipment
+    enemy_list = [shadow]                                        # list of all enemies to be used in combat function
+    # combat
+    player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
+    return player                                   # returns player after combat
 
-def encounter_scenario_18():   # overgrown toad
-    print('temp')
+def encounter_scenario_18(player, w_list, a_list, s_list):   # overgrown toad
+    toad = char.Character.create_toad(w_list)       # creates enemy for combat
+    enemy_list = [toad]                             # list of all enemies to be used in combat function
+    # combat
+    player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
+    return player                                   # returns player after combat
 
-def encounter_scenario_19():   # hell hounds 1-2
-    print('temp')
+def encounter_scenario_19(player, w_list, a_list, s_list):   # hell hounds 1-2
+    # random number of hell hounds created for combat
+    num_of_hounds = rand.randint(1, 2) # 1-2 inclusive
+    match num_of_hounds:
+        case 1: # 1 hound
+            hound = char.Character.create_hounds(w_list, 1)
+            enemy_list = [hound]                    # list of all enemies to be used in combat function
+        case 2: # 2 skeletons
+            hound0, hound1 = char.Character.create_hounds(w_list, 2)
+            enemy_list = [hound0, hound1]           # list of all enemies to be used in combat function
+    # combat
+    player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
+    return player                                   # returns player after combat
 
-def encounter_scenario_20():   # baby red dragon
-    print('temp')
+def encounter_scenario_20(player, w_list, a_list, s_list):   # baby red dragon
+    baby_dragon = char.Character.create_brd(w_list, a_list)         # creates enemy for combat
+    enemy_list = [baby_dragon]                                      # list of all enemies to be used in combat function
+    # combat
+    player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
+    return player                                   # returns player after combat
 
-def encounter_scenario_21():    # poison floor
+def encounter_scenario_21(player, w_list, a_list, s_list):    # poison floor
     # APPLIES POISON IF POSSIBLE
     print('temp')
 
-def encounter_scenario_22():    # poison dart room
+def encounter_scenario_22(player, w_list, a_list, s_list):    # poison dart room
     print('temp')
 
-def encounter_scenario_23():    # arrow trap
+def encounter_scenario_23(player, w_list, a_list, s_list):    # arrow trap
     print('temp')
 
-def encounter_scenario_24():    # spike trap
+def encounter_scenario_24(player, w_list, a_list, s_list):    # spike trap
     print('temp')
 
-def encounter_scenario_25():    # arcane missle library book
+def encounter_scenario_25(player, w_list, a_list, s_list):    # arcane missle library book
     print('temp')
 
-def encounter_scenario_26():    # log trap
+def encounter_scenario_26(player, w_list, a_list, s_list):    # log trap
     print('temp')
 
-def encounter_scenario_27():    # fireball seal
+def encounter_scenario_27(player, w_list, a_list, s_list):    # fireball seal
     print('temp')
 
-def encounter_scenario_28():    # snake pit 0-3 snake bites
+def encounter_scenario_28(player, w_list, a_list, s_list):    # snake pit 0-3 snake bites
     print('temp')
 
-def encounter_scenario_29():    # coin flip door
+def encounter_scenario_29(player, w_list, a_list, s_list):    # coin flip door
     print('temp')
 
-def encounter_scenario_30():    # pendulum axes over chasm
+def encounter_scenario_30(player, w_list, a_list, s_list):    # pendulum axes over chasm
     print('temp')
 
-def encounter_scenario_31():    # ancient sword in the stone
+def encounter_scenario_31(player, w_list, a_list, s_list):    # ancient sword in the stone
     print('temp')
 
-def encounter_scenario_32():    # heavy armor on display
+def encounter_scenario_32(player, w_list, a_list, s_list):    # heavy armor on display
     print('temp')
 
-def encounter_scenario_33():    # apothecary 3-5 random potions
+def encounter_scenario_33(player, w_list, a_list, s_list):    # apothecary 3-5 random potions
     print('temp')
 
-def encounter_scenario_34():    # field hospital 1-3 antitoxins and 2-4 bandages
+def encounter_scenario_34(player, w_list, a_list, s_list):    # field hospital 1-3 antitoxins and 2-4 bandages
     print('temp')
 
-def encounter_scenario_35():    # armory room with 1-3 weapons, armor, and shield(s)
+def encounter_scenario_35(player, w_list, a_list, s_list):    # armory room with 1-3 weapons, armor, and shield(s)
     print('temp')
 
-def encounter_scenario_36():    # wizard tower with 1-2 random scrolls
+def encounter_scenario_36(player, w_list, a_list, s_list):    # wizard tower with 1-2 random scrolls
     print('temp')
 
-def encounter_scenario_37():    # treasure room with ornate magic shield and 1/3 chance for ornate weapon
+def encounter_scenario_37(player, w_list, a_list, s_list):    # treasure room with ornate magic shield and 1/3 chance for ornate weapon
     print('temp')
 
-def encounter_scenario_38():    # travelers old storage room has 1 buckler, short sword, and ligth armor
+def encounter_scenario_38(player, w_list, a_list, s_list):    # travelers old storage room has 1 buckler, short sword, and ligth armor
     print('temp')
 
-def encounter_scenario_39():    # apothecary with different description and 2-4 random potions
+def encounter_scenario_39(player, w_list, a_list, s_list):    # apothecary with different description and 2-4 random potions
     print('temp')
 
-def encounter_scenario_40():    # library with emergency fireball scroll
+def encounter_scenario_40(player, w_list, a_list, s_list):    # library with emergency fireball scroll
     print('temp')
 
-def encounter_scenario_41():    # infusion room
+def encounter_scenario_41(player, w_list, a_list, s_list):    # infusion room
     print('temp')
 
-def encounter_scenario_42():    # different infusion room
+def encounter_scenario_42(player, w_list, a_list, s_list):    # different infusion room
     print('temp')
 
-def encounter_scenario_43():    # other different infusion room
+def encounter_scenario_43(player, w_list, a_list, s_list):    # other different infusion room
     print('temp')
 
-def encounter_scenario_44():    # ancient masks
+def encounter_scenario_44(player, w_list, a_list, s_list):    # ancient masks
     print('temp')
 
-def encounter_scenario_45():    # cursed artifacts
+def encounter_scenario_45(player, w_list, a_list, s_list):    # cursed artifacts
     print('temp')
 
-def encounter_scenario_46():    # ancient ritual room with runes
+def encounter_scenario_46(player, w_list, a_list, s_list):    # ancient ritual room with runes
     print('temp')
 
-def encounter_scenario_47():    # functioning observatory
+def encounter_scenario_47(player, w_list, a_list, s_list):    # functioning observatory
     print('temp')
 
-def encounter_scenario_48():    # stained torture room
+def encounter_scenario_48(player, w_list, a_list, s_list):    # stained torture room
     print('temp')
 
-def encounter_scenario_49():    # ethereal bridge over abyss
+def encounter_scenario_49(player, w_list, a_list, s_list):    # ethereal bridge over abyss
     print('temp')
 
-def encounter_scenario_50():    # mirror of memories
+def encounter_scenario_50(player, w_list, a_list, s_list):    # mirror of memories
     print('temp')
 
-def encounter_scenario_51():    # boss
+def encounter_scenario_51(player, w_list, a_list, s_list):    # boss
     print('temp')
 
-def encounter_scenario_52():    # exit
+def encounter_scenario_52(player, w_list, a_list, s_list):    # exit
     print('temp')
 
 encounter_dict = {
@@ -926,6 +1061,9 @@ encounter_dict = {
 # encounter_picker - selects encounter scenario from dictionary based on room
 # Parameters:   player - object - player character
 #               encounter_num - int - num spliced from encounter desc, used to select and play out any action in a room if there is any
+#               weapon_list - list of objects - List of all weapons, used to create enemies in needed scenarios
+#               armor_list - list of objects - List of all armor, used to create enemies in needed scenarios
+#               shield_list - list of objects - List of all shields, used to create enemies in needed scenarios
 # Returns:      player - object - player character
-def encounter_picker(player, encounter_num):
+def encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list):
     pass

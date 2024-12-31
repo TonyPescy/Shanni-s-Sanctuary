@@ -49,6 +49,7 @@
 
 
 8. Consumables Testing
+    TEMP SOLUTION > Healing player of all ailments and healing to 200 hp after all each combat
 
 
 9. Create encounter scenarios for each combat room (30 + boss room and all encounters)

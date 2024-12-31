@@ -508,10 +508,39 @@ class Room():
 
     # Dictionary to map rooms to proper room function
     room_dict = {
-        0: rm_0, 1: rm_1, 2: rm_2, 3: rm_3, 4: rm_4, 5: rm_5, 6: rm_6, 7: rm_7, 8: rm_8, 9: rm_9, 10: rm_10, 
-        11: rm_11, 12: rm_12, 13: rm_13, 14: rm_14, 15: rm_15, 16: rm_16, 17: rm_17, 18: rm_18, 19: rm_19, 20: rm_20, 
-        21: rm_21, 22: rm_22, 23: rm_23, 24: rm_24, 25: rm_25, 26: rm_26, 27: rm_27, 28: rm_28, 29: rm_29, 30: rm_30, 
-        31: rm_boss, 32: rm_exit
+        0: rm_0,
+        1: rm_1,
+        2: rm_2,
+        3: rm_3,
+        4: rm_4,
+        5: rm_5,
+        6: rm_6,
+        7: rm_7,
+        8: rm_8,
+        9: rm_9,
+        10: rm_10, 
+        11: rm_11,
+        12: rm_12,
+        13: rm_13,
+        14: rm_14,
+        15: rm_15,
+        16: rm_16,
+        17: rm_17,
+        18: rm_18,
+        19: rm_19,
+        20: rm_20, 
+        21: rm_21,
+        22: rm_22,
+        23: rm_23, 
+        24: rm_24,
+        25: rm_25,
+        26: rm_26,
+        27: rm_27,
+        28: rm_28,
+        29: rm_29,
+        30: rm_30, 
+        31: rm_boss,
+        32: rm_exit
     }
 
     # room_move to lookup and execute the function based on players new room

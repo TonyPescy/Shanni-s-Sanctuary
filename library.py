@@ -5,7 +5,6 @@
 #######################################################################################################################################
 
 # imports
-import sys
 import Items as it
 import Rooms as rm
 import random as rand
@@ -17,7 +16,7 @@ ARMOR_ID = 3
 CONSUMABLE_ID = 4
 
 # seed
-rand.seed(420)        # Hahaha funni number, for testing
+# rand.seed(420)        # Hahaha funni number, for testing
 
 
 # weapon counter starts
