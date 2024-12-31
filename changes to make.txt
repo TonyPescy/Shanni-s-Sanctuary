@@ -9,12 +9,13 @@
     3 enemies needed
         implementaion and tetsing needed
         Implementaion and Testing Finished
+        COMPLETED
 
 2.1 Move item removal to combat as it is a combat only function 
     COMPLETED
     A drop item function will be added to library for room interactions YET TO BE 
         TO BE IMPLEMENTED
-        > Might just be included in the item pickup function
+        > Might just be included in the item pickup function 
 
 2.2 Swap Weapon working
     - fix out of index error
@@ -33,12 +34,14 @@
 
 
 4. Add all room descriptions
+    10 remaining
 
 
 
 
 5. Get game fully running before January
     > Additional testing and code cleanup in January on
+    
 
 
 6. Add infliction print statements
@@ -55,4 +58,6 @@
 9. Create encounter scenarios for each combat room (30 + boss room and all encounters)
     > update rm_x definitions (starting on 1, use similar formula for the rest)
     > all need same parameters and same returns
-    > 
+    > Enemy encounters
+        COMPLETED
+    

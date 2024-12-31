@@ -712,14 +712,14 @@ def room_encounters(c_room, desc_arr, desc_arr_index, rms_arr):
 # Description: These are to be used in the room encounter functions in their dictionary
 # Returns:  It will return the player character as the player character and/or 
 #           its items will most likely be changed during encounters
-def encounter_scenario_1(player, w_list, a_list, s_list):    # venus mantrap
+def encounter_scenario_1(player, w_list, a_list, s_list, c_list):    # venus mantrap
     mantrap = char.Character.create_vmt(w_list) # creates enemy for combat
     enemy_list = [mantrap]                      # list of all enemies to be used in combat function
     # combat
     player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
     return player                                   # returns player after combat
 
-def encounter_scenario_2(player, w_list, a_list, s_list):    # harpies 1-3
+def encounter_scenario_2(player, w_list, a_list, s_list, c_list):    # harpies 1-3
     # random number of harpies created for combat
     num_of_harpies = rand.randint(1, 3) # 1-3 inclusive
     match num_of_harpies:
@@ -737,7 +737,7 @@ def encounter_scenario_2(player, w_list, a_list, s_list):    # harpies 1-3
     return player                                   # returns player after combat
         
 
-def encounter_scenario_3(player, w_list, a_list, s_list):    # sword skeletons 1-3
+def encounter_scenario_3(player, w_list, a_list, s_list, c_list):    # sword skeletons 1-3
     # random number of skeletons created for combat
     num_of_skeletons = rand.randint(1, 3) # 1-3 inclusive
     match num_of_skeletons:
@@ -755,7 +755,7 @@ def encounter_scenario_3(player, w_list, a_list, s_list):    # sword skeletons 1
     return player                                   # returns player after combat
     
 
-def encounter_scenario_4(player, w_list, a_list, s_list):    # bow skeletons 1-2
+def encounter_scenario_4(player, w_list, a_list, s_list, c_list):    # bow skeletons 1-2
     # random number of skeletons created for combat
     num_of_skeletons = rand.randint(1, 2) # 1-2 inclusive
     match num_of_skeletons:
@@ -769,45 +769,46 @@ def encounter_scenario_4(player, w_list, a_list, s_list):    # bow skeletons 1-2
     player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
     return player                                   # returns player after combat
 
-def encounter_scenario_5(player, w_list, a_list, s_list):    # siren
+def encounter_scenario_5(player, w_list, a_list, s_list, c_list):    # siren
     # MAY NEED SPECIAL ENCOUNTER LOOP OR SOMETHING
     # save for later!!!!!
     print('temp')
 
-def encounter_scenario_6(player, w_list, a_list, s_list):    # minotaur
+def encounter_scenario_6(player, w_list, a_list, s_list, c_list):    # minotaur
     minotaur = char.Character.create_mino(w_list) # creates enemy for combat
     enemy_list = [minotaur]                      # list of all enemies to be used in combat function
     # combat
     player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
     return player                                   # returns player after combat
 
-def encounter_scenario_7(player, w_list, a_list, s_list):    # decayed ancient captain
+def encounter_scenario_7(player, w_list, a_list, s_list, c_list):    # decayed ancient captain
     decay_capt = char.Character.create_decay_capt(w_list, s_list)   # creates enemy for combat
     enemy_list = [decay_capt]                                       # list of all enemies to be used in combat function
     # combat
     player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
     return player                                   # returns player after combat
 
-def encounter_scenario_8(player, w_list, a_list, s_list):    # mummy
+def encounter_scenario_8(player, w_list, a_list, s_list, c_list):    # mummy
     mummy = char.Character.create_mummy(w_list)     # creates enemy for combat
     enemy_list = [mummy]                            # list of all enemies to be used in combat function
     # combat
     player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
     return player                                   # returns player after combat
 
-def encounter_scenario_9(player, w_list, a_list, s_list):    # cyclops
+def encounter_scenario_9(player, w_list, a_list, s_list, c_list):    # cyclops
     cyclops = char.Character.create_cyclops(w_list, a_list)       # creates enemy for combat
     enemy_list = [cyclops]                                        # list of all enemies to be used in combat function
     # combat
     player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
     return player                                   # returns player after combat
 
-def encounter_scenario_10(player, w_list, a_list, s_list):   # honorable duelist
+def encounter_scenario_10(player, w_list, a_list, s_list, c_list):   # honorable duelist
     # asks player if they wish to pick up the rapier
     choice = str(input('Do you wish to pick up the rapier? Yes or no?').lower())
     while True:     # repeats question until a correct response is gotten from user
         if choice == 'yes':     # player wishes to pickup rapier
             player.inventory = lib.item_pickup(player.inventory, w_list[4]) # item pickup function used on the rapier
+            break
         elif choice == 'no':    # player does not pick up the rapier
             break
         else:   # If no proper answer is given, loop tries again
@@ -818,28 +819,28 @@ def encounter_scenario_10(player, w_list, a_list, s_list):   # honorable duelist
     player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
     return player                                   # returns player after combat
 
-def encounter_scenario_11(player, w_list, a_list, s_list):   # golem
+def encounter_scenario_11(player, w_list, a_list, s_list, c_list):   # golem
     golem = char.Character.create_golem(w_list)                 # creates enemy for combat
     enemy_list = [golem]                                        # list of all enemies to be used in combat function
     # combat
     player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
     return player                                   # returns player after combat
 
-def encounter_scenario_12(player, w_list, a_list, s_list):   # pristine ancient captain
+def encounter_scenario_12(player, w_list, a_list, s_list, c_list):   # pristine ancient captain
     pristine_capt = char.Character.create_pristine_capt(w_list, a_list, s_list)         # creates enemy for combat
     enemy_list = [pristine_capt]                                                        # list of all enemies to be used in combat function
     # combat
     player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
     return player                                   # returns player after combat
 
-def encounter_scenario_13(player, w_list, a_list, s_list):   # ancient spellspear
+def encounter_scenario_13(player, w_list, a_list, s_list, c_list):   # ancient spellspear
     spellspear = char.Character.create_spellspear(w_list, a_list, s_list)       # creates enemy for combat
     enemy_list = [spellspear]                                                      # list of all enemies to be used in combat function
     # combat
     player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
     return player                                   # returns player after combat
 
-def encounter_scenario_14(player, w_list, a_list, s_list):   # hellknight
+def encounter_scenario_14(player, w_list, a_list, s_list, c_list):   # hellknight
     # AT END OF ENCOUNTER U GAIN HIS SWORD
     hellknight = char.Character.create_hellknight(w_list, a_list, s_list)       # creates enemy for combat
     enemy_list = [hellknight]                                                   # list of all enemies to be used in combat function
@@ -850,41 +851,42 @@ def encounter_scenario_14(player, w_list, a_list, s_list):   # hellknight
     while True:     # repeats question until a correct response is gotten from user
         if choice == 'yes':     # player wishes to pickup greatsword
             player.inventory = lib.item_pickup(player.inventory, w_list[5]) # item pickup function used on the greatsword
+            break
         elif choice == 'no':    # player does not pick up the greatsword
             break
         else:   # If no proper answer is given, loop tries again
             choice = input("Please enter yes or no. ")
     return player                                   # returns player after combat and decision about greatsword
 
-def encounter_scenario_15(player, w_list, a_list, s_list):   # lost travelers (2)
+def encounter_scenario_15(player, w_list, a_list, s_list, c_list):   # lost travelers (2)
     traveler0, traveler1 = char.Character.create_travelers(w_list, a_list)      # creates enemies for combat
     enemy_list = [traveler0, traveler1]                                         # list of all enemies to be used in combat function
     # combat
     player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
     return player                                   # returns player after combat
 
-def encounter_scenario_16(player, w_list, a_list, s_list):   # forsaken mage
+def encounter_scenario_16(player, w_list, a_list, s_list, c_list):   # forsaken mage
     mage = char.Character.create_mage(w_list, a_list)   # creates enemy for combat
     enemy_list = [mage]                                 # list of all enemies to be used in combat function
     # combat
     player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
     return player                                   # returns player after combat
 
-def encounter_scenario_17(player, w_list, a_list, s_list):   # shadow
+def encounter_scenario_17(player, w_list, a_list, s_list, c_list):   # shadow
     shadow = char.Character.create_golem(player)                 # creates enemy for combat, uses player for equipment
     enemy_list = [shadow]                                        # list of all enemies to be used in combat function
     # combat
     player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
     return player                                   # returns player after combat
 
-def encounter_scenario_18(player, w_list, a_list, s_list):   # overgrown toad
+def encounter_scenario_18(player, w_list, a_list, s_list, c_list):   # overgrown toad
     toad = char.Character.create_toad(w_list)       # creates enemy for combat
     enemy_list = [toad]                             # list of all enemies to be used in combat function
     # combat
     player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
     return player                                   # returns player after combat
 
-def encounter_scenario_19(player, w_list, a_list, s_list):   # hell hounds 1-2
+def encounter_scenario_19(player, w_list, a_list, s_list, c_list):   # hell hounds 1-2
     # random number of hell hounds created for combat
     num_of_hounds = rand.randint(1, 2) # 1-2 inclusive
     match num_of_hounds:
@@ -898,108 +900,529 @@ def encounter_scenario_19(player, w_list, a_list, s_list):   # hell hounds 1-2
     player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
     return player                                   # returns player after combat
 
-def encounter_scenario_20(player, w_list, a_list, s_list):   # baby red dragon
+def encounter_scenario_20(player, w_list, a_list, s_list, c_list):   # baby red dragon
     baby_dragon = char.Character.create_brd(w_list, a_list)         # creates enemy for combat
     enemy_list = [baby_dragon]                                      # list of all enemies to be used in combat function
     # combat
     player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
     return player                                   # returns player after combat
 
-def encounter_scenario_21(player, w_list, a_list, s_list):    # poison floor
-    # APPLIES POISON IF POSSIBLE
+def encounter_scenario_21(player, w_list, a_list, s_list, c_list):    # poison floor
+    # applies poison to player for 4 turns
+    player.debuff = 'poisoned'
+    player.debuff_stack = 4
+    return player   # returns player after affliction is added
+
+def encounter_scenario_22(player, w_list, a_list, s_list, c_list):    # poison dart room
+    # player is hit with 0-5 poison darts
+    hits = rand.randint(0, 5)  # how many darts hit player
+    dmg_taken = hits * 5    # each dart does 5 damage
+    player.hp -= dmg_taken
+    player.debuff = 'poisoned'
+    player.debuff_stack = hits  # poison lasts for as many turns as the player is hit
+    return player   # returns player after affliction and damage is added
+
+def encounter_scenario_23(player, w_list, a_list, s_list, c_list):    # arrow trap
+    # player is hit with 0-4 arrows
+    hits = rand.randint(0, 4)  # how many arrows hit player
+    dmg_taken = hits * 10    # each arrow does 10 damage
+    player.hp -= dmg_taken
+    return player   # returns player after affliction and damage is added
+
+def encounter_scenario_24(player, w_list, a_list, s_list, c_list):    # spike trap
+    # player is hit with 1-3 spikes
+    hits = rand.randint(1, 3)  # how many spikes pierce player
+    dmg_taken = hits * 15    # each spike does 15 damage
+    player.hp -= dmg_taken
+    return player   # returns player after affliction and damage is dealt
+
+def encounter_scenario_25(player, w_list, a_list, s_list, c_list):    # arcane missle library book
+    choice = str(input('Do you wish to pick up the shimmering book? Yes or no?').lower())
+    while True:     # repeats question until a correct response is gotten from user
+        if choice == 'yes':     # player wishes to pickup the glowing book
+            print('A blue missle erupts from the book when the shimmering shield is broken. Before you can react the missle slams into your chest, thwoing you to your back. ')
+            player.hp -= 10     # magic missle does 10 damage
+            break
+        elif choice == 'no':    # nothing happens when player does not pick up the book
+            break
+        else:   # If no proper answer is given, loop tries again
+            choice = input("Please enter yes or no. ")
+    return player   # returns player after damage may have been done
+
+def encounter_scenario_26(player, w_list, a_list, s_list, c_list):    # log trap
+    # player is hit by a log trap
+    player.hp -= 25  # log trap does 25 damage
+    return player   # returns player after damage is dealt
+
+def encounter_scenario_27(player, w_list, a_list, s_list, c_list):    # fireball seal
+    # player is hit by fireball explosion
+    player.hp -= 30     # fireball does 30 damage
+    return player # returns player after damage is done
+
+def encounter_scenario_28(player, w_list, a_list, s_list, c_list):    # snake pit 0-3 snake bites
+    # player is bit by 0-3 poisonous snakes
+    bites = rand.randint(0, 3)  # how many snakes bite player
+    dmg_taken = bites * 10    # each bite does 10 damage
+    player.hp -= dmg_taken
+    if bites > 0:        # if player got bit
+        player.debuff = 'poisoned'
+        player.debuff_stack = bites
+    return player   # returns player after affliction and damage is dealt
+
+def encounter_scenario_29(player, w_list, a_list, s_list, c_list):    # coin flip door
+    door_case = rand.randint(1, 2)    # selects a random number to decide which color will open the door
+    choice = str(input('Which button would you like to pick? Red or blue? ')).lower()
+    while True:
+        if choice == 'blue' or 'red':       # valid response entered by player
+            break
+        else:       # response was invalid
+            choice = str(input('Please enter red or blue. ')).lower()
+    match door_case:
+        case 1:         # if 1 is randomly selected, then blue is the right answer
+            if choice == 'blue':
+                print('The door opens slowly as gears grind loudly from within the door.')
+                return player
+            else:
+                print('Electricity jolts through you body from the wrong selection. Despite the tense muscles you manage to quickly press the blue button, which frees you from the torture.')
+                player.hp -= 10     # electricity does 10 damage
+                return player
+        case 2:         # if 2 is randomly selected, then red is the right answer
+            if choice == 'red':
+                print('The door opens slowly as gears grind loudly from within the door.')
+                return player
+            else:
+                print('Electricity jolts through you body from the wrong selection. Despite the tense muscles you manage to quickly press the red button, which frees you from the torture.')
+                player.hp -= 10     # electricity does 10 damage
+                return player
+
+def encounter_scenario_30(player, w_list, a_list, s_list, c_list):    # pendulum axes over chasm
+    # player is scratched by pendulum axe
+    player.hp -= 15     # axe does 15 damage
+    return player # returns player after damage is done
+
+def encounter_scenario_31(player, w_list, a_list, s_list, c_list):    # ancient sword in the stone
+    choice = str(input('Do you pull the sword from the stone? Yes or no? ')).lower()
+    while True:
+        if choice == 'yes':       # player pulls sword from the stone
+            player.inventory = lib.item_pickup(player.invetory, w_list[4])
+            break
+        elif choice == 'no':        # player does not pull the sword from the stone
+            break
+        else:       # response was invalid
+            choice = str(input('Please enter yes or no. ')).lower()
+    return player
+
+def encounter_scenario_32(player, w_list, a_list, s_list, c_list):    # heavy armor on display
+    choice = str(input('Do you take the armor from the display? Yes or no? ')).lower()
+    while True:
+        if choice == 'yes':       # player uses the armor
+            player.inventory = lib.item_pickup(player.invetory, a_list[2])
+            break
+        elif choice == 'no':        # player does not use the armor
+            break
+        else:       # response was invalid
+            choice = str(input('Please enter yes or no. ')).lower()
+    return player
+
+def encounter_scenario_33(player, w_list, a_list, s_list, c_list):    # apothecary 3-5 random potions
+    num_of_potions = rand.randint(3, 5) # 3-5 random potions are in the apothecary
+    # player has choice to check for or leave the potions
+    choice = str(input('Do you check for potions from the apothecary? Yes or no? ')).lower()
+    while True:
+        if choice == 'yes':       # player takes the potions
+            # 3 potion minimum
+            # potion0
+            potion0 = rand.randint(0, 5)     # out of all the comsumable items there are 6 which are potions
+            if potion0 < 4:         # the 1st four potions are the top 4 in the consumables list
+                player.inventory = lib.item_pickup(player.invetory, c_list[potion0])    # player choses to keep and leave potion
+            elif potion0 >= 4:      # the 5th and 6th potion are at the index of potionX + 1
+                player.inventory = lib.item_pickup(player.invetory, c_list[potion0 + 1])    # player choses to keep and leave potion
+            # potion1
+            potion1 = rand.randint(0, 5)     # out of all the comsumable items there are 6 which are potions
+            if potion1 < 4:         # the 1st four potions are the top 4 in the consumables list
+                player.inventory = lib.item_pickup(player.invetory, c_list[potion1])    # player choses to keep and leave potion
+            elif potion1 >= 4:      # the 5th and 6th potion are at the index of potionX + 1
+                player.inventory = lib.item_pickup(player.invetory, c_list[potion1 + 1])    # player choses to keep and leave potion
+            # potion2
+            potion2 = rand.randint(0, 5)     # out of all the comsumable items there are 6 which are potions
+            if potion2 < 4:         # the 1st four potions are the top 4 in the consumables list
+                player.inventory = lib.item_pickup(player.invetory, c_list[potion2])    # player choses to keep and leave potion
+            elif potion2 >= 4:      # the 5th and 6th potion are at the index of potionX + 1
+                player.inventory = lib.item_pickup(player.invetory, c_list[potion2 + 1])    # player choses to keep and leave potion
+            # Depends on how num_of_potions if the following potions are generated
+            # potion3
+            if num_of_potions == 4:
+                potion3 = rand.randint(0, 5)     # out of all the comsumable items there are 6 which are potions
+                if potion3 < 4:         # the 1st four potions are the top 4 in the consumables list
+                    player.inventory = lib.item_pickup(player.invetory, c_list[potion3])    # player choses to keep and leave potion
+                elif potion3 >= 4:      # the 5th and 6th potion are at the index of potionX + 1
+                    player.inventory = lib.item_pickup(player.invetory, c_list[potion3 + 1])    # player choses to keep and leave potion
+            # potion4
+            elif num_of_potions ==5:
+                potion4 = rand.randint(0, 5)     # out of all the comsumable items there are 6 which are potions
+                if potion4 < 4:         # the 1st four potions are the top 4 in the consumables list
+                    player.inventory = lib.item_pickup(player.invetory, c_list[potion4])    # player choses to keep and leave potion
+                elif potion4 >= 4:      # the 5th and 6th potion are at the index of potionX + 1
+                    player.inventory = lib.item_pickup(player.invetory, c_list[potion4 + 1])    # player choses to keep and leave potion
+            break
+        elif choice == 'no':        # player does not look for any potions
+            break
+        else:       # response was invalid
+            choice = str(input('Please enter yes or no. ')).lower()
+    return player
+
+def encounter_scenario_34(player, w_list, a_list, s_list, c_list):    # field hospital 1-3 cleanse potions and 2-4 bandages
+    # cleanse potion generation and pickup
+    num_of_cleanse = rand.randint(1, 3) # number of cleanse potions in the hospital
+    choice = str(input(f'There are {num_of_cleanse} cleanse potions in the field hospital, do you want to grab them? Yes or no? ')).lower()
+    while True:
+        if choice == 'yes':     # player accepts the cleanse potions
+            for i in range(num_of_cleanse - 1):
+                player.inventory = lib.item_pickup(player.invetory, c_list[3])  # cleanse potions are at index 3 of consumable list
+            break
+        elif choice == 'no':    # player passes on the cleanse potions
+            break
+        else:       # invalid response
+            choice = str(input('Please enter yes or no. ')).lower()
+    # bandage generation and pickup
+    num_of_bands = rand.randint(2, 4) # number of bandages in the hospital
+    choice = str(input(f'There are {num_of_bands} bandages in the field hospital, do you want to grab them? Yes or no? ')).lower()
+    while True:
+        if choice == 'yes':     # player accepts the cleanse potions
+            for i in range(num_of_bands - 1):
+                player.inventory = lib.item_pickup(player.invetory, c_list[4])  # bandages are at index 4 of consumable list
+            break
+        elif choice == 'no':    # player passes on the bandages
+            break
+        else:       # invalid response
+            choice = str(input('Please enter yes or no. ')).lower()
+    return player
+
+def encounter_scenario_35(player, w_list, a_list, s_list, c_list):    # armory room with 1 or 3 weapons, armor, and shield(s)
+    # armory room type generation - 0 == armory with only 1 salvaged item, 1 == armory with 1 of each item type
+    choice = str(input('Do you wish to search for any items that can be salvaged from the armory? Yes or no? ').lower())
+    while True:
+        if choice == 'yes':     # player searches for salvagable items
+            armory_type = rand.randint(0, 1)
+            if armory_type == 1:    # only 1 salvaged item
+                item_type = rand.randint(1, 3)  # 1 == weapon, 2 == armor, and 3 == shield item generated
+                match item_type:
+                    case 1:     # weapon salvaged
+                        w_index = rand.randint(0, 7)
+                        player.inventory = lib.item_pickup(player.invetory, w_list[w_index])  # player picks up weapon based on what is randomly found
+                    case 2:     # armor salvaged
+                        a_index = rand.randint(0, 2)
+                        player.inventory = lib.item_pickup(player.invetory, a_list[a_index])  # player picks up armor based on what is randomly found
+                    case 3:     # shield salvaged
+                        s_index = rand.randint(0, 2)
+                        player.inventory = lib.item_pickup(player.invetory, s_list[s_index])  # player picks up shield based on what is randomly found
+            else:   # full armory type is generated - 0
+                # weapons salvaged
+                w_index = rand.randint(0, 7)
+                player.inventory = lib.item_pickup(player.invetory, w_list[w_index])  # player picks up weapon based on what is randomly found
+                # armor salvaged
+                a_index = rand.randint(0, 2)
+                player.inventory = lib.item_pickup(player.invetory, a_list[a_index])  # player picks up armor based on what is randomly found
+                # shield salvaged
+                s_index = rand.randint(0, 2)
+                player.inventory = lib.item_pickup(player.invetory, s_list[s_index])  # player picks up shield based on what is randomly found
+            break   # breaks while loop after items have been salvaged
+        elif choice == 'no':    # player does not salavge items
+            break   # breaks while loop after items have been salvaged
+        else:       # invalid response from player
+            choice = str(input('Please enter yes or no. ')).lower()
+    return player
+
+def encounter_scenario_36(player, w_list, a_list, s_list, c_list):    # wizard tower with 1-2 random scrolls
+    choice = str(input('Do you wish to take any scrolls you can read from the wizard tower? Yes or no? ').lower())
+    while True:
+        if choice == 'yes':     # player is looting the wizards tower
+            num_of_scrolls = rand.randint(1, 2)
+            match num_of_scrolls:
+                case 1:     # 1 readable scroll found
+                    scroll_found = rand.randint(6, 7)   # 6 and 7 are the indexes of the scrolls in the weapon list
+                    player.inventory = lib.item_pickup(player.invetory, w_list[scroll_found])  # player picks up the scroll they found
+                case 2:     # two scrolls are found - fireball and arcane missle
+                    player.inventory = lib.item_pickup(player.invetory, w_list[6])  # player picks up a scroll they found
+                    player.inventory = lib.item_pickup(player.invetory, w_list[7])  # player picks up a scroll they found
+            break
+        elif choice == 'no':    # player does not loot the tower
+            break
+        else:       # invalid response from player
+            choice = str(input('Please enter yes or no. ')).lower()
+    return player
+
+def encounter_scenario_37(player, w_list, a_list, s_list, c_list):    # treasure room with ornate magic shield and 1/3 chance for ornate weapon
+    choice = str(input('Do you wish to loot the treasure room? Yes or no? ').lower())
+    while True:
+        if choice == 'yes':     # player is looting the treasure room
+            # ornate shield pickup
+            player.inventory = lib.item_pickup(player.invetory, s_list[2])      # sturdy shield = ornate shield
+            # ornate sword pickup
+            ornate_sword_roll = rand.randint(1, 3)  # ornate sword has a 1/3 chance to spawn in the treasure room
+            if ornate_sword_roll == 3:      # player hit the 1 in 3 chance
+                player.inventory = lib.item_pickup(player.invetory, w_list[1])      # ancient sword = ornate sword
+            break
+        elif choice == 'no':        # player does not loot
+            break
+        else:   # invalid response from player
+            choice = str(input('Please enter yes or no. ')).lower()
+    return player
+
+def encounter_scenario_38(player, w_list, a_list, s_list, c_list):    # travelers old storage room has 1 buckler, short sword, and light armor
+    print('In the far corner of the room there lay a short sword, a buckler, and some light leather armor that luckily fits you.')
+    choice = str(input('Do you wish to take the items? Yes or no? ').lower())
+    while True:
+        if choice == 'yes':     # player is looting the traveler's room
+            player.inventory = lib.item_pickup(player.invetory, s_list[0])  # player picks up buckler
+            player.inventory = lib.item_pickup(player.invetory, a_list[1])  # player picks up light armor
+            player.inventory = lib.item_pickup(player.invetory, w_list[2])  # player pick ups short sword
+            break
+        elif choice == 'no':    # player leaves the items behind
+            break
+        else:       # invlaid response from player
+            choice = str(input('Please enter yes or no. ')).lower()
+    return player
+
+def encounter_scenario_39(player, w_list, a_list, s_list, c_list):    # apothecary with different description and 2-5 random potions
+    num_of_potions = rand.randint(3, 5) # 3-5 random potions are in the apothecary
+    # player has choice to check for or leave the potions
+    choice = str(input('Do you check for potions from the apothecary? Yes or no? ')).lower()
+    while True:
+        if choice == 'yes':       # player takes the potions
+            # 3 potion minimum
+            # potion0
+            potion0 = rand.randint(0, 5)     # out of all the comsumable items there are 6 which are potions
+            if potion0 < 4:         # the 1st four potions are the top 4 in the consumables list
+                player.inventory = lib.item_pickup(player.invetory, c_list[potion0])    # player choses to keep and leave potion
+            elif potion0 >= 4:      # the 5th and 6th potion are at the index of potionX + 1
+                player.inventory = lib.item_pickup(player.invetory, c_list[potion0 + 1])    # player choses to keep and leave potion
+            # potion1
+            potion1 = rand.randint(0, 5)     # out of all the comsumable items there are 6 which are potions
+            if potion1 < 4:         # the 1st four potions are the top 4 in the consumables list
+                player.inventory = lib.item_pickup(player.invetory, c_list[potion1])    # player choses to keep and leave potion
+            elif potion1 >= 4:      # the 5th and 6th potion are at the index of potionX + 1
+                player.inventory = lib.item_pickup(player.invetory, c_list[potion1 + 1])    # player choses to keep and leave potion
+            # potion2
+            potion2 = rand.randint(0, 5)     # out of all the comsumable items there are 6 which are potions
+            if potion2 < 4:         # the 1st four potions are the top 4 in the consumables list
+                player.inventory = lib.item_pickup(player.invetory, c_list[potion2])    # player choses to keep and leave potion
+            elif potion2 >= 4:      # the 5th and 6th potion are at the index of potionX + 1
+                player.inventory = lib.item_pickup(player.invetory, c_list[potion2 + 1])    # player choses to keep and leave potion
+            # Depends on how num_of_potions if the following potions are generated
+            # potion3
+            if num_of_potions == 4:
+                potion3 = rand.randint(0, 5)     # out of all the comsumable items there are 6 which are potions
+                if potion3 < 4:         # the 1st four potions are the top 4 in the consumables list
+                    player.inventory = lib.item_pickup(player.invetory, c_list[potion3])    # player choses to keep and leave potion
+                elif potion3 >= 4:      # the 5th and 6th potion are at the index of potionX + 1
+                    player.inventory = lib.item_pickup(player.invetory, c_list[potion3 + 1])    # player choses to keep and leave potion
+            # potion4
+            elif num_of_potions ==5:
+                potion4 = rand.randint(0, 5)     # out of all the comsumable items there are 6 which are potions
+                if potion4 < 4:         # the 1st four potions are the top 4 in the consumables list
+                    player.inventory = lib.item_pickup(player.invetory, c_list[potion4])    # player choses to keep and leave potion
+                elif potion4 >= 4:      # the 5th and 6th potion are at the index of potionX + 1
+                    player.inventory = lib.item_pickup(player.invetory, c_list[potion4 + 1])    # player choses to keep and leave potion
+            break
+        elif choice == 'no':        # player does not look for any potions
+            break
+        else:       # response was invalid
+            choice = str(input('Please enter yes or no. ')).lower()
+    return player
+
+def encounter_scenario_40(player, w_list, a_list, s_list, c_list):    # library with emergency fireball scroll
+    choice = str(input('Do you break the glass and take the scroll? Yes or no? ')).lower()
+    while True:
+        if choice == 'yes':        # player takes the fireball scroll
+            player.inventory = lib.item_pickup(player.invetory, w_list[6])  # player picks up fireball scroll
+            break
+        elif choice == 'no':        # player skipped on the scroll
+            break
+        else:       # invalid response from player
+            choice = str(input('Please enter yes or no. ')).lower()
+    return player
+
+def encounter_scenario_41(player, w_list, a_list, s_list, c_list):    # infusion room
+    # checks to see if player has any weapon to infuse
+    w_count, w_ind = lib.weapon_counter(player)
+    if w_count > 0:     # If player has a weapon
+        choice = str(input('Do you want to infuse a weapon? Yes or no? ')).lower()
+        while True:
+            if choice == 'yes':        # player wishes to infuse one of their weapon(s)
+                count = 0       # count is used to list the weapons in the for loop below
+                for index in w_ind: # for each index in weapon index list
+                    count += 1
+                    print(f'{count}. {w_list[index].name} Damage: {w_list[index].damage} Current Infusion: {w_list[index].infusion}')
+                chosen_wep = input('Please enter the number of the weapon you would like to infuse (infusions can be overwritten). ')
+                while True:
+                    try:        # catches type error for chosen_wep
+                        if 0 < int(chosen_wep) <= w_count:       # if chosen weapon is a valid number within the range of player weapons
+                            # list all infusion optionfs for the player weapon
+                            print('1. Magic +1 - Desc: Deals an additional 15 damage.')
+                            print('2. Fiery - Desc: Applies the \'burned\' status effect.')
+                            print('3. Acid - Desc: Applies the \'acidic\' status effect.')
+                            print('4. Gore - Desc: Applies the \'gored\' status effect.')
+                            chosen_infusion = input('Please enter the number of the infusion you would like to apply. (1, 2, 3, or 4). ')
+                            while True:
+                                try:    # catches type error for chosen infusion
+                                    if 0 < int(chosen_infusion) < 5:    # valid choice for infusion
+                                        match chosen_infusion:
+                                            case 1: # magic +1
+                                                player.inventory[w_ind[chosen_wep - 1]].infusion = 'magic +1'
+                                                break
+                                            case 2: # fiery
+                                                player.inventory[w_ind[chosen_wep - 1]].infusion = 'fiery'
+                                                break
+                                            case 3: # acid
+                                                player.inventory[w_ind[chosen_wep - 1]].infusion = 'acid'
+                                                break
+                                            case 4: # gore
+                                                player.inventory[w_ind[chosen_wep - 1]].infusion = 'gore'
+                                                break
+                                except:
+                                    chosen_infusion = input('Please enter a number from the following: 1, 2, 3, or 4. ')
+                                    continue
+                            break
+                    except:
+                        chosen_wep = input('Please enter a number. ')
+                        continue    # retires until valid number is given
+                break
+            elif choice == 'no':        # player skipped on infusing a weapon
+                break
+            else:       # invalid response from player
+                choice = str(input('Please enter yes or no. ')).lower()
+    return player
+
+def encounter_scenario_42(player, w_list, a_list, s_list, c_list):    # different infusion room
+    # checks to see if player has any weapon to infuse
+    w_count, w_ind = lib.weapon_counter(player)
+    if w_count > 0:     # If player has a weapon
+        choice = str(input('Do you want to infuse a weapon? Yes or no? ')).lower()
+        while True:
+            if choice == 'yes':        # player wishes to infuse one of their weapon(s)
+                count = 0       # count is used to list the weapons in the for loop below
+                for index in w_ind: # for each index in weapon index list
+                    count += 1
+                    print(f'{count}. {w_list[index].name} Damage: {w_list[index].damage} Current Infusion: {w_list[index].infusion}')
+                chosen_wep = input('Please enter the number of the weapon you would like to infuse (infusions can be overwritten). ')
+                while True:
+                    try:        # catches type error for chosen_wep
+                        if 0 < int(chosen_wep) <= w_count:       # if chosen weapon is a valid number within the range of player weapons
+                            # list all infusion optionfs for the player weapon
+                            print('1. Magic +1 - Desc: Deals an additional 15 damage.')
+                            print('2. Fiery - Desc: Applies the \'burned\' status effect.')
+                            print('3. Acid - Desc: Applies the \'acidic\' status effect.')
+                            print('4. Gore - Desc: Applies the \'gored\' status effect.')
+                            chosen_infusion = input('Please enter the number of the infusion you would like to apply. (1, 2, 3, or 4). ')
+                            while True:
+                                try:    # catches type error for chosen infusion
+                                    if 0 < int(chosen_infusion) < 5:    # valid choice for infusion
+                                        match chosen_infusion:
+                                            case 1: # magic +1
+                                                player.inventory[w_ind[chosen_wep - 1]].infusion = 'magic +1'
+                                                break
+                                            case 2: # fiery
+                                                player.inventory[w_ind[chosen_wep - 1]].infusion = 'fiery'
+                                                break
+                                            case 3: # acid
+                                                player.inventory[w_ind[chosen_wep - 1]].infusion = 'acid'
+                                                break
+                                            case 4: # gore
+                                                player.inventory[w_ind[chosen_wep - 1]].infusion = 'gore'
+                                                break
+                                except:
+                                    chosen_infusion = input('Please enter a number from the following: 1, 2, 3, or 4. ')
+                                    continue
+                            break
+                    except:
+                        chosen_wep = input('Please enter a number. ')
+                        continue    # retires until valid number is given
+                break
+            elif choice == 'no':        # player skipped on infusing a weapon
+                break
+            else:       # invalid response from player
+                choice = str(input('Please enter yes or no. ')).lower()
+    return player
+
+def encounter_scenario_43(player, w_list, a_list, s_list, c_list):    # other different infusion room
+    # checks to see if player has any weapon to infuse
+    w_count, w_ind = lib.weapon_counter(player)
+    if w_count > 0:     # If player has a weapon
+        choice = str(input('Do you want to infuse a weapon? Yes or no? ')).lower()
+        while True:
+            if choice == 'yes':        # player wishes to infuse one of their weapon(s)
+                count = 0       # count is used to list the weapons in the for loop below
+                for index in w_ind: # for each index in weapon index list
+                    count += 1
+                    print(f'{count}. {w_list[index].name} Damage: {w_list[index].damage} Current Infusion: {w_list[index].infusion}')
+                chosen_wep = input('Please enter the number of the weapon you would like to infuse (infusions can be overwritten). ')
+                while True:
+                    try:        # catches type error for chosen_wep
+                        if 0 < int(chosen_wep) <= w_count:       # if chosen weapon is a valid number within the range of player weapons
+                            # list all infusion optionfs for the player weapon
+                            print('1. Magic +1 - Desc: Deals an additional 15 damage.')
+                            print('2. Fiery - Desc: Applies the \'burned\' status effect.')
+                            print('3. Acid - Desc: Applies the \'acidic\' status effect.')
+                            print('4. Gore - Desc: Applies the \'gored\' status effect.')
+                            chosen_infusion = input('Please enter the number of the infusion you would like to apply. (1, 2, 3, or 4). ')
+                            while True:
+                                try:    # catches type error for chosen infusion
+                                    if 0 < int(chosen_infusion) < 5:    # valid choice for infusion
+                                        match chosen_infusion:
+                                            case 1: # magic +1
+                                                player.inventory[w_ind[chosen_wep - 1]].infusion = 'magic +1'
+                                                break
+                                            case 2: # fiery
+                                                player.inventory[w_ind[chosen_wep - 1]].infusion = 'fiery'
+                                                break
+                                            case 3: # acid
+                                                player.inventory[w_ind[chosen_wep - 1]].infusion = 'acid'
+                                                break
+                                            case 4: # gore
+                                                player.inventory[w_ind[chosen_wep - 1]].infusion = 'gore'
+                                                break
+                                except:
+                                    chosen_infusion = input('Please enter a number from the following: 1, 2, 3, or 4. ')
+                                    continue
+                            break
+                    except:
+                        chosen_wep = input('Please enter a number. ')
+                        continue    # retires until valid number is given
+                break
+            elif choice == 'no':        # player skipped on infusing a weapon
+                break
+            else:       # invalid response from player
+                choice = str(input('Please enter yes or no. ')).lower()
+    return player
+
+# ALL ROOMS HERE DO NOT HAVE ANY SPECIAL EFECTS AND ARE CONSIDERED TO BE 'EMPTY ROOMS'
+# THEY ALL ONLY RETURN PLAYER
+def encounter_scenario_44(player, w_list, a_list, s_list, c_list):    # ancient masks
+    return player
+
+def encounter_scenario_45(player, w_list, a_list, s_list, c_list):    # cursed artifacts
+    return player
+
+def encounter_scenario_46(player, w_list, a_list, s_list, c_list):    # ancient ritual room with runes
+    return player
+
+def encounter_scenario_47(player, w_list, a_list, s_list, c_list):    # functioning observatory
+    return player
+
+def encounter_scenario_48(player, w_list, a_list, s_list, c_list):    # stained torture room
+    return player
+
+def encounter_scenario_49(player, w_list, a_list, s_list, c_list):    # ethereal bridge over abyss
+    return player
+
+def encounter_scenario_50(player, w_list, a_list, s_list, c_list):    # mirror of memories
+    return player
+
+def encounter_scenario_51(player, w_list, a_list, s_list, c_list):    # boss
     print('temp')
 
-def encounter_scenario_22(player, w_list, a_list, s_list):    # poison dart room
-    print('temp')
-
-def encounter_scenario_23(player, w_list, a_list, s_list):    # arrow trap
-    print('temp')
-
-def encounter_scenario_24(player, w_list, a_list, s_list):    # spike trap
-    print('temp')
-
-def encounter_scenario_25(player, w_list, a_list, s_list):    # arcane missle library book
-    print('temp')
-
-def encounter_scenario_26(player, w_list, a_list, s_list):    # log trap
-    print('temp')
-
-def encounter_scenario_27(player, w_list, a_list, s_list):    # fireball seal
-    print('temp')
-
-def encounter_scenario_28(player, w_list, a_list, s_list):    # snake pit 0-3 snake bites
-    print('temp')
-
-def encounter_scenario_29(player, w_list, a_list, s_list):    # coin flip door
-    print('temp')
-
-def encounter_scenario_30(player, w_list, a_list, s_list):    # pendulum axes over chasm
-    print('temp')
-
-def encounter_scenario_31(player, w_list, a_list, s_list):    # ancient sword in the stone
-    print('temp')
-
-def encounter_scenario_32(player, w_list, a_list, s_list):    # heavy armor on display
-    print('temp')
-
-def encounter_scenario_33(player, w_list, a_list, s_list):    # apothecary 3-5 random potions
-    print('temp')
-
-def encounter_scenario_34(player, w_list, a_list, s_list):    # field hospital 1-3 antitoxins and 2-4 bandages
-    print('temp')
-
-def encounter_scenario_35(player, w_list, a_list, s_list):    # armory room with 1-3 weapons, armor, and shield(s)
-    print('temp')
-
-def encounter_scenario_36(player, w_list, a_list, s_list):    # wizard tower with 1-2 random scrolls
-    print('temp')
-
-def encounter_scenario_37(player, w_list, a_list, s_list):    # treasure room with ornate magic shield and 1/3 chance for ornate weapon
-    print('temp')
-
-def encounter_scenario_38(player, w_list, a_list, s_list):    # travelers old storage room has 1 buckler, short sword, and ligth armor
-    print('temp')
-
-def encounter_scenario_39(player, w_list, a_list, s_list):    # apothecary with different description and 2-4 random potions
-    print('temp')
-
-def encounter_scenario_40(player, w_list, a_list, s_list):    # library with emergency fireball scroll
-    print('temp')
-
-def encounter_scenario_41(player, w_list, a_list, s_list):    # infusion room
-    print('temp')
-
-def encounter_scenario_42(player, w_list, a_list, s_list):    # different infusion room
-    print('temp')
-
-def encounter_scenario_43(player, w_list, a_list, s_list):    # other different infusion room
-    print('temp')
-
-def encounter_scenario_44(player, w_list, a_list, s_list):    # ancient masks
-    print('temp')
-
-def encounter_scenario_45(player, w_list, a_list, s_list):    # cursed artifacts
-    print('temp')
-
-def encounter_scenario_46(player, w_list, a_list, s_list):    # ancient ritual room with runes
-    print('temp')
-
-def encounter_scenario_47(player, w_list, a_list, s_list):    # functioning observatory
-    print('temp')
-
-def encounter_scenario_48(player, w_list, a_list, s_list):    # stained torture room
-    print('temp')
-
-def encounter_scenario_49(player, w_list, a_list, s_list):    # ethereal bridge over abyss
-    print('temp')
-
-def encounter_scenario_50(player, w_list, a_list, s_list):    # mirror of memories
-    print('temp')
-
-def encounter_scenario_51(player, w_list, a_list, s_list):    # boss
-    print('temp')
-
-def encounter_scenario_52(player, w_list, a_list, s_list):    # exit
+def encounter_scenario_52(player, w_list, a_list, s_list, c_list):    # exit
     print('temp')
 
 encounter_dict = {
@@ -1065,5 +1488,5 @@ encounter_dict = {
 #               armor_list - list of objects - List of all armor, used to create enemies in needed scenarios
 #               shield_list - list of objects - List of all shields, used to create enemies in needed scenarios
 # Returns:      player - object - player character
-def encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list):
+def encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, comsumable_list):
     pass
