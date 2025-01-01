@@ -45,5 +45,7 @@ All other types and abilities (WAITING TO BE ADDED TO README)
 
 ## Fixed Issues
 [Table of Contents](#table-of-contents)
+
 This is to show the progress made to fix the known issues with the project and when they were fixed.
+
 1. 

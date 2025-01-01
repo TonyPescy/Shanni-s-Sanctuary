@@ -603,7 +603,7 @@ def single_enemy_combat(enemy, player, turn_skip, swapped, first_round, weapon_i
                         continue    # retries for player_action 
 
                 if player_action == 'consumable' and turn_skip != True:
-                    player, cons_index = use_cons(player)
+                    player, cons_index = use_cons(player, cons_index)
                 elif player_action == 'attack' and turn_skip != True:
                     # player attack
                     if len(weapon_index) > 1 and swapped == False:   # more than 1 weapon in player inventory and player has not used their swap:   # more than 1 weapon in player inventory
@@ -705,7 +705,7 @@ def double_enemy_combat(enemy_list, player, turn_skip, swapped, first_round, wea
                         continue    # retries for player_action 
 
                 if player_action == 'consumable' and turn_skip != True:
-                    player, cons_index = use_cons(player)
+                    player, cons_index = use_cons(player, cons_index)
                 elif player_action == 'attack' and turn_skip != True:
                     # player attack
                     if len(weapon_index) > 1 and swapped == False:   # more than 1 weapon in player inventory and player has not used their swap
@@ -892,7 +892,7 @@ def triple_enemy_combat(enemy_list, player, turn_skip, swapped, first_round, wea
                         continue    # retries for player_action 
 
                 if player_action == 'consumable' and turn_skip != True:
-                    player, cons_index = use_cons(player)
+                    player, cons_index = use_cons(player, cons_index)
                 elif player_action == 'attack' and turn_skip != True:
                     # player attack
                     if len(weapon_index) > 1 and swapped == False:   # more than 1 weapon in player inventory and player has not used their swap
@@ -1339,14 +1339,74 @@ def triple_enemy_combat(enemy_list, player, turn_skip, swapped, first_round, wea
 #               player - object - Player character
 #               turn_skip - boolean - Determines if player character is skipped or not
 #               swapped - boolean - Determines if player character has used their swap yet
-#               first_round - boolean - Determines if it is the first round or not
 #               weapon_index - list - list of the indexes of all player weapons in inventory
 #               cons_index - list - list of the indexes of all player consumables in inventory
 # Return:       player - object - Player character
-def boss_combat(boss, player, turn_skip, swapped, first_round, weapon_index, cons_index):
-    
+def boss_combat(boss, player, turn_skip, swapped, weapon_index, cons_index):
+    round_counter = 1       # coutner starts on round 1 - will be used for boss weapon swaps
+    while player.hp > 0 and boss.hp > 0:        # ensures that combat only occurs when both player and boss are alive
+        player, turn_skip = status_check(player)  # checks player status' and applies buffs/debuffs
+        if round_counter == 1:      # special round 1 case that stops player from being asked to swap again after the loadout swap
+            pass
+        elif swapped == False and len(weapon_index) > 1:      # player is asked to swap if they have not done it yet and they have more than 1 weapon in their index
+            print(f'Your current weapon is: {player.weapon.name} - DMG: {player.weapon.damage} - DUR: {player.weapon.durability} - INF: {player.weapon.infusion}')
+            while True:
+                swap = input('Do you want to swap weapon? (Enter yes or no): ').lower()
+                try:
+                    if swap == 'yes' or swap == 'no':  # swap input entered was valid
+                        break
+                except: # swap input was not entered correctly
+                    print('Please enter yes or no.')
+                    continue    # retries for swap input 
+            if swap == 'no':    # weapon not swapped
+                pass
+            else:               # player wished to swap weapons
+                swapped = True  # updates swapped
+                player, weapon_index = weapon_switch(player, weapon_index)
+        # player_turn
+        if turn_skip != True:   # if player turn is not being skipped
+            # player potential consumables use  
+            if len(cons_index) > 0:     # if player has consumables to use
+                while True:         # repeats until valid choice is made
+                    player_action = input('Would you like to attack or use a consumable? (Enter \'attack\' or \'consumable\'): ').lower()
+                    try:
+                        if player_action == 'consumable' or player_action == 'attack':  # choice entered was valid
+                            break
+                    except: # choice was not entered correctly
+                        print('Please enter \'attack\' or \'consumable\'.')
+                        continue    # retries for player_action 
+            # player attack action
+            else:       # player does not have any consumables to be used
+                player_action = 'attack'
+            match player_action:    # differentiates between using consumables or attacking as the player
+                # consumable case
+                case 'consumable':
+                    player, cons_index = use_cons(player, cons_index)
+                # attack case
+                case 'attack':
+                    player, boss = deal_damage(player, boss)
 
+        # boss turn
+        # boss weapon switch
+        match round_counter % 2:    # used to determine boss weapon for the turn
+            # breath attack case
+            case 0:
+                boss.weapon = boss.inventory[0]     # switches to breath weapon as main wepaon
+            # maw attack case
+            case 1:
+                boss.weapon = boss.inventory[1]     # switches to maw attack as main weapon
+        # boss attacks player
+        boss, player = deal_damage(boss, player)
 
+    # player and boss survival/death messages
+    if boss.hp > 0:
+        print('Enemy survived the encounter with ' + str(boss.hp) + ' health points left!')
+        print('You Died!')
+        return player
+    elif player.hp > 0:
+        print(player.name + ' survived the encounter with ' + str(player.hp) + ' health points left!')
+        return player
+# boss combat ends
 
 # combat_loop start
 # Basic loop that combat will follow
@@ -1358,13 +1418,13 @@ def boss_combat(boss, player, turn_skip, swapped, first_round, weapon_index, con
 # multiple enemies in the combat. 
 # PLAN: Reduce repeat code as much as possible - Break it down into more functions, better system for swapping and targetting together.
 def combat_loop(enemy_list, player, boss = False):
+    swapped = False         # sets swapped so player can only swap once per battle to increase use of strategic swapping
+    # loadout swap
+    # weapons can be switched later, armor and shields can only be done here
+    player, weapon_index, cons_index = set_loadout(player)   # gets a list of the weapon and item indexes in player inventory for swapping weaopons and using items in combat
     if boss == False:       # this combat is not for the boss
         num_of_enemies = len(enemy_list)    # number of enemies in combat
         first_round = True      # resets first round of combat indicator for use to reduce redundant weapon swap attempts when set_loadout does it in the first round
-        swapped = False         # resets first swap so player can only swap once per battle to increase use of strategic swapping
-        # loadout swap
-        # weapons can be switched later, armor and shields can only be done here
-        player, weapon_index, cons_index = set_loadout(player)   # gets a list of the weapon and item indexes in player inventory for swapping weaopons and using items in combat
         
         # initializing varibles for use inside while loop
         turn_skip = False
@@ -1386,4 +1446,4 @@ def combat_loop(enemy_list, player, boss = False):
     # boss battle combat
     else:
         enemy = enemy_list[0]
-        boss_combat(enemy)
+        return boss_combat(enemy, player, turn_skip, swapped, weapon_index, cons_index)    # returns player after single combat for boss encounter
