@@ -63,4 +63,10 @@
     > Enemy encounters
         COMPLETED
     COMPLETED
+
+10. FIX INVENTORY
+    > fix enemy creation    COMPLETED
+    > fix player creation   COMPLETED
+    > fix combat functions  
+        - make combat functions seperate for each number of enemies
     

@@ -15,8 +15,16 @@ SHIELD_ID = 2
 ARMOR_ID = 3
 CONSUMABLE_ID = 4
 
+# OTHER CONSTANTS
+INV_LEN = 5     # length of inventory
+
 # seed
 # rand.seed(420)        # Hahaha funni number, for testing
+
+# get_inventory_len starts
+# Gets number of non-null values that are in the inventory
+# Parameters:   inventory - list - list of character items
+# Return:       inventory_length - int - number of non-null values in the inventory
 
 
 # weapon counter starts
@@ -30,8 +38,10 @@ def weapon_counter(player):
     # lists of indexes for items
     weapon_index = []
     # gets counts of weapons in inventory
-    for i in range(0, len(player.inventory)):
-        if player.inventory[i].identifier == WEAPON_ID:
+    for i in range(0, INV_LEN):
+        if player.inventory[i] == 'null':   # null value, no item at this index in inventory
+            pass
+        elif player.inventory[i].identifier == WEAPON_ID:
             weapon_count += 1
             weapon_index.append(i)
     return weapon_count, weapon_index
@@ -48,8 +58,10 @@ def shield_counter(player):
     # lists of indexes for items
     shield_index = []
     # gets counts of all shields in inventory
-    for i in range(0, len(player.inventory)):
-        if player.inventory[i].identifier == SHIELD_ID:
+    for i in range(0, INV_LEN):
+        if player.inventory[i] == 'null':   # null value, no item at this index in inventory
+            pass
+        elif player.inventory[i].identifier == SHIELD_ID:
             shield_count += 1
             shield_index.append(i)
     return shield_count, shield_index
@@ -66,8 +78,10 @@ def armor_counter(player):
     # lists of indexes for items
     armor_index = []
     # gets counts of armor in inventory
-    for i in range(0, len(player.inventory)):
-        if player.inventory[i].identifier == ARMOR_ID:
+    for i in range(0, INV_LEN):
+        if player.inventory[i] == 'null':   # null value, no item at this index in inventory
+            pass
+        elif player.inventory[i].identifier == ARMOR_ID:
             armor_count += 1
             armor_index.append(i)
     return armor_count, armor_index
@@ -81,8 +95,10 @@ def consumable_indexer(player):
     # lists of indexes for items
     consumable_index = []
     # gets indexes of consumables in inventory
-    for i in range(0, len(player.inventory)):
-        if player.inventory[i].identifier == CONSUMABLE_ID:
+    for i in range(0, INV_LEN):
+        if player.inventory[i] == 'null':   # null value, no item at this index in inventory
+            pass
+        elif player.inventory[i].identifier == CONSUMABLE_ID:
             consumable_index.append(i)
     return consumable_index
 # consumable indexer ends
@@ -104,8 +120,10 @@ def loadout_count(player):
     armor_index = []
     consumable_index = []
     # gets counts of all item in loadout (armor, shield, and weapon) that player has at start of combat
-    for i in range(0, len(player.inventory)):
-        if player.inventory[i].identifier == WEAPON_ID:
+    for i in range(0, INV_LEN):                   # 5 is max size of inventory
+        if player.inventory[i] == 'null':   # null value, no item at this index in inventory
+            pass
+        elif player.inventory[i].identifier == WEAPON_ID:
             weapon_count += 1
             weapon_index.append(i)
         elif player.inventory[i].identifier == SHIELD_ID:
