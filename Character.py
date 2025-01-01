@@ -16,7 +16,7 @@ import random as rand
 
 class Character:
   # Initialize basic stats of the character
-  def __init__(self, name, hp = 200, weapon = 'NONE', armor = 'NONE', shield = 'NONE', inventory = [], buff = 'NONE', debuff = 'NONE', num_of_atks = 1, handicap = 0, buff_stack = 0, debuff_stack = 0, warded = False):
+  def __init__(self, name, hp = 200, weapon = 'NONE', armor = 'NONE', shield = 'NONE', inventory = ['null', 'null', 'null', 'null', 'null'], buff = 'NONE', debuff = 'NONE', num_of_atks = 1, handicap = 0, buff_stack = 0, debuff_stack = 0, warded = False):
     self.name = name
     self.hp = hp
     self.weapon = weapon
