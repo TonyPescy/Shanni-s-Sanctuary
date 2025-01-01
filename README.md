@@ -7,7 +7,10 @@ Tony Pescatore (TonyPescy)
 Nick Pescatore (NAP1313)
 ## Table of Contents
 [Rooms](#Rooms)
-[Known-Issues](#known-issues)
+
+[Known Issues](#known-issues)
+
+[Fixed Issues](#fixed-issues)
 
 ## Rooms
 [Table of Contents](#table-of-contents)
@@ -38,4 +41,9 @@ All other types and abilities (WAITING TO BE ADDED TO README)
     - Fix: Complete overhaul of inventory system in multiple files including combat.py and Character.py. When any Character object is created the inventory will be filled as normal and then to max out the inventory at 5 items the remaining empty spaces will be filled with null values. All removals of items will instead replace the current item with a null value.
     - Potential issues with this fix: It will be more cumbersome to find the true size of ones inventory and may require any conditons that use the len() built-in function to use a custom len() function to only count the non-null values. This will also note the index of the non-null values within the inventory for accessing them within other functions.
     - Other: This will take a while to implement as inventory is used and accessed very often, especially within the combat.py functions. Most likely will require a rework of the logic of the combat_loop. Since combat_loop already needs to be slimmed down and split into smaller functions for different number of enemies, this change should be done in tandem with the 'Repeated Code and Use of Inefficient Code Practices' issue within the combat.py file. NOTE: combat_loop logic does not need significant changes for the necessary inventory changes to be made, so only a small amount of the 'Repeated Code and Use of Inefficient Code Practices' issue will be resolved within the combat loop.
+1. 
+
+## Fixed Issues
+[Table of Contents](#table-of-contents)
+This is to show the progress made to fix the known issues with the project and when they were fixed.
 1. 
