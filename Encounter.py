@@ -91,13 +91,16 @@ def intro():            # Intro to the game
 
 # rm_entrance Starts
 # rm_entrance - First encounter within the actual pyramid
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-#               player - object - player character
-# Return:       new_room - Room that player will move into
-#               rooms_arr - array - Returns modified room array Note: rooms_arr does not change here as rm_entrance cannot be entered again
-#               player - object - player character
-def rm_entrance(desc, rooms_arr, player):
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_entrance(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list):
     print(desc)
     next_direction = rm.Room.get_player_move(rooms_arr[32].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[32].num)      # gets new room that player has selected
@@ -109,18 +112,22 @@ def rm_entrance(desc, rooms_arr, player):
 
 # rm_1 Starts
 # rm_1 - Room 1 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-#               player - object - player character
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-#               player - object - player character
-def rm_1(desc, rooms_arr, player, weapon_list, armor_list, shield_list):
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_1(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list):
     encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
-    print("ENCOUNTER SCENARIO NUMBER: " + str(desc[encounter_num_ind:]))
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[0].re_entry != True:   # first time entering the room
-        
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[0].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 1 has been already entered and conquered
     else:       # room has been entered before
         print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is North.')
@@ -128,527 +135,866 @@ def rm_1(desc, rooms_arr, player, weapon_list, armor_list, shield_list):
     next_direction = rm.Room.get_player_move(rooms_arr[0].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[0].num)      # gets new room that player has selected
     print("THIS IS UR EXIT OF ROOM 1")              # all rooms will need a unique exit statement
-
     return rooms_arr, new_room, player
 # rm_1 ends
 
 # rm_2 Starts
 # rm_2 - Room 2 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_2(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_2(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[1].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[1].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 2 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is North.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[1].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[1].num)      # gets new room that player has selected
-    rooms_arr[1].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 2 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 2")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_2 ends
 
 # rm_3 Starts
 # rm_3 - Room 3 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_3(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_3(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[2].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[2].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 3 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is Northwest.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[2].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[2].num)      # gets new room that player has selected
-    rooms_arr[2].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 3 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 3")              # all rooms will need a unique exit statement
 
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_3 ends
 
 # rm_4 Starts
 # rm_4 - Room 4 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_4(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_4(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[3].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[3].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 4 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is West.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[3].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[3].num)      # gets new room that player has selected
-    rooms_arr[3].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 4 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 4")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_4 ends
 
 # rm_5 Starts
 # rm_5 - Room 5 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_5(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_5(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[4].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[4].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 5 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is East.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[4].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[4].num)      # gets new room that player has selected
-    rooms_arr[4].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 5 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 5")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_5 ends
 
 # rm_6 Starts
 # rm_6 - Room 6 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_6(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_6(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[5].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[5].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 6 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is Northeast.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[5].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[5].num)      # gets new room that player has selected
-    rooms_arr[5].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 6 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 6")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_6 ends
 
 # rm_7 Starts
 # rm_7 - Room 7 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_7(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_7(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[6].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[6].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 7 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is Northwest.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[6].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[6].num)      # gets new room that player has selected
-    rooms_arr[6].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 7 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 7")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_7 ends
 
 # rm_8 Starts
 # rm_8 - Room 8 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_8(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_8(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[7].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[7].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 8 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is Northwest.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[7].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[7].num)      # gets new room that player has selected
-    rooms_arr[7].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 8 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 8")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_8 ends
 
 # rm_9 Starts
 # rm_9 - Room 9 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_9(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_9(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[8].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[8].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 9 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is Northeast.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[8].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[8].num)      # gets new room that player has selected
-    rooms_arr[8].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 9 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 9")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_9 ends
 
 # rm_10 Starts
 # rm_10 - Room 10 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_10(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_10(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[9].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[9].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 10 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is East.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[9].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[9].num)      # gets new room that player has selected
-    rooms_arr[9].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 10 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 10")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_10 ends
 
 # rm_11 Starts
 # rm_11 - Room 11 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_11(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_11(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[10].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[10].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 11 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is North.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[10].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[10].num)      # gets new room that player has selected
-    rooms_arr[10].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 11 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 11")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_11 ends
 
 # rm_12 Starts
 # rm_12 - Room 12 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_12(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_12(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[11].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[11].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 12 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is North.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[11].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[11].num)      # gets new room that player has selected
-    rooms_arr[11].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 12 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 12")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_12 ends
 
 # rm_13 Starts
 # rm_13 - Room 13 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_13(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_13(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[12].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[12].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 13 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is Southwest.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[12].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[12].num)      # gets new room that player has selected
-    rooms_arr[12].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 13 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 13")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_13 ends
 
 # rm_14 Starts
 # rm_14 - Room 14 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_14(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_14(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[13].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[13].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 14 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is North.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[13].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[13].num)      # gets new room that player has selected
-    rooms_arr[13].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 14 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 14")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_14 ends
 
 # rm_15 Starts
 # rm_15 - Room 15 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_15(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_15(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[14].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[14].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 15 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is Northwest.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[14].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[14].num)      # gets new room that player has selected
-    rooms_arr[14].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 15 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 15")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_15 ends
 
 # rm_16 Starts
 # rm_16 - Room 16 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_16(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_16(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[15].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[15].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 16 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is Northwest.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[15].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[15].num)      # gets new room that player has selected
-    rooms_arr[15].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 16 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 16")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_16 ends
 
 # rm_17 Starts
 # rm_17 - Room 17 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_17(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_17(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[16].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[16].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 17 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is Northwest.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[16].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[16].num)      # gets new room that player has selected
-    rooms_arr[16].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 17 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 17")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_17 ends
 
 # rm_18 Starts
 # rm_18 - Room 18 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_18(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_18(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[17].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[17].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 18 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is North.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[17].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[17].num)      # gets new room that player has selected
-    rooms_arr[17].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 18 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 18")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_18 ends
 
 # rm_19 Starts
 # rm_19 - Room 19 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_19(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_19(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[18].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[18].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 19 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is West.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[18].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[18].num)      # gets new room that player has selected
-    rooms_arr[18].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 19 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 19")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_19 ends
 
 # rm_20 Starts
 # rm_20 - Room 20 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_20(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_20(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[19].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[19].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 20 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is Northeast.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[19].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[19].num)      # gets new room that player has selected
-    rooms_arr[19].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 20 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 20")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_20 ends
 
 # rm_21 Starts
 # rm_21 - Room 21 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_21(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_21(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[20].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[20].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 21 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is North.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[20].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[20].num)      # gets new room that player has selected
-    rooms_arr[20].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 21 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 21")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_21 ends
 
 # rm_22 Starts
 # rm_22 - Room 22 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_22(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_22(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[21].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[21].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 22 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is North.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[21].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[21].num)      # gets new room that player has selected
-    rooms_arr[21].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 22 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 22")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_22 ends
 
 # rm_23 Starts
 # rm_23 - Room 23 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_23(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_23(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[22].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[22].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 23 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is North.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[22].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[22].num)      # gets new room that player has selected
-    rooms_arr[22].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 23 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 23")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_23 ends
 
 # rm_24 Starts
 # rm_24 - Room 24 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_24(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_24(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[23].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[23].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 24 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is West.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[23].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[23].num)      # gets new room that player has selected
-    rooms_arr[23].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 24 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 24")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_24 ends
 
 # rm_25 Starts
 # rm_25 - Room 25 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_25(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_25(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[24].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[24].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 25 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is North.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[24].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[24].num)      # gets new room that player has selected
-    rooms_arr[24].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 25 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 25")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_25 ends
 
 # rm_26 Starts
 # rm_26 - Room 26 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_26(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_26(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[25].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[25].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 26 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is North.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[25].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[25].num)      # gets new room that player has selected
-    rooms_arr[25].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 26 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 26")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_26 ends
 
 # rm_27 Starts
 # rm_27 - Room 27 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_27(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_27(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[26].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[26].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 27 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is West.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[26].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[26].num)      # gets new room that player has selected
-    rooms_arr[26].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 27 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 27")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_27 ends
 
 # rm_28 Starts
 # rm_28 - Room 28 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_28(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_28(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[27].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[27].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 28 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is West.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[27].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[27].num)      # gets new room that player has selected
-    rooms_arr[27].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 28 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 28")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_28 ends
 
 # rm_29 Starts
 # rm_29 - Room 29 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_29(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_29(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[28].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[28].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 29 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is West.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[28].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[28].num)      # gets new room that player has selected
-    rooms_arr[28].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 29 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 29")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_29 ends
 
 # rm_30 Starts
 # rm_30 - Room 30 with random encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_30(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_30(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[29].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[29].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 30 has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is North.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[29].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[29].num)      # gets new room that player has selected
-    rooms_arr[28].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 30 has been already entered and conquered
     print("THIS IS UR EXIT OF ROOM 30")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_30 ends
 
 # rm_boss Starts
 # rm_boss - Boss Room with boss encounter inside
-# Parameters:   desc - string - description of the room
-#               rooms_arr - array - array of all rooms
-# Return:       new_room - int - Room that player will move into
-#               rooms_arr - array - Returns modified room array
-def rm_boss(desc, rooms_arr): 
-    print(desc)
-    #COMBAT GOES HERE
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_boss(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    encounter_num = desc[:encounter_num_ind]  # selects number from room description
+    print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
+    if rooms_arr[31].re_entry != True:   # first time entering the room
+        print(desc[encounter_num_ind:]) # prints random room description
+        player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
+        rooms_arr[31].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 31 (boss) has been already entered and conquered
+    else:       # room has been entered before
+        print('As you have been here before, Shanni bestows the gift of guidance upon you. She states the best direction to go from here is North.')
+    # select next room
     next_direction = rm.Room.get_player_move(rooms_arr[31].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[31].num)      # gets new room that player has selected
-    rooms_arr[31].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that boss room has been already entered and conquered
     print("THIS IS UR EXIT OF BOSS ROOM")              # all rooms will need a unique exit statement
-
-    return rooms_arr, new_room
+    return rooms_arr, new_room, player
 # rm_boss ends
 
 # rm_exit Starts
 # rm_exit - Exit room with exit story
-# Parameters:   desc - string - description of the room
-# Return:       N/A
-def rm_exit(desc): 
-    print(desc)
-    print('Temp!Exit')
+# Parameters:   
+#               desc - string - description for this room
+#               rooms_arr - array - Array of all room objects
+#               player - character object - player character
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
+# Returns: returns the output of the corresponding function in the dictionary
+#           new_room - int - Room that player will move into
+#           rooms_arr - array - Returns modified room array
+#           player - object - player character
+def rm_exit(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    print(desc[encounter_num_ind:])
+    new_room = 'temp'   # place holder given for proper return statement
+    return rooms_arr, new_room, player
 
 encounter_dict = {
     0: rm_entrance,
@@ -693,20 +1039,21 @@ encounter_dict = {
 #               desc_arr - array - Array of all room descriptions
 #               desc_arr_index - int - Index for current room 
 #               rmms_arr - array - Array of all room objects
+#               w_list/a_list/s_list - arrays- contains all weapons, armors, shields, and consumables that are need to run all scenarios
 # Returns: returns the output of the corresponding function in the dictionary
 #          new_room - int - Room that player will move into
 #           rooms_arr - array - Returns modified room array
 #           player - object - player character
-def room_encounters(c_room, desc_arr, desc_arr_index, rms_arr):
+def room_encounters(c_room, desc_arr, desc_arr_index, rms_arr, player, weapon_list, armor_list, shield_list, consume_list):
     # special room descriptions (static encounters) are checked else normal room encounters play out
     if c_room == 0:     # entrance
-        return encounter_dict[c_room](desc_arr[desc_arr_index], rms_arr)
+        return encounter_dict[c_room](desc_arr[desc_arr_index], rms_arr, player, weapon_list, armor_list, shield_list, consume_list)
     elif c_room == 31:      # exit
-        return encounter_dict[c_room](desc_arr[desc_arr_index], rms_arr)
+        return encounter_dict[c_room](desc_arr[desc_arr_index], rms_arr, player, weapon_list, armor_list, shield_list, consume_list)
     elif c_room == 32:      # boss
-        return encounter_dict[c_room](desc_arr[-1], rms_arr)
+        return encounter_dict[c_room](desc_arr[-1], rms_arr, player, weapon_list, armor_list, shield_list, consume_list)
     else:
-        return encounter_dict[c_room](desc_arr[desc_arr_index], rms_arr)
+        return encounter_dict[c_room](desc_arr[desc_arr_index], rms_arr, player, weapon_list, armor_list, shield_list, consume_list)
 
 # encounter scenarios start
 # Description: These are to be used in the room encounter functions in their dictionary
@@ -1396,7 +1743,7 @@ def encounter_scenario_43(player, w_list, a_list, s_list, c_list):    # other di
                 choice = str(input('Please enter yes or no. ')).lower()
     return player
 
-# ALL ROOMS HERE DO NOT HAVE ANY SPECIAL EFECTS AND ARE CONSIDERED TO BE 'EMPTY ROOMS'
+# ALL ROOMS HERE (except the last two) DO NOT HAVE ANY SPECIAL EFECTS AND ARE CONSIDERED TO BE 'EMPTY ROOMS'
 # THEY ALL ONLY RETURN PLAYER
 def encounter_scenario_44(player, w_list, a_list, s_list, c_list):    # ancient masks
     return player
@@ -1420,12 +1767,18 @@ def encounter_scenario_50(player, w_list, a_list, s_list, c_list):    # mirror o
     return player
 
 def encounter_scenario_51(player, w_list, a_list, s_list, c_list):    # boss
-    print('temp')
+    adult_drag = char.Character.create_ard(w_list, a_list) # creates enemy for combat
+    enemy_list = [adult_drag]                      # list of all enemies to be used in combat function
+    # combat
+    player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
+    return player                                   # returns player after combat
 
 def encounter_scenario_52(player, w_list, a_list, s_list, c_list):    # exit
+    # nothing happens, it is just a description being read out
+    # CHANGED, THIS IS NO LONGER EVEN CALLED
     print('temp')
 
-encounter_dict = {
+encounter_scenario_dict = {
     1: encounter_scenario_1,
     2: encounter_scenario_2,
     3: encounter_scenario_3,
@@ -1489,4 +1842,4 @@ encounter_dict = {
 #               shield_list - list of objects - List of all shields, used to create enemies in needed scenarios
 # Returns:      player - object - player character
 def encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, comsumable_list):
-    pass
+    return encounter_scenario_dict[encounter_num](player, weapon_list, armor_list, shield_list, comsumable_list)    # returns encounter scenario output
