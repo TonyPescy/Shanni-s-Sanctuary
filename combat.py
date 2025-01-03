@@ -8,6 +8,7 @@
 import library as lib
 import random as rand
 import Items as it
+import sys
 
 # set loadout starts
 # Asks players if they wish to switch weapons, armor, or shields if they are able
@@ -669,7 +670,7 @@ def single_enemy_combat(enemy, player, turn_skip, swapped, first_round, weapon_i
     if enemy.hp > 0:
         print('Enemy survived the encounter with ' + str(enemy.hp) + ' health points left!')
         print('You Died!')
-        return player
+        sys.exit(1)     # prevents game from continuing on with a dead player character
     elif player.hp > 0:
         print(player.name + ' survived the encounter with ' + str(player.hp) + ' health points left!')
         return player
@@ -855,7 +856,7 @@ def double_enemy_combat(enemy_list, player, turn_skip, swapped, first_round, wea
     if enemy1.hp > 0 or enemy2.hp > 0:
         print('Enemies survived the encounter with ' + str(enemy1.hp + enemy2.hp) + ' health points left!')
         print('You Died!')
-        return player
+        sys.exit(1)     # prevents game from continuing on with a dead player character
     elif player.hp > 0:
         print(player.name + ' survived the encounter with ' + str(player.hp) + ' health points left!')
         return player
@@ -1326,7 +1327,7 @@ def triple_enemy_combat(enemy_list, player, turn_skip, swapped, first_round, wea
     if enemy_total_hp > 0:
         print('Enemies survived the encounter with ' + str(enemy_total_hp) + ' health points left!')
         print('You Died!')
-        return player
+        sys.exit(1)     # prevents game from continuing on with a dead player character
     elif player.hp > 0:
         print(player.name + ' survived the encounter with ' + str(player.hp) + ' health points left!')
         return player
@@ -1402,7 +1403,7 @@ def boss_combat(boss, player, turn_skip, swapped, weapon_index, cons_index):
     if boss.hp > 0:
         print('Enemy survived the encounter with ' + str(boss.hp) + ' health points left!')
         print('You Died!')
-        return player
+        sys.exit(1)     # prevents game from continuing on with a dead player character
     elif player.hp > 0:
         print(player.name + ' survived the encounter with ' + str(player.hp) + ' health points left!')
         return player

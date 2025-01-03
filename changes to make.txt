@@ -37,7 +37,7 @@
 
 4. Add all room descriptions
     10 remaining
-
+    Boss and exit rooms too
 
 
 
@@ -55,6 +55,7 @@
 
 8. Consumables Testing
     TEMP SOLUTION > Healing player of all ailments and healing to 200 hp after all each combat?
+    Inventory was changed
 
 
 9. Create encounter scenarios for each combat room (30 + boss room and all encounters)
@@ -68,5 +69,6 @@
     > fix enemy creation    COMPLETED
     > fix player creation   COMPLETED
     > fix combat functions  
-        - make combat functions seperate for each number of enemies
+        - make combat functions seperate for each number of enemies COMPLETED
+        - BOSS  COMPLETED
     

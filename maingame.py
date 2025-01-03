@@ -49,7 +49,7 @@ def main():
     '''
 
 
-    
+    # Beginning of game scenarios
     en.intro()
     player_name, player_answer = en.user_name_and_ans()
     en.entrance(player_name, player_answer)

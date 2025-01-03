@@ -71,7 +71,7 @@ def entrance(name, answer):         # Entrance to the sanctuary, this decides if
 # Return:       N/A
 def intro():            # Intro to the game 
     temp = 0        # temp for while loop to ensure yes or no is provided
-    print("You are walking down the side walk of the city you've spent your entire life in, during that time nothing much has changed.  It was always a small city, but now that you've grown up it seems to have gotten smaller and much duller.  You know every inch of this city like the back of your hand, you could walk the streets blindfolded and make it to work on time.  However today was odd, a peculiar weight was on you shoulders, maybe work was getting to you?  But that can't be making you feel this way can it?.")
+    print("You are walking down the side walk of the city you've spent your entire life in, during that time nothing much has changed.  It was always a small city, but now that you've grown up it seems to have gotten smaller and much duller.  You know every inch of this city like the back of your hand, you could walk the streets blindfolded and make it to work on time.  However today was odd, a peculiar weight was on you shoulders, maybe leaving home for the city was getting to you?  But that can't be making you feel this way can it?.")
     answer = str(input("That's when something catches your eye, something you never saw before.  A large overgrown pyramid in the center of the street, how have you never noticed this before?  A voice speaks to you, it comes from within your own mind, it's beckoning you forth.  Come closer it says, egging you on and on.  Do you listen to what the voice says?  Yes or no? ").lower())
     while True:
         if answer.lower() == "no":
@@ -101,7 +101,8 @@ def intro():            # Intro to the game
 #           rooms_arr - array - Returns modified room array
 #           player - object - player character
 def rm_entrance(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list):
-    print(desc)
+    encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
+    print(desc[encounter_num_ind:])
     next_direction = rm.Room.get_player_move(rooms_arr[32].pathing)              # gets player input on what direction they would like to go
     new_room = rm.Room.next_room(next_direction.lower(), rooms_arr[32].num)      # gets new room that player has selected
     print('As you you make your way north, those heavy wooden doors slam shut. Another barrier to ensure you do not escape Shanni\'s Sanctuary.')
@@ -126,7 +127,7 @@ def rm_1(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[0].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[0].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 1 has been already entered and conquered
     else:       # room has been entered before
@@ -154,7 +155,7 @@ def rm_2(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[1].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[1].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 2 has been already entered and conquered
     else:       # room has been entered before
@@ -182,7 +183,7 @@ def rm_3(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[2].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[2].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 3 has been already entered and conquered
     else:       # room has been entered before
@@ -211,7 +212,7 @@ def rm_4(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[3].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[3].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 4 has been already entered and conquered
     else:       # room has been entered before
@@ -239,7 +240,7 @@ def rm_5(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[4].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[4].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 5 has been already entered and conquered
     else:       # room has been entered before
@@ -267,7 +268,7 @@ def rm_6(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[5].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[5].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 6 has been already entered and conquered
     else:       # room has been entered before
@@ -295,7 +296,7 @@ def rm_7(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[6].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[6].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 7 has been already entered and conquered
     else:       # room has been entered before
@@ -323,7 +324,7 @@ def rm_8(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[7].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[7].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 8 has been already entered and conquered
     else:       # room has been entered before
@@ -351,7 +352,7 @@ def rm_9(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[8].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[8].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 9 has been already entered and conquered
     else:       # room has been entered before
@@ -379,7 +380,7 @@ def rm_10(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[9].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[9].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 10 has been already entered and conquered
     else:       # room has been entered before
@@ -407,7 +408,7 @@ def rm_11(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[10].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[10].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 11 has been already entered and conquered
     else:       # room has been entered before
@@ -435,7 +436,7 @@ def rm_12(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[11].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[11].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 12 has been already entered and conquered
     else:       # room has been entered before
@@ -463,7 +464,7 @@ def rm_13(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[12].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[12].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 13 has been already entered and conquered
     else:       # room has been entered before
@@ -491,7 +492,7 @@ def rm_14(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[13].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[13].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 14 has been already entered and conquered
     else:       # room has been entered before
@@ -519,7 +520,7 @@ def rm_15(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[14].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[14].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 15 has been already entered and conquered
     else:       # room has been entered before
@@ -547,7 +548,7 @@ def rm_16(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[15].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[15].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 16 has been already entered and conquered
     else:       # room has been entered before
@@ -575,7 +576,7 @@ def rm_17(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[16].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[16].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 17 has been already entered and conquered
     else:       # room has been entered before
@@ -603,7 +604,7 @@ def rm_18(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[17].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[17].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 18 has been already entered and conquered
     else:       # room has been entered before
@@ -631,7 +632,7 @@ def rm_19(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[18].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[18].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 19 has been already entered and conquered
     else:       # room has been entered before
@@ -659,7 +660,7 @@ def rm_20(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[19].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[19].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 20 has been already entered and conquered
     else:       # room has been entered before
@@ -687,7 +688,7 @@ def rm_21(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[20].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[20].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 21 has been already entered and conquered
     else:       # room has been entered before
@@ -715,7 +716,7 @@ def rm_22(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[21].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[21].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 22 has been already entered and conquered
     else:       # room has been entered before
@@ -743,7 +744,7 @@ def rm_23(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[22].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[22].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 23 has been already entered and conquered
     else:       # room has been entered before
@@ -771,7 +772,7 @@ def rm_24(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[23].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[23].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 24 has been already entered and conquered
     else:       # room has been entered before
@@ -799,7 +800,7 @@ def rm_25(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[24].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[24].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 25 has been already entered and conquered
     else:       # room has been entered before
@@ -827,7 +828,7 @@ def rm_26(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[25].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[25].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 26 has been already entered and conquered
     else:       # room has been entered before
@@ -855,7 +856,7 @@ def rm_27(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[26].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[26].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 27 has been already entered and conquered
     else:       # room has been entered before
@@ -883,7 +884,7 @@ def rm_28(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[27].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[27].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 28 has been already entered and conquered
     else:       # room has been entered before
@@ -911,7 +912,7 @@ def rm_29(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[28].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[28].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 29 has been already entered and conquered
     else:       # room has been entered before
@@ -939,7 +940,7 @@ def rm_30(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[29].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[29].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 30 has been already entered and conquered
     else:       # room has been entered before
@@ -967,7 +968,7 @@ def rm_boss(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consu
     encounter_num = desc[:encounter_num_ind]  # selects number from room description
     print('ENCOUNTER SCENARIO NUMBER: ' + str(encounter_num))   # to be removed, helps keep track of unexpected errors
     if rooms_arr[31].re_entry != True:   # first time entering the room
-        print(desc[encounter_num_ind:]) # prints random room description
+        print(desc[encounter_num_ind+1:]) # prints random room description
         player = encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, consume_list)
         rooms_arr[31].re_entry = rm.Room.reentry_switch()         # changes rooms_arr to say that room 31 (boss) has been already entered and conquered
     else:       # room has been entered before
@@ -992,7 +993,7 @@ def rm_boss(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consu
 #           player - object - player character
 def rm_exit(desc, rooms_arr, player, weapon_list, armor_list, shield_list, consume_list): 
     encounter_num_ind = desc.find(' ')  # finds index at the end of the room description number which allows for correct combat scenario
-    print(desc[encounter_num_ind:])
+    print(desc[encounter_num_ind+1:])
     new_room = 'temp'   # place holder given for proper return statement
     return rooms_arr, new_room, player
 
@@ -1119,7 +1120,8 @@ def encounter_scenario_4(player, w_list, a_list, s_list, c_list):    # bow skele
 def encounter_scenario_5(player, w_list, a_list, s_list, c_list):    # siren
     # MAY NEED SPECIAL ENCOUNTER LOOP OR SOMETHING
     # save for later!!!!!
-    print('temp')
+    print('temp THIS IS SIREN ROUND')
+    return player
 
 def encounter_scenario_6(player, w_list, a_list, s_list, c_list):    # minotaur
     minotaur = char.Character.create_mino(w_list) # creates enemy for combat
@@ -1151,7 +1153,7 @@ def encounter_scenario_9(player, w_list, a_list, s_list, c_list):    # cyclops
 
 def encounter_scenario_10(player, w_list, a_list, s_list, c_list):   # honorable duelist
     # asks player if they wish to pick up the rapier
-    choice = str(input('Do you wish to pick up the rapier? Yes or no?').lower())
+    choice = str(input('Do you wish to pick up the rapier? Yes or no? ').lower())
     while True:     # repeats question until a correct response is gotten from user
         if choice == 'yes':     # player wishes to pickup rapier
             player.inventory = lib.item_pickup(player.inventory, w_list[4]) # item pickup function used on the rapier
@@ -1776,7 +1778,8 @@ def encounter_scenario_51(player, w_list, a_list, s_list, c_list):    # boss
 def encounter_scenario_52(player, w_list, a_list, s_list, c_list):    # exit
     # nothing happens, it is just a description being read out
     # CHANGED, THIS IS NO LONGER EVEN CALLED
-    print('temp')
+    print('temp FAILED EXIT ONE???, THIS SHOULD NEVER APPEAR')
+    return player
 
 encounter_scenario_dict = {
     1: encounter_scenario_1,
@@ -1842,4 +1845,4 @@ encounter_scenario_dict = {
 #               shield_list - list of objects - List of all shields, used to create enemies in needed scenarios
 # Returns:      player - object - player character
 def encounter_picker(player, encounter_num, weapon_list, armor_list, shield_list, comsumable_list):
-    return encounter_scenario_dict[encounter_num](player, weapon_list, armor_list, shield_list, comsumable_list)    # returns encounter scenario output
+    return encounter_scenario_dict[int(encounter_num)](player, weapon_list, armor_list, shield_list, comsumable_list)    # returns encounter scenario output
