@@ -38,16 +38,16 @@
 38 The cave is dim and damp, its walls rough and jagged, illuminated only by the faint light filtering through cracks in the stone. In one corner, a crude makeshift desk has been assembled from uneven planks of wood, propped up on loose stones. Scattered across its surface are remnants of hurried activity: a burnt-down candle stub, scraps of torn parchment, and a simple inkpot tipped on its side, leaving a dark stain. Among the clutter lies a hastily written note, its words scrawled in uneven handwriting as if penned in great urgency. The paper is smudged and creased, its message fully illegible.
 39 The apothecary is a cozy, dimly lit room brimming with the scents of herbs, spices, and mysterious concoctions. Wooden shelves line the walls, packed with glass jars of dried leaves, powdered minerals, and colorful liquids. Bundles of lavender, rosemary, and other plants dangle from the ceiling beams, adding to the earthy aroma. A sturdy oak counter, scarred from years of mixing and grinding, sits at the center, its surface cluttered with mortar and pestles, parchment recipes, and a scale for precise measurements.
 40 The room opened up into an ancient library with towering shelves filled with old, dusty books. In the center of the room, a large glass case stands, illuminated by the soft glow of a nearby lantern. Inside the case, nestled on a velvet cushion, is an ornate scroll with intricate, gold-leafed designs. The scroll is labeled in bold, elegant lettering: "Emergency Use Only".
-41 
-42 
-43 
-44 
-45 
-46 
-47 
-48 
-49 
-50 
+41 A dimly lit room with a sturdy, ancient anvil at its center, glowing faintly with runic inscriptions. Shelves of mystical tools and enchanted materials line the walls, and a soft hum of magic lingers in the air, ready for powerful infusions.
+42 A cozy chamber with a roaring campfire at its heart, surrounded by a circle of smooth stones etched with glowing runes. The flames flicker with hues of blue and green, emanating an aura of enchantment, perfect for crafting magical infusions.
+43 A rugged workshop featuring a collection of grindstones and whetstones, each shimmering faintly with magical energy. The air carries the metallic tang of honing and enchantment, making it an ideal space for sharpening tools and infusing them with mystical power.
+44 A mysterious chamber with walls adorned by ancient masks, each intricately carved and emanating an aura of hidden power. The dim lighting casts eerie shadows, making the masks seem almost alive, whispering secrets of forgotten rituals.
+45 A shadowy room where cursed artifacts rest behind reinforced glass cases, each pulsating with ominous energy. The artifacts' twisted forms and dark auras evoke unease, as warning runes etched into the glass glow faintly to keep their malevolence contained.
+46 A mystical chamber where walls are inscribed with countless glowing runes, their shapes shifting and flowing like living text. The air vibrates softly with their murmured incantations, creating an atmosphere of chaotic, ancient wisdom.
+47 A grand observatory with a massive, polished telescope extending through an open dome, perfectly aligned with the night sky. The room is filled with star charts, celestial models, and softly glowing instruments, all designed to unravel the mysteries of the cosmos.
+48 A grim, dimly lit room filled with rusted chains, old racks, and various sinister devices, each stained with the marks of its dark history. The air is thick with the echoes of past suffering, and the walls seem to whisper of forgotten horrors.
+49 A delicate, glowing bridge suspended above an endless chasm, its surface shimmering like liquid light. The bridge seems to pulse with an otherworldly energy, offering a fleeting path between realms as the vast, bottomless void stretches endlessly below.
+50 A haunting room with eight walls, each one alive with swirling memories of human atrocities from across the ages. Each surface is a vivid tableau, flickering with the anguish and suffering of countless souls, casting a sorrowful glow that fills the air with a palpable sense of despair.
 51 As you walk through the short hallway the heavy doors slam shut behind you. Slowly your eyes adjust to the dim light revealing weathered stone brick covered with thick vines and wet moss. As you scan the room there is nothing that you can see and the doors behind you won't budge. There won't be any turning back now, the only way is through the thick wooden doors before you.
-52 EXIT SCENARIO
-53 BOSS FIGHT!
+52 As quickly as you were sucked into this pyramid, you were thrown back out to the street. All cuts and bruises and items vanished as if you never had them. However a weight is felt in your pants pockets. You fish out the weight to find a golden coin with a large 'S' etched into the face of it. and on the back it read: 'Congratulations on escaping the sanctuary, Shanalotte is impressed with your cunning, strength, and resilience!'
+53 A cavernous room overflowing with gleaming gold coins, jeweled treasures, and priceless artifacts, their brilliance casting shimmering reflections on the walls. Atop the hoard rests an imposing red dragon, its scales seemingly crafted from ruby, glowing with an inner fire and watching over its riches with a regal, fiery gaze.
