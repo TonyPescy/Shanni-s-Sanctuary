@@ -101,7 +101,7 @@ def use_cons(player, cons_index):
             print('Please enter a number corresponding to an item above.')
             continue    # retries for choice 
 
-    consumable_to_be_used = player.inventory[cons_index[choice - 1].name]
+    consumable_to_be_used = player.inventory[cons_index[choice - 1]].name
     player.inventory[cons_index[choice - 1]] = 'null'    # removes consumable from inventory when used and replaces with null value
     cons_index.pop(choice - 1)                           # removes item from list of consumables indexes
 
@@ -967,8 +967,8 @@ def triple_enemy_combat(enemy_list, player, turn_skip, swapped, first_round, wea
                                         match enemy_dead:
                                             case 1:     # enemy1 is dead
                                                 while True:     # player chooses which enemy to attack this round
-                                                    print(f'1. {enemy2.name} - HP: {enemy2.hp}')    # enemy2 is alive
-                                                    print(f'2. {enemy3.name} - HP: {enemy3.hp}')    # enemy3 is alive
+                                                    print(f'2. {enemy2.name} - HP: {enemy2.hp}')    # enemy2 is alive
+                                                    print(f'3. {enemy3.name} - HP: {enemy3.hp}')    # enemy3 is alive
                         
                                                     target = input('Please enter the enemy number you would like to target (Enter 1, or 2): ')
                                                     try:
@@ -981,7 +981,7 @@ def triple_enemy_combat(enemy_list, player, turn_skip, swapped, first_round, wea
                                             case 2: # enemy2 is dead
                                                 while True:     # player chooses which enemy to attack this round
                                                     print(f'1. {enemy1.name} - HP: {enemy1.hp}')    # enemy1 is alive
-                                                    print(f'2. {enemy3.name} - HP: {enemy3.hp}')    # enemy3 is alive
+                                                    print(f'3. {enemy3.name} - HP: {enemy3.hp}')    # enemy3 is alive
                         
                                                     target = input('Please enter the enemy number you would like to target (Enter 1, or 2): ')
                                                     try:

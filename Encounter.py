@@ -1274,8 +1274,12 @@ def encounter_scenario_22(player, w_list, a_list, s_list, c_list):    # poison d
 def encounter_scenario_23(player, w_list, a_list, s_list, c_list):    # arrow trap
     # player is hit with 0-4 arrows
     hits = rand.randint(0, 4)  # how many arrows hit player
-    dmg_taken = hits * 10    # each arrow does 10 damage
-    player.hp -= dmg_taken
+    if hits > 0:    # some arrows hit the player
+        dmg_taken = hits * 10    # each arrow does 10 damage
+        player.hp -= dmg_taken
+        print(f'You were hit by {hits} arrows as you rushed for the door on the other side of the room and now have {player.hp} health points!')
+    else:       # all arrows missed
+        print('Somehow all the arrows missed as you braved crossing the room!')
     return player   # returns player after affliction and damage is added
 
 def encounter_scenario_24(player, w_list, a_list, s_list, c_list):    # spike trap
@@ -1629,9 +1633,11 @@ def encounter_scenario_41(player, w_list, a_list, s_list, c_list):    # infusion
                                             case 4: # gore
                                                 player.inventory[w_ind[chosen_wep - 1]].infusion = 'gore'
                                                 break
+                                    else:
+                                        chosen_infusion = input('Please enter a number from the following: 1, 2, 3, or 4. ')
                                 except:
-                                    chosen_infusion = input('Please enter a number from the following: 1, 2, 3, or 4. ')
-                                    continue
+                                    print('Wrong format error.')
+                                    sys.exit(1)
                             break
                     except:
                         chosen_wep = input('Please enter a number. ')
@@ -1680,9 +1686,11 @@ def encounter_scenario_42(player, w_list, a_list, s_list, c_list):    # differen
                                             case 4: # gore
                                                 player.inventory[w_ind[chosen_wep - 1]].infusion = 'gore'
                                                 break
+                                    else:
+                                        chosen_infusion = input('Please enter a number from the following: 1, 2, 3, or 4. ')
                                 except:
-                                    chosen_infusion = input('Please enter a number from the following: 1, 2, 3, or 4. ')
-                                    continue
+                                    print('Wrong format error.')
+                                    sys.exit(1)
                             break
                     except:
                         chosen_wep = input('Please enter a number. ')
@@ -1731,9 +1739,11 @@ def encounter_scenario_43(player, w_list, a_list, s_list, c_list):    # other di
                                             case 4: # gore
                                                 player.inventory[w_ind[chosen_wep - 1]].infusion = 'gore'
                                                 break
+                                    else:
+                                        chosen_infusion = input('Please enter a number from the following: 1, 2, 3, or 4. ')
                                 except:
-                                    chosen_infusion = input('Please enter a number from the following: 1, 2, 3, or 4. ')
-                                    continue
+                                    print('Wrong format error.')
+                                    sys.exit(1)
                             break
                     except:
                         chosen_wep = input('Please enter a number. ')
@@ -1768,11 +1778,8 @@ def encounter_scenario_49(player, w_list, a_list, s_list, c_list):    # ethereal
 def encounter_scenario_50(player, w_list, a_list, s_list, c_list):    # mirror of memories
     return player
 
-def encounter_scenario_51(player, w_list, a_list, s_list, c_list):    # boss
-    adult_drag = char.Character.create_ard(w_list, a_list) # creates enemy for combat
-    enemy_list = [adult_drag]                      # list of all enemies to be used in combat function
-    # combat
-    player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
+def encounter_scenario_51(player, w_list, a_list, s_list, c_list):    # nothing?
+    print('ERROR ROOM')
     return player                                   # returns player after combat
 
 def encounter_scenario_52(player, w_list, a_list, s_list, c_list):    # exit
@@ -1780,6 +1787,13 @@ def encounter_scenario_52(player, w_list, a_list, s_list, c_list):    # exit
     # CHANGED, THIS IS NO LONGER EVEN CALLED
     print('temp FAILED EXIT ONE???, THIS SHOULD NEVER APPEAR')
     return player
+
+def encounter_scenario_53(player, w_list, a_list, s_list, c_list):    # boss
+    adult_drag = char.Character.create_ard(w_list, a_list) # creates enemy for combat
+    enemy_list = [adult_drag]                      # list of all enemies to be used in combat function
+    # combat
+    player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
+    return player 
 
 encounter_scenario_dict = {
     1: encounter_scenario_1,
@@ -1833,7 +1847,8 @@ encounter_scenario_dict = {
     49: encounter_scenario_49,
     50: encounter_scenario_50,
     51: encounter_scenario_51,
-    52: encounter_scenario_52
+    52: encounter_scenario_52,
+    53: encounter_scenario_53
 }
 
 # encounter_picker starts

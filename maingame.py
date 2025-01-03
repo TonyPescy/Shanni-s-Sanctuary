@@ -56,7 +56,7 @@ def main():
 
     # creates character object for player with default values for player character
     # used in combat and the sort
-    player = char.Character.create_player(player_name, weapon_list, armor_list)
+    player = char.Character.create_player(player_name, weapon_list, armor_list, shield_list)
     # print(player.name)
 
     # Entrance Encounter
