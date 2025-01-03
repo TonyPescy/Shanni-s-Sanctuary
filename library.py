@@ -143,27 +143,28 @@ def loadout_count(player):
 #               new_item - object - new item to be added
 # Return:       inventory - List - updated inventory
 def item_pickup(inventory, new_item):
-    if inventory.len() == 5:        # if inventory is full
-        print('Your inventory is full! Please remove an item to continue.')
-        for i in range(6):          # for every element in inventory
-            print(i + '. Remove ' + inventory[i])
-
-        print('6. Remove ' + new_item.name)
-        while True:
-            selection = input('Please select the number of the option you would like to select: ')  # player selects an item to remove
-            if selection == 1 or selection == 2 or selection == 3 or selection == 4 or selection == 5:
-                print('You dropped ' + inventory[selection])
-                inventory[selection] = new_item         # new item replaces older item
-                break
-            elif selection == 6:
-                print('You dropped ' + new_item)
-                break
-            else:
-                continue
-    
-    else:           # if inventory has open slots
-        inventory.append(new_item)
-
+    # searching for empty item space
+    for i in range(0, INV_LEN):      # iterates over every item in player inventory
+        if inventory[i] == 'null':      # if there is an empty space in player inventory
+            # replace empty space with new item
+            inventory[i] = new_item
+            return inventory    # returns inventory with newly picked up item
+    # if this code is reached, that means that the inventory is completely filled with items so player must remove an item to make room for a new one
+    for i in range(1, INV_LEN + 1):     # iterates over every item at +1 to list out all items for player to remove an item
+        print(f'{i}. {inventory[i-1].name}')                    # prints all items in inventory
+    print(f'6. {new_item.name} (Do not pick up this item). ')   # prints new item to be added
+    while True:
+        selection = input('Please select the number of the option you would like to select: ')  # player selects an item to remove
+        selection = int(selection)      # casts selection to be an int for comparison
+        if selection == 1 or selection == 2 or selection == 3 or selection == 4 or selection == 5:  # player removes an old item
+            print(f'You dropped {inventory[selection].name}!')
+            inventory[selection] = new_item         # new item replaces older item
+            break
+        elif selection == 6:
+            print(f'You did not pick up {new_item.name}!')
+            break
+        else:
+            continue    # continues selection loop if player makes invalid selection
     return inventory
 # item pickup ends
 

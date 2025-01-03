@@ -1353,7 +1353,7 @@ def encounter_scenario_31(player, w_list, a_list, s_list, c_list):    # ancient 
     choice = str(input('Do you pull the sword from the stone? Yes or no? ')).lower()
     while True:
         if choice == 'yes':       # player pulls sword from the stone
-            player.inventory = lib.item_pickup(player.invetory, w_list[4])
+            player.inventory = lib.item_pickup(player.inventory, w_list[4])
             break
         elif choice == 'no':        # player does not pull the sword from the stone
             break
@@ -1365,7 +1365,7 @@ def encounter_scenario_32(player, w_list, a_list, s_list, c_list):    # heavy ar
     choice = str(input('Do you take the armor from the display? Yes or no? ')).lower()
     while True:
         if choice == 'yes':       # player uses the armor
-            player.inventory = lib.item_pickup(player.invetory, a_list[2])
+            player.inventory = lib.item_pickup(player.inventory, a_list[2])
             break
         elif choice == 'no':        # player does not use the armor
             break
@@ -1383,36 +1383,36 @@ def encounter_scenario_33(player, w_list, a_list, s_list, c_list):    # apotheca
             # potion0
             potion0 = rand.randint(0, 5)     # out of all the comsumable items there are 6 which are potions
             if potion0 < 4:         # the 1st four potions are the top 4 in the consumables list
-                player.inventory = lib.item_pickup(player.invetory, c_list[potion0])    # player choses to keep and leave potion
+                player.inventory = lib.item_pickup(player.inventory, c_list[potion0])    # player choses to keep and leave potion
             elif potion0 >= 4:      # the 5th and 6th potion are at the index of potionX + 1
-                player.inventory = lib.item_pickup(player.invetory, c_list[potion0 + 1])    # player choses to keep and leave potion
+                player.inventory = lib.item_pickup(player.inventory, c_list[potion0 + 1])    # player choses to keep and leave potion
             # potion1
             potion1 = rand.randint(0, 5)     # out of all the comsumable items there are 6 which are potions
             if potion1 < 4:         # the 1st four potions are the top 4 in the consumables list
-                player.inventory = lib.item_pickup(player.invetory, c_list[potion1])    # player choses to keep and leave potion
+                player.inventory = lib.item_pickup(player.inventory, c_list[potion1])    # player choses to keep and leave potion
             elif potion1 >= 4:      # the 5th and 6th potion are at the index of potionX + 1
-                player.inventory = lib.item_pickup(player.invetory, c_list[potion1 + 1])    # player choses to keep and leave potion
+                player.inventory = lib.item_pickup(player.inventory, c_list[potion1 + 1])    # player choses to keep and leave potion
             # potion2
             potion2 = rand.randint(0, 5)     # out of all the comsumable items there are 6 which are potions
             if potion2 < 4:         # the 1st four potions are the top 4 in the consumables list
-                player.inventory = lib.item_pickup(player.invetory, c_list[potion2])    # player choses to keep and leave potion
+                player.inventory = lib.item_pickup(player.inventory, c_list[potion2])    # player choses to keep and leave potion
             elif potion2 >= 4:      # the 5th and 6th potion are at the index of potionX + 1
-                player.inventory = lib.item_pickup(player.invetory, c_list[potion2 + 1])    # player choses to keep and leave potion
+                player.inventory = lib.item_pickup(player.inventory, c_list[potion2 + 1])    # player choses to keep and leave potion
             # Depends on how num_of_potions if the following potions are generated
             # potion3
             if num_of_potions == 4:
                 potion3 = rand.randint(0, 5)     # out of all the comsumable items there are 6 which are potions
                 if potion3 < 4:         # the 1st four potions are the top 4 in the consumables list
-                    player.inventory = lib.item_pickup(player.invetory, c_list[potion3])    # player choses to keep and leave potion
+                    player.inventory = lib.item_pickup(player.inventory, c_list[potion3])    # player choses to keep and leave potion
                 elif potion3 >= 4:      # the 5th and 6th potion are at the index of potionX + 1
-                    player.inventory = lib.item_pickup(player.invetory, c_list[potion3 + 1])    # player choses to keep and leave potion
+                    player.inventory = lib.item_pickup(player.inventory, c_list[potion3 + 1])    # player choses to keep and leave potion
             # potion4
             elif num_of_potions ==5:
                 potion4 = rand.randint(0, 5)     # out of all the comsumable items there are 6 which are potions
                 if potion4 < 4:         # the 1st four potions are the top 4 in the consumables list
-                    player.inventory = lib.item_pickup(player.invetory, c_list[potion4])    # player choses to keep and leave potion
+                    player.inventory = lib.item_pickup(player.inventory, c_list[potion4])    # player choses to keep and leave potion
                 elif potion4 >= 4:      # the 5th and 6th potion are at the index of potionX + 1
-                    player.inventory = lib.item_pickup(player.invetory, c_list[potion4 + 1])    # player choses to keep and leave potion
+                    player.inventory = lib.item_pickup(player.inventory, c_list[potion4 + 1])    # player choses to keep and leave potion
             break
         elif choice == 'no':        # player does not look for any potions
             break
@@ -1427,7 +1427,7 @@ def encounter_scenario_34(player, w_list, a_list, s_list, c_list):    # field ho
     while True:
         if choice == 'yes':     # player accepts the cleanse potions
             for i in range(num_of_cleanse - 1):
-                player.inventory = lib.item_pickup(player.invetory, c_list[3])  # cleanse potions are at index 3 of consumable list
+                player.inventory = lib.item_pickup(player.inventory, c_list[3])  # cleanse potions are at index 3 of consumable list
             break
         elif choice == 'no':    # player passes on the cleanse potions
             break
@@ -1439,7 +1439,7 @@ def encounter_scenario_34(player, w_list, a_list, s_list, c_list):    # field ho
     while True:
         if choice == 'yes':     # player accepts the cleanse potions
             for i in range(num_of_bands - 1):
-                player.inventory = lib.item_pickup(player.invetory, c_list[4])  # bandages are at index 4 of consumable list
+                player.inventory = lib.item_pickup(player.inventory, c_list[4])  # bandages are at index 4 of consumable list
             break
         elif choice == 'no':    # player passes on the bandages
             break
@@ -1458,23 +1458,23 @@ def encounter_scenario_35(player, w_list, a_list, s_list, c_list):    # armory r
                 match item_type:
                     case 1:     # weapon salvaged
                         w_index = rand.randint(0, 7)
-                        player.inventory = lib.item_pickup(player.invetory, w_list[w_index])  # player picks up weapon based on what is randomly found
+                        player.inventory = lib.item_pickup(player.inventory, w_list[w_index])  # player picks up weapon based on what is randomly found
                     case 2:     # armor salvaged
                         a_index = rand.randint(0, 2)
-                        player.inventory = lib.item_pickup(player.invetory, a_list[a_index])  # player picks up armor based on what is randomly found
+                        player.inventory = lib.item_pickup(player.inventory, a_list[a_index])  # player picks up armor based on what is randomly found
                     case 3:     # shield salvaged
                         s_index = rand.randint(0, 2)
-                        player.inventory = lib.item_pickup(player.invetory, s_list[s_index])  # player picks up shield based on what is randomly found
+                        player.inventory = lib.item_pickup(player.inventory, s_list[s_index])  # player picks up shield based on what is randomly found
             else:   # full armory type is generated - 0
                 # weapons salvaged
                 w_index = rand.randint(0, 7)
-                player.inventory = lib.item_pickup(player.invetory, w_list[w_index])  # player picks up weapon based on what is randomly found
+                player.inventory = lib.item_pickup(player.inventory, w_list[w_index])  # player picks up weapon based on what is randomly found
                 # armor salvaged
                 a_index = rand.randint(0, 2)
-                player.inventory = lib.item_pickup(player.invetory, a_list[a_index])  # player picks up armor based on what is randomly found
+                player.inventory = lib.item_pickup(player.inventory, a_list[a_index])  # player picks up armor based on what is randomly found
                 # shield salvaged
                 s_index = rand.randint(0, 2)
-                player.inventory = lib.item_pickup(player.invetory, s_list[s_index])  # player picks up shield based on what is randomly found
+                player.inventory = lib.item_pickup(player.inventory, s_list[s_index])  # player picks up shield based on what is randomly found
             break   # breaks while loop after items have been salvaged
         elif choice == 'no':    # player does not salavge items
             break   # breaks while loop after items have been salvaged
@@ -1490,10 +1490,10 @@ def encounter_scenario_36(player, w_list, a_list, s_list, c_list):    # wizard t
             match num_of_scrolls:
                 case 1:     # 1 readable scroll found
                     scroll_found = rand.randint(6, 7)   # 6 and 7 are the indexes of the scrolls in the weapon list
-                    player.inventory = lib.item_pickup(player.invetory, w_list[scroll_found])  # player picks up the scroll they found
+                    player.inventory = lib.item_pickup(player.inventory, w_list[scroll_found])  # player picks up the scroll they found
                 case 2:     # two scrolls are found - fireball and arcane missle
-                    player.inventory = lib.item_pickup(player.invetory, w_list[6])  # player picks up a scroll they found
-                    player.inventory = lib.item_pickup(player.invetory, w_list[7])  # player picks up a scroll they found
+                    player.inventory = lib.item_pickup(player.inventory, w_list[6])  # player picks up a scroll they found
+                    player.inventory = lib.item_pickup(player.inventory, w_list[7])  # player picks up a scroll they found
             break
         elif choice == 'no':    # player does not loot the tower
             break
@@ -1506,11 +1506,11 @@ def encounter_scenario_37(player, w_list, a_list, s_list, c_list):    # treasure
     while True:
         if choice == 'yes':     # player is looting the treasure room
             # ornate shield pickup
-            player.inventory = lib.item_pickup(player.invetory, s_list[2])      # sturdy shield = ornate shield
+            player.inventory = lib.item_pickup(player.inventory, s_list[2])      # sturdy shield = ornate shield
             # ornate sword pickup
             ornate_sword_roll = rand.randint(1, 3)  # ornate sword has a 1/3 chance to spawn in the treasure room
             if ornate_sword_roll == 3:      # player hit the 1 in 3 chance
-                player.inventory = lib.item_pickup(player.invetory, w_list[1])      # ancient sword = ornate sword
+                player.inventory = lib.item_pickup(player.inventory, w_list[1])      # ancient sword = ornate sword
             break
         elif choice == 'no':        # player does not loot
             break
@@ -1523,9 +1523,9 @@ def encounter_scenario_38(player, w_list, a_list, s_list, c_list):    # traveler
     choice = str(input('Do you wish to take the items? Yes or no? ').lower())
     while True:
         if choice == 'yes':     # player is looting the traveler's room
-            player.inventory = lib.item_pickup(player.invetory, s_list[0])  # player picks up buckler
-            player.inventory = lib.item_pickup(player.invetory, a_list[1])  # player picks up light armor
-            player.inventory = lib.item_pickup(player.invetory, w_list[2])  # player pick ups short sword
+            player.inventory = lib.item_pickup(player.inventory, s_list[0])  # player picks up buckler
+            player.inventory = lib.item_pickup(player.inventory, a_list[1])  # player picks up light armor
+            player.inventory = lib.item_pickup(player.inventory, w_list[2])  # player pick ups short sword
             break
         elif choice == 'no':    # player leaves the items behind
             break
@@ -1543,36 +1543,36 @@ def encounter_scenario_39(player, w_list, a_list, s_list, c_list):    # apotheca
             # potion0
             potion0 = rand.randint(0, 5)     # out of all the comsumable items there are 6 which are potions
             if potion0 < 4:         # the 1st four potions are the top 4 in the consumables list
-                player.inventory = lib.item_pickup(player.invetory, c_list[potion0])    # player choses to keep and leave potion
+                player.inventory = lib.item_pickup(player.inventory, c_list[potion0])    # player choses to keep and leave potion
             elif potion0 >= 4:      # the 5th and 6th potion are at the index of potionX + 1
-                player.inventory = lib.item_pickup(player.invetory, c_list[potion0 + 1])    # player choses to keep and leave potion
+                player.inventory = lib.item_pickup(player.inventory, c_list[potion0 + 1])    # player choses to keep and leave potion
             # potion1
             potion1 = rand.randint(0, 5)     # out of all the comsumable items there are 6 which are potions
             if potion1 < 4:         # the 1st four potions are the top 4 in the consumables list
-                player.inventory = lib.item_pickup(player.invetory, c_list[potion1])    # player choses to keep and leave potion
+                player.inventory = lib.item_pickup(player.inventory, c_list[potion1])    # player choses to keep and leave potion
             elif potion1 >= 4:      # the 5th and 6th potion are at the index of potionX + 1
-                player.inventory = lib.item_pickup(player.invetory, c_list[potion1 + 1])    # player choses to keep and leave potion
+                player.inventory = lib.item_pickup(player.inventory, c_list[potion1 + 1])    # player choses to keep and leave potion
             # potion2
             potion2 = rand.randint(0, 5)     # out of all the comsumable items there are 6 which are potions
             if potion2 < 4:         # the 1st four potions are the top 4 in the consumables list
-                player.inventory = lib.item_pickup(player.invetory, c_list[potion2])    # player choses to keep and leave potion
+                player.inventory = lib.item_pickup(player.inventory, c_list[potion2])    # player choses to keep and leave potion
             elif potion2 >= 4:      # the 5th and 6th potion are at the index of potionX + 1
-                player.inventory = lib.item_pickup(player.invetory, c_list[potion2 + 1])    # player choses to keep and leave potion
+                player.inventory = lib.item_pickup(player.inventory, c_list[potion2 + 1])    # player choses to keep and leave potion
             # Depends on how num_of_potions if the following potions are generated
             # potion3
             if num_of_potions == 4:
                 potion3 = rand.randint(0, 5)     # out of all the comsumable items there are 6 which are potions
                 if potion3 < 4:         # the 1st four potions are the top 4 in the consumables list
-                    player.inventory = lib.item_pickup(player.invetory, c_list[potion3])    # player choses to keep and leave potion
+                    player.inventory = lib.item_pickup(player.inventory, c_list[potion3])    # player choses to keep and leave potion
                 elif potion3 >= 4:      # the 5th and 6th potion are at the index of potionX + 1
-                    player.inventory = lib.item_pickup(player.invetory, c_list[potion3 + 1])    # player choses to keep and leave potion
+                    player.inventory = lib.item_pickup(player.inventory, c_list[potion3 + 1])    # player choses to keep and leave potion
             # potion4
             elif num_of_potions ==5:
                 potion4 = rand.randint(0, 5)     # out of all the comsumable items there are 6 which are potions
                 if potion4 < 4:         # the 1st four potions are the top 4 in the consumables list
-                    player.inventory = lib.item_pickup(player.invetory, c_list[potion4])    # player choses to keep and leave potion
+                    player.inventory = lib.item_pickup(player.inventory, c_list[potion4])    # player choses to keep and leave potion
                 elif potion4 >= 4:      # the 5th and 6th potion are at the index of potionX + 1
-                    player.inventory = lib.item_pickup(player.invetory, c_list[potion4 + 1])    # player choses to keep and leave potion
+                    player.inventory = lib.item_pickup(player.inventory, c_list[potion4 + 1])    # player choses to keep and leave potion
             break
         elif choice == 'no':        # player does not look for any potions
             break
@@ -1584,7 +1584,7 @@ def encounter_scenario_40(player, w_list, a_list, s_list, c_list):    # library 
     choice = str(input('Do you break the glass and take the scroll? Yes or no? ')).lower()
     while True:
         if choice == 'yes':        # player takes the fireball scroll
-            player.inventory = lib.item_pickup(player.invetory, w_list[6])  # player picks up fireball scroll
+            player.inventory = lib.item_pickup(player.inventory, w_list[6])  # player picks up fireball scroll
             break
         elif choice == 'no':        # player skipped on the scroll
             break
