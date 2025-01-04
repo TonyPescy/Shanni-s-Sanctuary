@@ -32,17 +32,20 @@
 3. Integrate combats into rooms
     Also integrate navigation with no repeats if you have been there previously
     Testing needed
+    COMPLETED
 
 
 
 4. Add all room descriptions
     10 remaining
     Boss and exit rooms too
+    COMPLETED
 
 
 
 5. Get game fully running before January
     > Additional testing and code cleanup in January on
+    > Only Testing and code cleanup required
     
 
 
@@ -56,6 +59,7 @@
 8. Consumables Testing
     TEMP SOLUTION > Healing player of all ailments and healing to 200 hp after all each combat?
     Inventory was changed
+    COMPLETED
 
 
 9. Create encounter scenarios for each combat room (30 + boss room and all encounters)
@@ -71,4 +75,4 @@
     > fix combat functions  
         - make combat functions seperate for each number of enemies COMPLETED
         - BOSS  COMPLETED
-    
+    COMPLETED
