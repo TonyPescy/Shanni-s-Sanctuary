@@ -84,7 +84,7 @@ Nick Pescatore (NAP1313)
 1. Game Balance
     - Currently all game numbers have yet to be tested thoroughly enough so there may be issues of the game being too difficult and therefore not fun. The game is meant to be a bit challenging but should still be fair and enjoyable for the player.
     - The fix for this is more testing and most likely nerfing the enemy stats, giving the player starting potions, giving the player buffs in and out of combat, and changing some rooms to give player more chances to avoid damage or status effects
-1. MAJOR ISSUE - Swap Mechanic/Consumable Use/Inventory Indexing Issue
+1. MAJOR ISSUE - Swap Mechanic/Consumable Use/Inventory Indexing Issue (Solved)
     - Invetory had issues with addressing its index, especially when consumables are used and when weapons come after items that are more likely to be removed from the inventory (Example: armor, shields, and potions).
     - Cause: When swapping weapons multiple times, using consumables, breaking armor/weapons/shields, and all other times when the invetory is accessed and an item is removed from it the item will be popped which will reduce the inventory size and possibly shift the indexes of items around.
     - Fix: Complete overhaul of inventory system in multiple files including combat.py and Character.py. When any Character object is created the inventory will be filled as normal and then to max out the inventory at 5 items the remaining empty spaces will be filled with null values. All removals of items will instead replace the current item with a null value.
