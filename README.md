@@ -17,42 +17,60 @@ Nick Pescatore (NAP1313)
 ## Rooms
 [Table of Contents](#table-of-contents)
 ### Enemy Rooms
-    - Adult Red Dragon > Final boss enemy with two weapons and uses fire breath, maw, and hard scale armor
-    - Ancient Spellspear > Uses magical spear, magical shield, and light armor
-    - Baby Red Dragon > Uses maw and soft scale armor
-    - Cyclops > Uses club and cloth armor
-    - Decayed Ancient Captain > Uses spear and sturdy shield
-    - Forsaken Mage > Uses arcane missile scroll and light armor
-    - Golem > Uses fists and portable ward
-    - Harpy > Uses claws
-    - Hell Hound > Uses jaws
-    - Hellknight > Uses greatsword, sturdy shield, and heavy armor
-    - Honorable Duelist > Uses rapier, buckler, and light armor
-    - Lost Traveler > Uses unarmed
-    - Minotaur > Uses horns
-    - Mummy > Uses unarmed
-    - Overgrown Toad > Uses tongue
-    - Pristine Ancient Captain > Uses magic ancient sword, sturdy shield, and heavy armor
-    - Shadow > Uses players current weapon, shield, and armor
-    - Siren > Uses claws
-    - Skeleton Bowman > Uses bow and light armor
-    - Skeleton Swordsman > Uses short sword and buckler
-    - Venus Mantrap > Uses Acidic jaws
+- Adult Red Dragon > Final boss enemy with two weapons and uses fire breath, maw, and hard scale armor
+- Ancient Spellspear > Uses magical spear, magical shield, and light armor
+- Baby Red Dragon > Uses maw and soft scale armor
+- Cyclops > Uses club and cloth armor
+- Decayed Ancient Captain > Uses spear and sturdy shield
+- Forsaken Mage > Uses arcane missile scroll and light armor
+- Golem > Uses fists and portable ward
+- Harpy > Uses claws
+- Hell Hound > Uses jaws
+- Hellknight > Uses greatsword, sturdy shield, and heavy armor
+- Honorable Duelist > Uses rapier, buckler, and light armor
+- Lost Traveler > Uses unarmed
+- Minotaur > Uses horns
+- Mummy > Uses unarmed
+- Overgrown Toad > Uses tongue
+- Pristine Ancient Captain > Uses magic ancient sword, sturdy shield, and heavy armor
+- Shadow > Uses players current weapon, shield, and armor
+- Siren > Uses claws
+- Skeleton Bowman > Uses bow and light armor
+- Skeleton Swordsman > Uses short sword and buckler
+- Venus Mantrap > Uses Acidic jaws
 ### Item Rooms
-    - Ancient sword in the stone
-    - Armory
-    - Heavy armor display case
-    - Hospital
-    - Library with scrolls
-    - Old Traveler Camp
-    - Potion apothecary #1
-    - Potion apothecary #2
-    - Treasure Trove
-    - Wizard tower
+- Ancient sword in the stone
+- Armory
+- Heavy Armor Display Case
+- Hospital
+- Library
+- Old Traveler Camp
+- Potion Apothecary #1
+- Potion Apothecary #2
+- Treasure Trove
+- Wizard Tower
 ### Trap Rooms
-All trap types and abilities (WAITING TO BE ADDED TO README)
+- Ancient Tomb
+- Castle Walls
+- Chasm
+- Door Code
+- Fireball Seal
+- Forest
+- Jungle
+- Library
+- Poison Floor
+- Snake Pit
 ### Other Rooms
-All trap types and abilities (WAITING TO BE ADDED TO README)
+- Ancient Mask Display
+- Cursed Artifact Display
+- Dungeon
+- Ethereal Bridge
+- Infusion Room 1
+- Infusion Room 2
+- Infusion Room 3
+- Memory Walls
+- Observatory
+- Rune Covered Walls
 
 ## Known Issues
 [Table of Contents](#table-of-contents)
