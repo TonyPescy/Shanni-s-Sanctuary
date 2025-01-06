@@ -177,6 +177,7 @@ def item_pickup(inventory, new_item):
 #               w_list - List - list of all weapons
 #               a_list - List - List of all armors
 #               s_list - List - List of all shield
+#               c_list - List - List of all consumables
 def create_all():
     # rooms
     rm_nums = list(rand.sample(range(50), 31))  # randomize rooms in layout
