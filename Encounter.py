@@ -1118,10 +1118,12 @@ def encounter_scenario_4(player, w_list, a_list, s_list, c_list):    # bow skele
     return player                                   # returns player after combat
 
 def encounter_scenario_5(player, w_list, a_list, s_list, c_list):    # siren
-    # MAY NEED SPECIAL ENCOUNTER LOOP OR SOMETHING
-    # save for later!!!!!
-    print('temp THIS IS SIREN ROUND')
-    return player
+    # MAY NEED SPECIAL ENCOUNTER LOOP OR SOMETHING - later
+    siren = char.Character.create_siren(w_list)     # creates enemy for combat
+    enemy_list = [siren]                            # list of all enemies to be used in combat function
+    # combat
+    player = com.combat_loop(enemy_list, player)    # updates player after combat, if they survive
+    return player                                   # returns player after combat
 
 def encounter_scenario_6(player, w_list, a_list, s_list, c_list):    # minotaur
     minotaur = char.Character.create_mino(w_list) # creates enemy for combat
@@ -1597,6 +1599,7 @@ def encounter_scenario_40(player, w_list, a_list, s_list, c_list):    # library 
     return player
 
 def encounter_scenario_41(player, w_list, a_list, s_list, c_list):    # infusion room
+    return player   # temp until issues with infusion fixed
     # checks to see if player has any weapon to infuse
     w_count, w_ind = lib.weapon_counter(player)
     if w_count > 0:     # If player has a weapon
@@ -1650,6 +1653,7 @@ def encounter_scenario_41(player, w_list, a_list, s_list, c_list):    # infusion
     return player
 
 def encounter_scenario_42(player, w_list, a_list, s_list, c_list):    # different infusion room
+    return player   # temp until issues with infusion fixed
     # checks to see if player has any weapon to infuse
     w_count, w_ind = lib.weapon_counter(player)
     if w_count > 0:     # If player has a weapon
@@ -1703,6 +1707,7 @@ def encounter_scenario_42(player, w_list, a_list, s_list, c_list):    # differen
     return player
 
 def encounter_scenario_43(player, w_list, a_list, s_list, c_list):    # other different infusion room
+    return player   # temp until issues with infusion fixed
     # checks to see if player has any weapon to infuse
     w_count, w_ind = lib.weapon_counter(player)
     if w_count > 0:     # If player has a weapon
