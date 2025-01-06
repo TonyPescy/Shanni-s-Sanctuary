@@ -1,10 +1,12 @@
 # Shanni's Sanctuary
 ## Description
-This is a simple and small text-based adventure game.  It has a labyrinth with rooms that are generated in the same path everytime, however every rooms encounter are randomized.  The starting room and ending rooms are not randomized.  The player has to manage their inventory with limited space and their health points as they navigate Shanni's Sanctuary.  The goal of the player is to escape the labryinth with their lives and get back to their regular lifestyle.
+This is a simple and small text-based adventure game. It has a labyrinth with rooms that are generated in a pre-determined path everytime, however every individual room encounter is randomized from a set list. The starting room and ending rooms are not randomized. The player has to manage their inventory with limited space and their health points as they navigate Shanni's Sanctuary. The goal of the player is to escape the labryinth with their lives and get back to their regular lifestyle.
+
 ## Authors
 Tony Pescatore (TonyPescy)
 
 Nick Pescatore (NAP1313)
+
 ## Table of Contents
 [Rooms](#Rooms)
 
@@ -15,19 +17,48 @@ Nick Pescatore (NAP1313)
 ## Rooms
 [Table of Contents](#table-of-contents)
 ### Enemy Rooms
-All enemy types and abilities (WAITING TO BE ADDED TO README)
+    - Adult Red Dragon > Final boss enemy with two weapons and uses fire breath, maw, and hard scale armor
+    - Ancient Spellspear > Uses magical spear, magical shield, and light armor
+    - Baby Red Dragon > Uses maw and soft scale armor
+    - Cyclops > Uses club and cloth armor
+    - Decayed Ancient Captain > Uses spear and sturdy shield
+    - Forsaken Mage > Uses arcane missile scroll and light armor
+    - Golem > Uses fists and portable ward
+    - Harpy > Uses claws
+    - Hell Hound > Uses jaws
+    - Hellknight > Uses greatsword, sturdy shield, and heavy armor
+    - Honorable Duelist > Uses rapier, buckler, and light armor
+    - Lost Traveler > Uses unarmed
+    - Minotaur > Uses horns
+    - Mummy > Uses unarmed
+    - Overgrown Toad > Uses tongue
+    - Pristine Ancient Captain > Uses magic ancient sword, sturdy shield, and heavy armor
+    - Shadow > Uses players current weapon, shield, and armor
+    - Siren > Uses claws
+    - Skeleton Bowman > Uses bow and light armor
+    - Skeleton Swordsman > Uses short sword and buckler
+    - Venus Mantrap > Uses Acidic jaws
 ### Item Rooms
-All item types and abilities (WAITING TO BE ADDED TO README)
+    - Ancient sword in the stone
+    - Armory
+    - Heavy armor display case
+    - Hospital
+    - Library with scrolls
+    - Old Traveler Camp
+    - Potion apothecary #1
+    - Potion apothecary #2
+    - Treasure Trove
+    - Wizard tower
 ### Trap Rooms
 All trap types and abilities (WAITING TO BE ADDED TO README)
 ### Other Rooms
-All other types and abilities (WAITING TO BE ADDED TO README)
+All trap types and abilities (WAITING TO BE ADDED TO README)
 
 ## Known Issues
 [Table of Contents](#table-of-contents)
-1. A big issue with this is that the maze layout is not randomized which lowers the replay value drastically.
-    - The fix for this would result in a complete overhaul of pathing system for the labryinth, which would cause issues over the whole project.
-    - Perhaps make several maps for the labryinth to take, as it will have more replayablility value along with the random room generator.
+1. Static labyrinth layout reduces replay value
+    - The fix for this would result in a complete overhaul of pathing system for the labryinth, which would cause issues over the whole project with navigation to the functions finding which room to go to and where you currently are in the maze.
+    - Perhaps make several maps for the labryinth to take, as it will have more replayablility value along with the random room generator and will not need a full overhaul.
 1. Repeated Code and Use of Inefficient Code Practices
     - The fix for this is optimizing and creating more functions to reduce code reuse, updating code practices etc...
     - The cause of this is learning more efficient ways to solve certain problems as I programmed leading to new practices being used as I wrote and older code still being outdated.
@@ -41,11 +72,16 @@ All other types and abilities (WAITING TO BE ADDED TO README)
     - Fix: Complete overhaul of inventory system in multiple files including combat.py and Character.py. When any Character object is created the inventory will be filled as normal and then to max out the inventory at 5 items the remaining empty spaces will be filled with null values. All removals of items will instead replace the current item with a null value.
     - Potential issues with this fix: It will be more cumbersome to find the true size of ones inventory and may require any conditons that use the len() built-in function to use a custom len() function to only count the non-null values. This will also note the index of the non-null values within the inventory for accessing them within other functions.
     - Other: This will take a while to implement as inventory is used and accessed very often, especially within the combat.py functions. Most likely will require a rework of the logic of the combat_loop. Since combat_loop already needs to be slimmed down and split into smaller functions for different number of enemies, this change should be done in tandem with the 'Repeated Code and Use of Inefficient Code Practices' issue within the combat.py file. NOTE: combat_loop logic does not need significant changes for the necessary inventory changes to be made, so only a small amount of the 'Repeated Code and Use of Inefficient Code Practices' issue will be resolved within the combat loop.
-1. 
 
 ## Fixed Issues
 [Table of Contents](#table-of-contents)
 
 This is to show the progress made to fix the known issues with the project and when they were fixed.
 
-1. 
+1. Swap Mechanic/Consumable Use/Inventory Indexing Issue
+    - Inventory was updated to be pre-filled with 'null' then items will replace those values when they are added. When new items are picked up and there are no 'null' values, then the player must select which to replace. Removing or destroying an item will replace that inventory slot with 'null'.
+    - All combat, item removal, and item pickup functions changed to work with new inventory system
+
+1. Game Balance (Still Ongoing)
+    - Player character was buffed in with stronger inventory, iuncluding new weapon, armor, and shield, and increased health points.
+    - Enemies health points reduced.

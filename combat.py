@@ -306,10 +306,6 @@ def status_check(char):
     if char.buff != 'NONE':
         match char.buff:
 
-            # TEMP_DMG CALCULATED AT DMG CALC SO NO NEED FOR THIS AS IT ONLY DOES TEMP_DMG
-            # case 'strengthened':    # buffs char damage based on stack
-                # temp_dmg += (5*char.buff_stack)
-
             case 'warded':          # prevents damage to char
                 if char.buff_stack == 0:    # ward ended last turn
                     char.buff = 'NONE'
@@ -360,8 +356,8 @@ def item_removal(player, item):
         if x == 'null':     # null value, no item at this index in inventory
             pass
         else:       # there is a valid item at this index of the inventory
-            print('Current Item in inventory: ' + x.name)
-            print('Item To be removed: ' + item.name)
+            # print('Current Item in inventory: ' + x.name)
+            # print('Item To be removed: ' + item.name)
             current_index += 1          # current index of inventory is calculated
             if x.name == item.name:     # item was found in inventory
                 # see if item is a weapon, shield, armor, or consumable
@@ -1239,7 +1235,7 @@ def triple_enemy_combat(enemy_list, player, turn_skip, swapped, first_round, wea
 
                                 match temp_enemies_alive:
                                     case 1:     # only one enemy alive
-                                        print('AUTO COMBAT!!!')
+                                        print('Auto Combat: ')
                                         for i in range(len(enemy_list)):    # iterates through all enemies to find which is alive
                                             if  enemy_list[i].hp > 0:       # once it finds the last alive enemy in combat 
                                                 enemy_alive = i + 1         # enemy found alive is marked for comparison
