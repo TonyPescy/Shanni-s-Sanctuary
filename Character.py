@@ -6,8 +6,6 @@
 
 # imports
 import sys
-import Items as it
-import random as rand
 
 # ALL STATS SUBJECT TO CHANGE
 # MORE WEAPONS/ITEMS TO BE ADDED
