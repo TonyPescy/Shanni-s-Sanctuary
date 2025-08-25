@@ -1790,7 +1790,7 @@ def encounter_scenario_51(player, w_list, a_list, s_list, c_list):    # nothing?
 def encounter_scenario_52(player, w_list, a_list, s_list, c_list):    # exit
     # nothing happens, it is just a description being read out
     # CHANGED, THIS IS NO LONGER EVEN CALLED
-    print('temp FAILED EXIT ONE???, THIS SHOULD NEVER APPEAR')
+    print('You entered the room of escape, congrats!')
     return player
 
 def encounter_scenario_53(player, w_list, a_list, s_list, c_list):    # boss

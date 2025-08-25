@@ -9,12 +9,6 @@ import Items as it
 import Rooms as rm
 import random as rand
 
-# identifiers
-WEAPON_ID = 1
-SHIELD_ID = 2
-ARMOR_ID = 3
-CONSUMABLE_ID = 4
-
 # OTHER CONSTANTS
 INV_LEN = 5     # length of inventory
 
@@ -41,7 +35,7 @@ def weapon_counter(player):
     for i in range(0, INV_LEN):
         if player.inventory[i] == 'null':   # null value, no item at this index in inventory
             pass
-        elif player.inventory[i].identifier == WEAPON_ID:
+        elif player.inventory[i].identifier == it.WEAPON_ID:
             weapon_count += 1
             weapon_index.append(i)
     return weapon_count, weapon_index
@@ -61,7 +55,7 @@ def shield_counter(player):
     for i in range(0, INV_LEN):
         if player.inventory[i] == 'null':   # null value, no item at this index in inventory
             pass
-        elif player.inventory[i].identifier == SHIELD_ID:
+        elif player.inventory[i].identifier == it.SHIELD_ID:
             shield_count += 1
             shield_index.append(i)
     return shield_count, shield_index
@@ -81,7 +75,7 @@ def armor_counter(player):
     for i in range(0, INV_LEN):
         if player.inventory[i] == 'null':   # null value, no item at this index in inventory
             pass
-        elif player.inventory[i].identifier == ARMOR_ID:
+        elif player.inventory[i].identifier == it.ARMOR_ID:
             armor_count += 1
             armor_index.append(i)
     return armor_count, armor_index
@@ -98,7 +92,7 @@ def consumable_indexer(player):
     for i in range(0, INV_LEN):
         if player.inventory[i] == 'null':   # null value, no item at this index in inventory
             pass
-        elif player.inventory[i].identifier == CONSUMABLE_ID:
+        elif player.inventory[i].identifier == it.CONSUMABLE_ID:
             consumable_index.append(i)
     return consumable_index
 # consumable indexer ends
@@ -123,16 +117,16 @@ def loadout_count(player):
     for i in range(0, INV_LEN):                   # 5 is max size of inventory
         if player.inventory[i] == 'null':   # null value, no item at this index in inventory
             pass
-        elif player.inventory[i].identifier == WEAPON_ID:
+        elif player.inventory[i].identifier == it.WEAPON_ID:
             weapon_count += 1
             weapon_index.append(i)
-        elif player.inventory[i].identifier == SHIELD_ID:
+        elif player.inventory[i].identifier == it.SHIELD_ID:
             shield_count += 1
             shield_index.append(i)
-        elif player.inventory[i].identifier == ARMOR_ID:
+        elif player.inventory[i].identifier == it.ARMOR_ID:
             armor_count += 1
             armor_index.append(i)
-        elif player.inventory[i].identifier == CONSUMABLE_ID:
+        elif player.inventory[i].identifier == it.CONSUMABLE_ID:
             consumable_index.append(i)
     return weapon_index, weapon_count, shield_index, shield_count, armor_index, armor_count, consumable_index
 # loadout count ends

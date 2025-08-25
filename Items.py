@@ -4,11 +4,14 @@
 # Description: All functions related to items
 #######################################################################################################################################
 
-# imports
-import library as lib
+# identifiers
+WEAPON_ID = 1
+SHIELD_ID = 2
+ARMOR_ID = 3
+CONSUMABLE_ID = 4
 
 class Weapons:
-    def __init__(self, name, desc, damage, durability = 99, infusion = 'NONE', identifier = lib.WEAPON_ID):
+    def __init__(self, name, desc, damage, durability = 99, infusion = 'NONE', identifier = WEAPON_ID):
         self.name = name
         self.desc = desc
         self.damage = damage
@@ -51,7 +54,7 @@ class Weapons:
     # create_weapons Ends
 
 class Shields:
-    def __init__(self, name, desc, defence, identifier = lib.SHIELD_ID):
+    def __init__(self, name, desc, defence, identifier = SHIELD_ID):
         self.name = name
         self.desc = desc
         self.defence = defence
@@ -72,7 +75,7 @@ class Shields:
     # create_shields ends
 
 class Armors:
-    def __init__(self, name, desc, defence, identifier = lib.ARMOR_ID):
+    def __init__(self, name, desc, defence, identifier = ARMOR_ID):
         self.name = name
         self.desc = desc
         self.defence = defence
@@ -98,7 +101,7 @@ class Armors:
     # create_armors ends
 
 class Consumables():
-    def __init__(self, name, desc, quantity = 1, identifier = lib.CONSUMABLE_ID):
+    def __init__(self, name, desc, quantity = 1, identifier = CONSUMABLE_ID):
         self.name = name
         self.desc = desc
         self.quantity = quantity

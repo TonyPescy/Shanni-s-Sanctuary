@@ -46,6 +46,7 @@ def main():
         rooms_array, next_room, player = en.room_encounters(next_room, rm_dsc_lst, rooms_array[next_room].e_num, rooms_array, player, weapon_list, armor_list, shield_list, consume_list)  # always starts at zero, later we will use next_room for first parameter
         # print(next_room)
 
+    next_room = 32  # ensures boss room is not skipped when reaching the end of the maze
     # Exit Encounter
     rooms_array, next_room, player = en.room_encounters(next_room, rm_dsc_lst, -2, rooms_array, player, weapon_list, armor_list, shield_list, consume_list) # final room, exit room
     
